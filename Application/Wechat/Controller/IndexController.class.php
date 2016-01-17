@@ -17,8 +17,8 @@ class IndexController extends Controller {
             $weobj->valid();
             return;
         }
+        //处理微信请求
         WechatWrap::handleMsg($weobj->getRev());
-
     }
 
 

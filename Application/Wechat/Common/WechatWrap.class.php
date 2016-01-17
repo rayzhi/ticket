@@ -20,13 +20,14 @@ class WechatWrap
     //处理微信请求
     public static function handleMsg($msg){
         $filenames = self::read_all_dir("./Application/Wechat/Handler");
+        $msgtype = $msg->getRevType();
         //遍历每个handler，并处理各种类型的微信数据
         foreach ($filenames as $filename) {
             $result = "";
             preg_match($rule, $filename,$result);
             $classname = basename($filename,"Handler.class.php");
+            file_put_contents("./test.txt", $classname);
             $handler = self::newObj($classname,"Handler");
-            $msgtype = $msg->getRevType();
             switch ($msgtype) {
                 case Wechat::MSGTYPE_TEXT:
                     $isnext = $handler->handleText($msg);
@@ -56,6 +57,7 @@ class WechatWrap
                     $isnext = $handler->handleVideo($msg);
                    break;
                 default:
+                    echo " ^6^别蒙我，你可不是微信的请求。";
                     break;
             }
             if(!$isnext) return;     //如果不继续，就直接返回.
