@@ -2,26 +2,27 @@
 
 namespace Wechat\Controller;
 use Think\Controller;
+use Wechat\Common\WechatWrap;
 
 class IndexController extends Controller {
 
 	/**
-	 * 文章详情页
+	 * 微信入口
 	 */
     public function indexAct(){
+        $weobj = WechatWrap::getInstance();
 
-
-        echo '欢迎到来。';
-        exit();
-
-    	$id = I('get.id');
-    	if(!$id){
-    		$this->error('非法操作！');
-    	}
-    	$info = M('Article')->where(array('id' => $id))->find();
-    	$this->assign('info',  $info);
-    	$this->display();
+        //验证微信请求
+        if ( isset($_GET["echostr"])){
+            $weobj->valid();
+            return;
+        }
+        //处理微信请求
+        WechatWrap::handleMsg($weobj->getRev());
     }
+
+
+
     
     
 }
