@@ -12,7 +12,7 @@
 
 			欢迎使用
 			<strong class="green">
-				售票系统后台管理系统
+				售票后台管理系统
 			</strong>
 			
 		</div>

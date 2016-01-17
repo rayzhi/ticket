@@ -12,14 +12,12 @@
 				<td>{$vo.id}</td>
 				<td>{$vo.nickname}</td>
 				<td>{$vo.third_party_pay}</td>
+				<td>{$vo.statusName}</td>
 				<td>{$vo.add_time}</td>
 				<td>
-					<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-						<a class="green" href="<?php echo UC('Admin/Course/edit_level')?>?id={$vo.id}" title="编辑">
-							<i class="icon-pencil bigger-130"></i>
-						</a>							
-						<a class="red" href="javascript:;" onclick="remove_vote({$vo.id}, '您确认要删除这条数据吗?')" title="删除">
-							<i class="icon-trash bigger-130"></i>
+					<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">													
+						<a class="green" href="javascript:;" onclick="detail({$vo.id})" title="详情">
+							<i class="icon-flickr bigger-130"></i>
 						</a>
 					</div>
 				</td>

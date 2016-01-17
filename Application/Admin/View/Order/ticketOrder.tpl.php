@@ -6,12 +6,34 @@
 
 <div class="row">
 	<div class="col-xs-12">
+        
         <div class="well">
-        	  <div class="btn-group">
-              	<a class="btn btn-success dropdown-toggle" href="<?php echo UC('Admin/Course/add_level')?>">&nbsp;添&nbsp;&nbsp;加&nbsp;</a>
-              </div>		 
-
-        </div>   
+             <!-- 搜索 -->        
+              <form class="form-horizontal btn-group h-form" role="form" method="post" enctype="multipart/form-data" action="javascript:;">
+			  	
+					<label class="col-xs-1 control-label no-padding-right width-auto">下单日期</label>
+                    <div class="col-sm-2 grid-search-field width-auto HzjSerach">
+                    	<input class="form-control search-query date-picker" name="add_date" id="dateRangePicker" type="text" value="" />
+                    </div>
+                    
+					<div class="col-sm-2 grid-search-field width-auto HzjSerach">
+						<label class="col-xs-1 control-label no-padding-right width-auto">订单状态</label>
+						<select class="col-xs-10 col-sm-2 HzjSelect" name="status" id="status" style="width:120px;">
+							<option value="">----</option>
+							<volist name="status" id="vo">
+							 <option value="{$key}">{$vo}</option>
+							</volist>
+						</select>          	
+					</div>
+					
+                    <div class="btn HzjTop btn-success" style="margin-left:10px;margin-top:5px;" onclick="search();">搜&nbsp;&nbsp;索</div>
+					<input name="pagesize" type="hidden" id="Hpagesize" value="" />
+                                                     
+			  </form>
+			  <!-- 搜索 -->
+        </div>
+        
+        
 		<div class="table-responsive dataTables_wrapper">
 			{$top_html}
 			<table id="sample-table-2" class="table table-striped table-bordered table-hover">
@@ -26,6 +48,7 @@
 						<th>订单ID</th>
 						<th>下单人</th>
 						<th>支付金额</th>
+						<th>订单状态</th>
 						<th>下单时间</th>
 						<th>操作</th>
 					</tr>
@@ -40,42 +63,38 @@
 	</div>
 </div>
 
+<script src="__STATIC__/theme/ace/assets/js/date-time/daterangepicker.min.js"></script>
+<link rel="stylesheet" href="__STATIC__/theme/ace/assets/css/daterangepicker.css" />
+<script src="__STATIC__/theme/ace/assets/js/date-time/moment.min.js"></script>
+
 <script type="text/javascript">
 	
-	function remove_vote(id, cfm)
-	{
-		if (confirm(cfm))
-	    {
-			$.post("<?php echo UC('Admin/Course/del_level')?>", {"id":id}, 
-			  function(data){
-				alert(data.info);
-	            if (data.status == 1) {
-	            	window.location.reload();
-	            } 
-	        },'json');
-	    }
+	function detail(id){
+		index = layer.open({
+            type: 2,
+            title: '订单详情',
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭层
+            area : ['600px', '500px'],
+            content: "<?php echo UC('Admin/Order/orderDetail')?>?id="+id
+        });   
+        layer.full(index);
 	}
 
 //搜索
 function search(){
 	$('#Hpagesize').val($('#pagesize option:selected').val());//分页参数
 	var data = $("form").serialize();
-	$.post("<?php echo UC('Course/course')?>", data, 
+	$.post("<?php echo UC('Order/ticketOrder')?>", data, 
 	  function(data){
 		  $('#list').html(data.info);
 		  supage('pageNav','cengp_Page','',1, data.url, pagesize);//分页参数
     },'json');
 }
 
-// 刷新数据字典缓存信息
-function resetSysDictCache()
-{
-    $.post("<?php echo UC('Admin/Setting/resetSysDictCache')?>",
-      function(data){
-        alert(data.info);
-        if (data.status == 1) {
-            window.location.reload();
-        } 
-    },'json');
-}
+//时间控件
+$('#dateRangePicker').daterangepicker({format : 'YYYYMMDD'}).prev().on(ace.click_event, function(){
+    $(this).next().focus();
+});
+
 </script>
