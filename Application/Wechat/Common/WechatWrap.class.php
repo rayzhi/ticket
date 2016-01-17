@@ -26,7 +26,6 @@ class WechatWrap
             preg_match($rule, $filename,$result);
             $classname = basename($filename,"Handler.class.php");
             $handler = self::newObj($classname,"Handler");
-            $handler->handleText("8");
             $msgtype = $msg->getRevType();
             switch ($msgtype) {
                 case Wechat::MSGTYPE_TEXT:
