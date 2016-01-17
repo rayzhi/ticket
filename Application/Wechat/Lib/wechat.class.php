@@ -42,7 +42,7 @@
  *   $result = $weObj->createMenu($newmenu);
  */
 namespace Wechat\Lib; 
-class wechat
+class Wechat
 {
 	const MSGTYPE_TEXT = 'text';
 	const MSGTYPE_IMAGE = 'image';

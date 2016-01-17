@@ -40,7 +40,7 @@ class WechatController extends Controller {
 		if ( isset($_GET["echostr"])){
 		    $this->weObj->valid();
 		    exit();
-		}
+		} 
 
 		//oauth回调处理
 		if($code && $state)

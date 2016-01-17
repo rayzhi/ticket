@@ -8,4 +8,3 @@ if ( !isset($_GET['a']))
 
 include('index.php');
 
-?>
