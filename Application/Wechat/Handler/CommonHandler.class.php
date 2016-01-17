@@ -8,30 +8,30 @@ class CommonHandler{
         return 1;
     }
     public function handleText($msg){
-        return next();
+        return $this->next();
     }
     public function handleImage($msg){
-        return next();
+        return $this->next();
     }
     public function handleLocation($msg){
-        return next();
+        return $this->next();
     }
     public function handleLink($msg){
-        return next();
+        return $this->next();
     }
     public function handleEvent($msg){
-        return next();
+        return $this->next();
     }
     public function handleMusic($msg){
-        return next();
+        return $this->next();
     }
     public function handleNews($msg){
-        return next();
+        return $this->next();
     }
     public function handleVoice($msg){
-        return next();
+        return $this->next();
     }
     public function handleVideo($msg){
-        return next();
+        return $this->next();
     }
 }

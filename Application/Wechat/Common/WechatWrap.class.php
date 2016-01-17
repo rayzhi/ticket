@@ -26,7 +26,6 @@ class WechatWrap
             $result = "";
             preg_match($rule, $filename,$result);
             $classname = basename($filename,"Handler.class.php");
-            file_put_contents("./test.txt", $classname);
             $handler = self::newObj($classname,"Handler");
             switch ($msgtype) {
                 case Wechat::MSGTYPE_TEXT:
@@ -58,7 +57,7 @@ class WechatWrap
                    break;
                 default:
                     echo " ^6^别蒙我，你可不是微信的请求。";
-                    break;
+                    break;  
             }
             if(!$isnext) return;     //如果不继续，就直接返回.
         }
