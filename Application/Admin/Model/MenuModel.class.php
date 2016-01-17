@@ -73,7 +73,7 @@ class MenuModel extends Model {
     public function admin_menu($parentid, $with_self = false) {
         //父节点ID
         $parentid = (int) $parentid;
-        $result = $this->where(array('parentid' => $parentid, 'status' => 1))->order(array("listorder" => "ASC"))->select();
+        $result = $this->where(array('parentid' => $parentid, 'status' => 1))->order(array("id" => "ASC"))->select();
         if ($with_self) {
             $result2[] = $this->where(array('id' => $parentid))->find();
             $result = array_merge($result2, $result);
