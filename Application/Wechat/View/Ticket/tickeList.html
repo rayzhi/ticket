@@ -1,0 +1,63 @@
+<extend name="template/template" />
+
+<block name="css">
+	<style type="text/css">
+	  
+	</style>
+</block>
+
+<block name="content">
+
+ <body>
+ 
+	 <form id="h-form" method="post" enctype="multipart/form-data" action="javascript:;" >
+	    <div class="panel margin-top">
+	        <h3 class="maintext">魔乐城场馆体验票</h3>
+	        <p class="mainprice">￥99.0</p>
+	    </div>
+	
+	    <div class="panel margin-top" href="#">
+	        <select name="area" class="selectarea required">
+	            <option value="">请选择场地</option>
+	            <option value="1">场地1</option>
+	            <option value="2">场地2</option>
+	            <option value="3">场地3</option>
+	        </select>
+	        <div class="selectnum">
+	            <span class="text">数量</span>
+	            <div class="numer margin-left30">
+	                <span class="minus">- </span>
+	                <input type="text" class="numval" value="1">
+	                <span class="plus">+</span>
+	            </div>
+	        </div>
+	    </div>
+	
+	    <div class="margin-top30">&nbsp;</div>
+	    <button type="submit" class="btn-block margin-top">立即购买</button>
+	</form>
+  </body>
+</block>
+
+
+<block name="script">
+	<script>
+		
+		//提交表单
+		$('.btn-block').click(function(){
+			if($("#h-form").valid()){
+				data = $("form").serialize();
+				$.post(
+					"{:UC('Wechat/Ticket/makeOrder')}", 
+					data, 
+				    function(obj){
+						
+					},
+					'json'
+				);
+			}
+		})
+		
+	</script>
+</block>
+

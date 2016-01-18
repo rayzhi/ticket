@@ -2,7 +2,6 @@
 
 namespace Wechat\Controller;
 use Think\Controller;
-use Wechat\Common\WechatWrap;
 
 class TestController extends Controller {
 

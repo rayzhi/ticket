@@ -11,8 +11,8 @@ return array(
 	'APP_FILE_CASE'  => true, // 检查文件大小写  
 	
     /* SESSION 和 COOKIE 配置 */
-    'SESSION_PREFIX' => 'll_wechat', //session前缀
-    'COOKIE_PREFIX'  => 'll_wechat', // Cookie前缀 避免冲突
+    'SESSION_PREFIX' => 'ticket_wechat', //session前缀
+    'COOKIE_PREFIX'  => 'ticket_wechat', // Cookie前缀 避免冲突
     
     /* 自定义参数 */
     'SITE_TITLE' => '药师帮',

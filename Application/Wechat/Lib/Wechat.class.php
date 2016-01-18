@@ -1180,7 +1180,6 @@ class Wechat
         }
 
         $result = $this->http_get(self::API_URL_PREFIX.self::AUTH_URL.'appid='.$appid.'&secret='.$appsecret);
-        print_r($result);
         if ($result)
         {
             $json = json_decode($result,true);

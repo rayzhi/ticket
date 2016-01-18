@@ -6,7 +6,7 @@ class MenuLogic{
 
     public static function initMenu(){
         $wechat = wechatInstance();
-        return $wechat->createMenu(json_encode(C('WECHAT_MENU')));
+        return $wechat->createMenu(C('WECHAT_MENU'));
     }
 
 }
