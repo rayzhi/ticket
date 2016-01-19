@@ -11,8 +11,13 @@ class CommonController extends Controller {
 
     public function _initialize() {
 
-        if(!session('openid')){
-            $this->_session_openid();
+        if(SERVER_ENVIRONMENT == 'LOCAL_HOST'){
+            session('openid','oZcK7wtW4NB-hr5I1_XKKfoC6zV8');//测试openid
+        }
+        if( ACTION_NAME != 'notifyurl'){//支付通知--过滤掉
+            if(!session('openid')){
+                $this->_session_openid();
+            }
         }
         
     }
@@ -54,7 +59,7 @@ class CommonController extends Controller {
         }
         
     }
-    
+
    
 
 }

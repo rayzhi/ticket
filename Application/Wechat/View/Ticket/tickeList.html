@@ -14,6 +14,7 @@
 	    <div class="panel margin-top">
 	        <h3 class="maintext">魔乐城场馆体验票</h3>
 	        <p class="mainprice">￥99.0</p>
+	        <input type="hidden" name="ticket_id" value="1">
 	    </div>
 	
 	    <div class="panel margin-top" href="#">
@@ -27,7 +28,7 @@
 	            <span class="text">数量</span>
 	            <div class="numer margin-left30">
 	                <span class="minus">- </span>
-	                <input type="text" class="numval" value="1">
+	                <input type="text" name="amount" class="numval" value="1">
 	                <span class="plus">+</span>
 	            </div>
 	        </div>
@@ -46,12 +47,19 @@
 		//提交表单
 		$('.btn-block').click(function(){
 			if($("#h-form").valid()){
-				data = $("form").serialize();
+				var index = layer.load(0,{shade:[0.3,'#676767']});
+				data = $("form").serialize();			
 				$.post(
 					"{:UC('Wechat/Ticket/makeOrder')}", 
 					data, 
 				    function(obj){
-						
+						if(obj.status == 1){
+							window.location.href = "{:UC('Wechat/Ticket/doPay')}?order_id="+obj.url;
+						}else{
+							layer.msg(data.info,{time:1000},function(){
+								layer.close(index);
+							});
+						}
 					},
 					'json'
 				);
