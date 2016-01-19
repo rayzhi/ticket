@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 售票模块
+ * 优惠券模块
  * 
  */
 namespace Wechat\Controller;
@@ -9,7 +9,6 @@ namespace Wechat\Controller;
 class CouponController extends CommonController {
 
     public function indexAct(){
-        
         
         $this->display();
         

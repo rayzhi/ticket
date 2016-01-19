@@ -21,8 +21,5 @@ class IndexController extends Controller {
         WechatWrap::handleMsg($weobj->getRev());
     }
 
-
-
-    
     
 }

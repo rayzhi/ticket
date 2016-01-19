@@ -16,6 +16,7 @@ a{color: #000;text-decoration: none;}
 .pull-right{float: right !important;}
 .fiximg{width: 100%;}
 .hide{display: none !important;}
+.block{display: block;}
 
 .btn-block{display: block;width: 100%;padding: 10px;background: #ff6600;border:none;margin: 0 auto;border-radius: 5px; color: #fff;text-align: center;}
 .btn-block.blue{background: #599ef4;}
@@ -26,6 +27,7 @@ a{color: #000;text-decoration: none;}
 .text{font-size: 16px;font-weight: normal;}
 .text-help{font-size: 12px;color: #333;}
 .text-guide{font-size: 12px;color: #aaa;}
+.text-guide > img{vertical-align: top;margin-right: 5px;}
 .moretext{color: #ff6600;}
 .box-title{font-size: 14px;margin-left: 25px;font-weight: lighter;}
 
