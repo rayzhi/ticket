@@ -10,7 +10,7 @@
   </head>
   <body class="index-container">
     <div>
-        <a href="#" class="index-menubtn"><img src="images/tao3.png" width="30px"></a>
+        <a href="javascript:" class="index-menubtn"><img src="images/tao3.png" width="30px" onclick="showUserCenter()"></a>
 
         <h1 class="index-title">魔乐城</h1>
         <h3 class="index-titlemore">Molo Vision</h3>
@@ -27,6 +27,80 @@
             </div>
         </div>
     </div>
+
+    <div class="usercenter hide" id="userc">
+        <a href="javascript:" class="closebtn"><img src="images/cha.png" width="45px" onclick="hideUserCenter()"></a>
+        <div class="panel usercenter-box close left-move" id="usercenterbox">
+            <div class="list">
+                <a class="item" href="#">
+                    <img src="images/head.jpg" class="imghead">
+                    <img src="images/tao.gif" class="item-icon margin-left"> 158****4057
+                </a>
+                <a class="item" href="#">
+                    <img src="images/guanpiao.gif" class="item-icon"> 我的馆场券
+                </a>
+                <a class="item" href="#">
+                    <img src="images/youhuij.gif" class="item-icon"> 我的优惠券
+                </a>
+                <a class="item" href="#">
+                    <img src="images/jianping.gif" class="item-icon"> 推荐有奖
+                </a>
+                <a class="item" href="#">
+                    <img src="images/scheng.gif" class="item-icon"> 魔乐城商城
+                </a>
+                <a class="item" href="#">
+                    <img src="images/szhi.gif" class="item-icon"> 设置
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        function showUserCenter(){
+            var box = document.getElementById("userc");
+            removeClass(box,"hide");
+            setTimeout(function(){
+                var el = document.getElementsByClassName("usercenter-box");
+                removeClass(el[0],"close");
+                addClass(el[0],"open");
+            },100);
+        }
+
+        function hideUserCenter(){
+            setTimeout(function(){
+                var box = document.getElementById("userc");
+                addClass(box,"hide");
+            },100);
+            var el = document.getElementsByClassName("usercenter-box");
+            removeClass(el[0],"open");
+            addClass(el[0],"close");
+            
+        }
+
+        function hasClass(obj, cls) {
+            return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+        }
+
+        function addClass(obj, cls) {
+            if (!this.hasClass(obj, cls)) obj.className += " " + cls;
+        }
+
+        function removeClass(obj, cls) {
+            if (hasClass(obj, cls)) {
+                var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+                obj.className = obj.className.replace(reg, ' ');
+            }
+        }
+
+        function toggleClass(obj,cls){
+            if(hasClass(obj,cls)){
+                removeClass(obj, cls);
+            }else{
+                addClass(obj, cls);
+            }
+        }
+    </script>
 
   </body>
 </html>

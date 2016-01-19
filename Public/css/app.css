@@ -11,9 +11,11 @@ a{color: #000;text-decoration: none;}
 .margin-right{margin-right: 10px;}
 .margin-bottom{margin-bottom: 10px;}
 .margin-left30{margin-left: 30px;}
+.margin-left{margin-left: 10px;}
 .pull-left{float: left !important;}
 .pull-right{float: right !important;}
 .fiximg{width: 100%;}
+.hide{display: none !important;}
 
 .btn-block{display: block;width: 100%;padding: 10px;background: #ff6600;border:none;margin: 0 auto;border-radius: 5px; color: #fff;text-align: center;}
 .btn-block.blue{background: #599ef4;}
@@ -23,6 +25,7 @@ a{color: #000;text-decoration: none;}
 .panel h3{margin: 0;line-height: 35px;}
 .text{font-size: 16px;font-weight: normal;}
 .text-help{font-size: 12px;color: #333;}
+.text-guide{font-size: 12px;color: #aaa;}
 .moretext{color: #ff6600;}
 .box-title{font-size: 14px;margin-left: 25px;font-weight: lighter;}
 
@@ -47,7 +50,7 @@ a{color: #000;text-decoration: none;}
 
 .bg{position: fixed;z-index: -1; background:url(../images/beijing3.gif) no-repeat; width: 100%;height: 100%; background-size: 100%;}
 .index-container{background:url(../images/bjing.gif) no-repeat;background-size: 100%;padding: 20px;}
-.index-menubtn{display: block;}
+.index-menubtn{display: block;width: 50px;}
 .index-title{margin:0;margin-top: 30px;color: #ff6600;text-align: center;font-size: 56px;}
 .index-titlemore{margin: 0;margin-top: 5px;text-align: center;color: #fff;font-size: 24px;}
 .index-desc{margin-top: 50px;color: #fff;text-align: center;}
@@ -66,3 +69,30 @@ a{color: #000;text-decoration: none;}
 .numer .numval{width: 40px;margin: 0; border: 1px solid #ccc;height: 33px;line-height: 33px;vertical-align: top;text-align: center;}
 
 .payicon{width: 25px;vertical-align: text-top;margin-right: 10px;}
+.couponlist{padding: 10px;}
+.couponinfo{height: 100px;}
+.couponinfo .coupon{position: absolute;right: 9px;width: 100px;height: 100px;margin-top: -75px;line-height: 80px;text-align: center;font-size: 35px;color: #fff;}
+.couponinfo .coupon.notuse{background: url(../images/youhuijuan2.gif);background-size: 100%;}
+.couponinfo .coupon.used{background: url(../images/youhuijuan1.gif);background-size: 100%;}
+.couponinfo .coupon .unit{font-size: 16px;}
+
+.usercenter{background:rgba(255,255,255,0.3);background:#000\9;filter:alpha(opacity=20)\9; position: fixed;width: 100%;height: 100%;top: 0;left: 0;}
+.closebtn{right: 10px;top: 10px;position: fixed;z-index: 2;}
+.usercenter-box{width: 300px;height: 100%;}
+.imghead{width: 80px;border-radius: 80px;vertical-align: middle;}
+.item-icon{max-width: 15px;max-height: 15px;}
+.usercenter-box.open{
+    margin-left: 0;
+}
+.usercenter-box.close{
+    margin-left: -300px;
+}
+.left-move {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.list{display: block;}
+.list .item{padding: 20px 0;border-bottom: solid 1px #ccc; display: block;}
+.list .item .item-icon{vertical-align: middle;margin-right: 15px;}
