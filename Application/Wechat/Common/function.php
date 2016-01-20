@@ -12,6 +12,10 @@ function currentUrl(){
 function domainurl(){
     return $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'];
 }
+function recordLog($data,$fileName){
+    return \Common\Lib\Pclass\Webown::record_log(print_r($data,true),$fileName);
+}
+
 
 //获取数据库中sysconfig的配置值
 function getSysConfig($key){

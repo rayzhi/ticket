@@ -5,7 +5,6 @@
  * @date 2015/4/21 15:45:40
  */
 namespace Common\Lib\Pay\pay_wap_wechat;
-use Common\Lib\payment;
 
 class wap_wechat
 {
@@ -31,7 +30,7 @@ class wap_wechat
 	/**
 	 * @see paymentplugin::callback()
 	 */
-	public function callback($callbackData,&$paymentId,&$money,&$message,&$orderNo)
+	public function callback($callbackData)
 	{
 
 		if(isset($callbackData['return_code']) && $callbackData['return_code'] == 'SUCCESS')
@@ -43,7 +42,7 @@ class wap_wechat
 			$para_sort = $this->argSort($para_filter);
 
 			//生成签名结果
-			$mysign = $this->buildMysign($para_sort,Payment::getConfigParam($paymentId,'key'));
+			$mysign = $this->buildMysign($para_sort,C('WECHAT_PAY_KEY'));
 
 			//验证签名
 			if($mysign == $callbackData['sign'])
@@ -74,7 +73,7 @@ class wap_wechat
 	/**
 	 * @see paymentplugin::serverCallback()
 	 */
-	public function serverCallback($callbackData,$key)
+	public function serverCallback($key)
 	{
 
 		$postXML      = file_get_contents("php://input");
@@ -99,7 +98,7 @@ class wap_wechat
 				{
 					$orderNo = $callbackData['out_trade_no'];
 					$money   = $callbackData['total_fee']/100;
-					return true;
+					return $callbackData;
 				}
 				else
 				{
@@ -231,8 +230,8 @@ class wap_wechat
 
 			//签名结果与签名方式加入请求提交参数组中
 			$return['paySign']    = $mysign;
-			$return['successUrl'] = __BASE__.UC('Wechat/Share/orderDetail');
-			$return['failUrl']    = __BASE__.UC('Wechat/Share/orderDetail');
+			$return['successUrl'] = __BASE__.UC('Wechat/Ticket/index');
+			$return['failUrl']    = __BASE__.UC('Wechat/Ticket/index');
 			include(dirname(__FILE__).'/template/pay.php');
 		}
 		else
