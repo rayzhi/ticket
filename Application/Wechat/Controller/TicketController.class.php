@@ -12,9 +12,10 @@ class TicketController extends CommonController {
      * 魔幻城首页
      */
     public function indexAct(){
+        $userinfo = \Wechat\Logic\UserLogic::getUserinfo(getOpenid());
+        $this->assign('userinfo',$userinfo);
         $this->assign('activity_text',getSysConfig('activity-text'));
         $this->display();
-        
     }
     
     /**
