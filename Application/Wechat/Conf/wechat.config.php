@@ -1,6 +1,5 @@
 <?php
 
-define("SERVER_ENVIRONMENT" , "LOCAL_HOST");
 
 return array(
 	
