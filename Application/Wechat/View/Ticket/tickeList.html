@@ -20,14 +20,14 @@
 	    <div class="panel margin-top" href="#">
 	        <select name="area" class="selectarea required">
 	            <option value="">请选择场地</option>
-	            <option value="1">场地1</option>
-	            <option value="2">场地2</option>
-	            <option value="3">场地3</option>
+	            <option value="0">天河</option>
+	            <option value="1">海珠</option>
+	            <option value="2">越秀</option>
 	        </select>
 	        <div class="selectnum">
 	            <span class="text">数量</span>
 	            <div class="numer margin-left30">
-	                <span class="minus">- </span>
+	                <span class="minus">-</span>
 	                <input type="text" name="amount" class="numval" value="1">
 	                <span class="plus">+</span>
 	            </div>
@@ -48,22 +48,31 @@
 		$('.btn-block').click(function(){
 			if($("#h-form").valid()){
 				var index = layer.load(0,{shade:[0.3,'#676767']});
-				data = $("form").serialize();			
+				data = $("form").serialize();
 				$.post(
 					"{:UC('Wechat/Ticket/makeOrder')}", 
 					data, 
 				    function(obj){
 						if(obj.status == 1){
-							window.location.href = "{:UC('Wechat/Ticket/doPay')}?order_id="+obj.url;
+							window.location.href = "{:UC('Wechat/Ticket/sureOrder')}?order_id="+obj.url;
 						}else{
-							layer.msg(data.info,{time:1000},function(){
-								layer.close(index);
-							});
+							alert(data.info);
+							layer.close(index);
 						}
 					},
 					'json'
 				);
 			}
+		})
+		
+		$('.plus').click(function(){
+			numval = Number($('.numval').val())+1;
+			$('.numval').val(numval);
+		})
+		
+		$('.minus').click(function(){
+			numval = Number($('.numval').val());
+			if(numval > 1) $('.numval').val(numval-1);
 		})
 		
 	</script>

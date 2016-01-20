@@ -12,6 +12,7 @@ class TicketOrderDetailModel extends Model{
         $array['order_id']  = $order_id;
         $array['ticket_id'] = 1;
         $array['amount']    = $postData['amount'];
+        $array['area']      = $postData['area'];
         
         return $this->add($array);
 

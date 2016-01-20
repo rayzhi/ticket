@@ -1,0 +1,108 @@
+[33mcommit 680f1c9dce2a62839c641820209ae100061861ef[m
+Author: skyshow <249569914@qq.com>
+Date:   Tue Jan 19 23:39:06 2016 +0800
+
+    微信支付流程走通
+
+[33mcommit e3aeb99e3313a2b501cea97f3ded43e34adf9e1c[m
+Author: dasheng523 <dasheng523@163.com>
+Date:   Tue Jan 19 21:00:05 2016 +0800
+
+    优惠券
+
+[33mcommit de5f7d70d80c037146d9db36f98acc627c8f172f[m
+Author: dasheng523 <dasheng523@163.com>
+Date:   Tue Jan 19 13:04:48 2016 +0800
+
+    所有的切图
+
+[33mcommit fb437c8a8652b2680ab9fb39ed5389aea9ad4073[m
+Author: skyshow <249569914@qq.com>
+Date:   Tue Jan 19 01:32:53 2016 +0800
+
+    买票首页部分代码
+
+[33mcommit f573d028f97a2f92bca68f8621b26f51b20ae4fe[m
+Author: dasheng523 <dasheng523@163.com>
+Date:   Mon Jan 18 19:34:01 2016 +0800
+
+    前台页面切图
+
+[33mcommit 40b78eb95f65bcff7e94ab764ee79cbdfd4593c3[m
+Author: skyshow <249569914@qq.com>
+Date:   Sun Jan 17 23:47:15 2016 +0800
+
+    admin order
+
+[33mcommit 377306641880fabe8780d2e5b55d20da8e490d9b[m
+Merge: 7933bda 694c53f
+Author: skyshow <249569914@qq.com>
+Date:   Sun Jan 17 22:22:42 2016 +0800
+
+    修改index.php常量定义，移动到myconfig里面去
+
+[33mcommit 7933bdae3f2208b0bc03f7d9a074143ba3975659[m
+Author: skyshow <249569914@qq.com>
+Date:   Sun Jan 17 22:12:48 2016 +0800
+
+    修改base常量的位置，增加后台部分代码
+
+[33mcommit 694c53f375dab35852a67151837364afeb5a7088[m
+Author: dasheng523 <dasheng523@163.com>
+Date:   Sun Jan 17 21:22:14 2016 +0800
+
+    删除多余代码，添加微信菜单
+
+[33mcommit 3aa5a08842fe104261308fe722f77324eaadac7f[m
+Author: dasheng523 <dasheng523@163.com>
+Date:   Sun Jan 17 17:14:31 2016 +0800
+
+    修复不回复问题
+
+[33mcommit 71383c76eecf38b5f71be12ff6965ffc3ff38f8c[m
+Author: dasheng523 <dasheng523@163.com>
+Date:   Sun Jan 17 17:02:39 2016 +0800
+
+    修复不回复问题
+
+[33mcommit 609a94df924e2e814883a7067ed0aa29be9761f3[m
+Author: dasheng523 <dasheng523@163.com>
+Date:   Sun Jan 17 16:03:22 2016 +0800
+
+    修改weixin.php入口配置
+
+[33mcommit 9d23c1052ecdf6992702c7271df93af60c72fec9[m
+Author: dasheng523 <dasheng523@163.com>
+Date:   Sun Jan 17 15:50:58 2016 +0800
+
+    修复Wechat.class.php名称
+
+[33mcommit 946f41b7f256755f57359fbe3cc2022c1904ec0c[m
+Author: dasheng523 <dasheng523@163.com>
+Date:   Sun Jan 17 15:50:12 2016 +0800
+
+    修复Wechat.class.php名称
+
+[33mcommit 580d421fb709ecbf3409b0525fe7870e5d1d75a0[m
+Author: dasheng523 <dasheng523@163.com>
+Date:   Sun Jan 17 15:39:11 2016 +0800
+
+    修改微信配置
+
+[33mcommit c566a65ecd5b1226d5cd86c8e5629ce709b90907[m
+Author: dasheng523 <dasheng523@163.com>
+Date:   Sun Jan 17 15:30:53 2016 +0800
+
+    修复index.php的地址
+
+[33mcommit 65adfd37d7e77402d90b5ffd8a58c3cc4f0a5a9a[m
+Author: dasheng523 <dasheng523@163.com>
+Date:   Sun Jan 17 15:01:49 2016 +0800
+
+    微信对接配置和一些架构
+
+[33mcommit eeb60172f2e275247f6e5aa9baa81d1a62e2e7b9[m
+Author: skyshow <249569914@qq.com>
+Date:   Sun Jan 17 09:48:06 2016 +0800
+
+    售票系统初始代码

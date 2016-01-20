@@ -2,28 +2,32 @@
 
 <block name="css">
 	<style type="text/css">
-	   
+		#usercenterbox{width:100%;}
 	</style>
 </block>
 
 <block name="content">
 
-  <body class="index-container">
-    <div>
-        <a href="#" class="index-menubtn"><img src="__PUBLIC__/images/tao3.png" width="30px"></a>
-
-        <h1 class="index-title">魔乐城</h1>
-        <h3 class="index-titlemore">Molo Vision</h3>
-        <p class="index-desc">穿越“时空裂缝”情境体验馆门票</p>
-
-        <div class="index-price">￥99</div>
-
-        <div class="index-btngroup">
-            <div class="index-btn">
-                <a href="#" class="btn-block">立即购买</a>
-            </div> 
-            <div class="index-btn">
-                <a href="#" class="btn-block blue">了解详情</a>
+  <body>
+    
+    <div class="usercenter user_index" id="userc">   
+        <div class="panel usercenter-box open left-move" id="usercenterbox">
+            <div class="list">
+                <a class="item" href="#">
+                	<if condition="$userInfo.headimgurl neq ''">
+                		<img src="{$userInfo.headimgurl}" class="imghead">
+                	<else />
+                		<img src="__PUBLIC__/images/head.jpg" class="imghead">
+                	</if>
+                    
+                    <img src="__PUBLIC__/images/tao.gif" class="item-icon margin-left">{$userInfo.nickname}
+                </a>
+                <a class="item" href="{:UC('Wechat/User/orderDetail')}">
+                    <img src="__PUBLIC__/images/jianping.gif" class="item-icon"> 我的订单
+                </a>
+                <a class="item" href="{:UC('Wechat/User/coupon')}">
+                    <img src="__PUBLIC__/images/youhuij.gif" class="item-icon"> 我的优惠券
+                </a>               
             </div>
         </div>
     </div>
@@ -31,11 +35,13 @@
   </body>
 </block>
 
-
 <block name="script">
 	<script>
-		function buyCourse(eventid,id){	
-			//window.location.href="{:UC('Wechat/Share/userInfo')}?productid="+id+'&eventid='+eventid;
-		}
+	   
+	      
+	
+	    
+	
 	</script>
 </block>
+

@@ -1,0 +1,54 @@
+<extend name="template/template" />
+
+<block name="css">
+	<style type="text/css">
+	  
+	</style>
+</block>
+
+<block name="content">
+
+ <body>
+ 
+    <div class="panel margin-top">
+        <h3>魔乐城场馆体验票</h3>
+        <span class="text">魔乐城场馆 天河区</span>
+    </div>
+
+    <a class="panel margin-top" href="#">
+        <span class="text">抵用券/优惠码</span>
+        <span class="moretext pull-right">{$couponInfo.price}元</span>
+       <!--  <span class="moretext pull-right">1张可用 &gt;</span>--> 
+    </a>
+
+    <div class="panel margin-top" href="#">
+        <span class="text">实付金额</span>
+        <span class="moretext pull-right">{$orderInfo.third_party_pay}元</span>
+    </div>
+
+    <h3 class="box-title">选择支付方式</h3>
+    <div class="panel">
+        <img src="__PUBLIC__/images/weixin.gif" class="payicon"><span class="text">微信支付</span>
+        <span class="moretext pull-right"><img src="__PUBLIC__/images/yuan.gif" class="payicon"></span>
+    </div>
+
+    <p class="helpbox text-help margin-top">体验票出票后不可退换，请仔细核对订单信息</p>
+
+    <div class="margin-top">&nbsp;</div>
+    <button type="submit" class="btn-block margin-top">立即购买</button>
+  </body>
+</block>
+
+
+<block name="script">
+	<script>
+		
+		//提交表单
+		$('.btn-block').click(function(){
+			var index = layer.load(0,{shade:[0.3,'#676767']});
+			window.location.href = "{:UC('Wechat/Ticket/doPay')}?oid="+{$orderInfo.id}+'&cid='+{$couponInfo.id};		
+		})
+		
+	</script>
+</block>
+

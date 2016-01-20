@@ -1,0 +1,38 @@
+<extend name="template/template" />
+
+<block name="css">
+	<style type="text/css">
+		
+	</style>
+</block>
+
+<block name="content">
+
+  <body>
+    
+   <div class="couponlist">
+   		<volist name="coupon" id="vo">
+	        <div class="panel margin-top couponinfo">
+	            <h3>{$vo.title}</h3>
+	            <span class="text-help">有效期：{$vo.begin_time} - {$vo.end_time}</span>
+	           
+	            <if condition="$vo.status eq 1">
+	            	 <div class="coupon used"><span class="unit">￥</span>10</div>
+	            <elseif condition="$vo.status eq 0">
+	            	 <div class="coupon notuse"><span class="unit">￥</span>10</div>
+	            </if>
+	        </div>
+        </volist>      
+    </div>
+
+    <div class="helpbox text-guide margin-top30">没有更多可用券了</div>
+
+  </body>
+</block>
+
+<block name="script">
+	<script>
+	   
+	</script>
+</block>
+

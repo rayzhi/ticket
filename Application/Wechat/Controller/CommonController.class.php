@@ -45,7 +45,7 @@ class CommonController extends Controller {
     protected function _saveUserInfo($userInfo){
         
         $check = D('User')->where(array('open_id'=>$userInfo['openid']))->find();
-        if(!$check){
+        if(!$check && $userInfo['openid']){
             $array['open_id']    = $userInfo['openid'];
             $array['headimgurl'] = $userInfo['headimgurl'];
             $array['nickname']   = $userInfo['nickname'];

@@ -27,6 +27,10 @@ class TicketOrderModel extends Model{
         }
         
     }
+    
+    public function getOrderInfo($order_id){
+        return $this->where(array('id'=>$order_id))->find();
+    }
 
 
 }
