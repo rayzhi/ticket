@@ -12,7 +12,7 @@ class TicketController extends CommonController {
      * 魔幻城首页
      */
     public function indexAct(){
-        
+        $this->assign('activity_text',getSysConfig('activity-text'));
         $this->display();
         
     }

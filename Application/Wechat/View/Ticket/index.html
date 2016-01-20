@@ -22,7 +22,7 @@
                 <a href="{:UC('Wechat/Ticket/tickeList')}" class="btn-block">立即购买</a>
             </div> 
             <div class="index-btn">
-                <a href="#" class="btn-block blue">了解详情</a>
+                <a href="javascript:" class="btn-block blue" id="helpbox">了解详情</a>
             </div>
         </div>
     </div>
@@ -38,10 +38,10 @@
                 <a class="item" href="#">
                     <img src="__PUBLIC__/images/guanpiao.gif" class="item-icon"> 我的馆场券
                 </a>
-                <a class="item" href="#">
+                <a class="item" href="<?php echo UC('Wechat/Coupon/index');?>">
                     <img src="__PUBLIC__/images/youhuij.gif" class="item-icon"> 我的优惠券
                 </a>
-                <a class="item" href="#">
+                <a class="item" href="<?php echo UC('Wechat/Recommend/index');?>">
                     <img src="__PUBLIC__/images/jianping.gif" class="item-icon"> 推荐有奖
                 </a>
                 <a class="item" href="#">
@@ -52,6 +52,13 @@
                 </a>
             </div>
         </div>
+    </div>
+
+    <div class="mask default-mask hide">
+        <a href="javascript:" class="mask-close"><img src="__PUBLIC__/images/cha.png" width="50px"></a>
+        <p class="container text-nomal">
+            {$activity_text}
+        </p>
     </div>
 
   </body>
@@ -103,6 +110,22 @@
 	            addClass(obj, cls);
 	        }
 	    }
+
+        $("#helpbox").click(function(){
+            showHelp();
+        });
+
+        $(".mask-close").click(function(){
+            hideHelp();
+        });
+
+        function showHelp(){
+            $(".default-mask").removeClass("hide");
+        }
+
+        function hideHelp(){
+            $(".default-mask").addClass("hide");
+        }
 	
 	</script>
 </block>

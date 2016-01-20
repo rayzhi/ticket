@@ -1,5 +1,7 @@
 <?php
 
+define("InviteCouponID", 1);
+
 return array(
 	
     /* 数据缓存设置 */

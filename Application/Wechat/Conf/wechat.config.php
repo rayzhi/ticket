@@ -1,5 +1,7 @@
 <?php
 
+define("SERVER_ENVIRONMENT" , "LOCAL_HOST");
+
 return array(
 	
 	/* 微信公众号配置 */

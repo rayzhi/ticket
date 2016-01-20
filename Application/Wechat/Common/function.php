@@ -24,6 +24,11 @@ function getSysConfig($key){
 
 //获得openid
 function getOpenid(){
-    return 555;
-    //return session('openid');
+    //return 555;
+    return session('openid');
+}
+
+//调试日志
+function slog($content){
+    file_put_contents("/test.log",$content,FILE_APPEND);
 }
