@@ -6,11 +6,14 @@ function wechatInstance(){
 
 //获得当前URL
 function currentUrl(){
-    return $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    if($_SERVER['QUERY_STRING']){
+        $query = '?'.$_SERVER['QUERY_STRING'];
+    }
+    return 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$query;
 }
 //获得项目根路径
 function domainurl(){
-    return $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'];
+    return 'http://'.$_SERVER['HTTP_HOST'];
 }
 function recordLog($data,$fileName){
     return \Common\Lib\Pclass\Webown::record_log(print_r($data,true),$fileName);

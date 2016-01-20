@@ -43,8 +43,13 @@
     <script type="text/javascript">
         wx.config(<?php echo $signature;?>);
         wx.ready(function(){
-
+            alert("456");
         });
+        wx.error(function(res){
+            alert("error!");
+            alert(res);
+        });
+
         wx.onMenuShareTimeline({
             title: '魔乐城',
             link: "<?php echo $inviteurl;?>", // 分享链接
