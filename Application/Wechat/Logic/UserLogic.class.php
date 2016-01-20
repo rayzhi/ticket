@@ -21,11 +21,23 @@ class UserLogic{
 
     public static function getUserinfo($openid){
         $userinfo = D('User')->where(array('open_id'=>$openid))->find();
-        if(!$userinfo) {
+        if(!$userinfo['nickname']) {
             $userinfo['nickname'] = "游客";
+        }
+        if(!$userinfo['headimgurl']){
             $userinfo['headimgurl'] = __PUBLIC__."/images/tao3.png";
         }
         return $userinfo;
+    }
+
+    public static function updateByOpenid($openid,$update){
+        D('User')->where(array("openid"=>$openid))->save($update);
+    }
+
+    public static function is_exists($openid){
+        $userinfo = D('User')->where(array('open_id'=>$openid))->find();
+        if($userinfo) return true;
+        return false;
     }
 
 }

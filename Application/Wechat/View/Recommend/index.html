@@ -55,14 +55,10 @@
             link: "<?php echo $inviteurl;?>", // 分享链接
             imgUrl: '', // 分享图标
             success: function () {
-                $.post("/index.php/Wechat/Recommend/invited",function(resp){
-                    if(resp == 1){
-                        alert("代金券已发出，请查收代金券。");
-                    }
-                });
+                alert("已分享到朋友圈，当您的朋友第一次关注魔乐城服务号，即可获得优惠券");
             },
             cancel: function () {
-                alert("您已取消。");
+                alert("您已取消分享");
             }
         });
 

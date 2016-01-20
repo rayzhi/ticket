@@ -1,6 +1,7 @@
 <?php
 
 define("InviteCouponID", 1);
+define("NewerCouponID",2);
 
 return array(
 	

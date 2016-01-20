@@ -66,6 +66,22 @@ a{color: #000;text-decoration: none;}
 .index-btngroup{margin-top: 30px;}
 .index-btn{display: inline-block;width: 49%;}
 
+.pop{display: block;position: fixed;text-align: center;width: 100%; margin-top:-500px;
+animation: myfirst 5s;
+-moz-animation: myfirst 5s; /* Firefox */
+-webkit-animation: myfirst 5s;  /* Safari 和 Chrome */
+-o-animation: myfirst 5s;   /* Opera */}
+.pop .poptext{background:rgba(0,0,0,0.5);background:#000\9;filter:alpha(opacity=20)\9;padding: 10px 20px;color: #fff;border-radius: 15px;}
+
+@keyframes myfirst
+{
+0%   {margin-top: -500px;}
+25%  {margin-top: 0;}
+50%  {margin-top: 0;}
+95%  {margin-top: -500px;}
+100% {margin-top: -600px;}
+}
+
 .maintext{text-align: center;font-weight: normal;}
 .mainprice{font-size: 40px;color: #ff6600; text-align: center;margin: 10px;}
 .selectarea{width: 100%;padding: 10px 10px 20px 10px;border:none;border-bottom: 1px solid #ccc;-webkit-appearance:listbox; -moz-appearance:listbox;}

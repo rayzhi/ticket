@@ -41,6 +41,14 @@ class CouponLogic{
         $id = D('coupon')->add($couponinfo);
         return $id;
     }
+
+    //获取已经拥有的优惠券个数
+    public static function countCoupon($openid,$couponid=0){
+        if($couponid==0){
+            return D('user_coupon')->where(array('open_id'=>$openid))->count(1);
+        }
+        return D('user_coupon')->where(array('open_id'=>$openid,'coupon_id'=>$couponid))->count(1);
+    }
    
 
 }
