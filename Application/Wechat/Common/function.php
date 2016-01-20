@@ -30,5 +30,5 @@ function getOpenid(){
 
 //调试日志
 function slog($content){
-    file_put_contents("/test.log",$content,FILE_APPEND);
+    file_put_contents("./test.log",$content,FILE_APPEND);
 }
