@@ -7,35 +7,20 @@
 </block>
 
 <block name="content">
-
-  <body class="index-container">
-    <div>
-        <a href="#" class="index-menubtn"><img src="__PUBLIC__/images/tao3.png" width="30px"></a>
-
-        <h1 class="index-title">魔乐城</h1>
-        <h3 class="index-titlemore">Molo Vision</h3>
-        <p class="index-desc">穿越“时空裂缝”情境体验馆门票</p>
-
-        <div class="index-price">￥99</div>
-
-        <div class="index-btngroup">
-            <div class="index-btn">
-                <a href="#" class="btn-block">立即购买</a>
-            </div> 
-            <div class="index-btn">
-                <a href="#" class="btn-block blue">了解详情</a>
-            </div>
+<body>
+    
+    <div class="couponlist">
+        <volist name="list" id="info">
+        <div class="panel margin-top couponinfo">
+            <h3>{$info['title']}</h3>
+            <span class="text-help">有效期：{$info['begin_time']|date="Y.m.d",###} - {$info['end_time']|date="Y.m.d",###}</span>
+            <div class="coupon <if condition="$info['status'] eq 0">notuse<else/>used</if>"><span class="unit">￥</span>{$info['price']}</div>
         </div>
+        </volist>
     </div>
 
-  </body>
+    <div class="helpbox text-guide margin-top30">没有更多可用券了</div>
+
+</body>
 </block>
 
-
-<block name="script">
-	<script>
-		function buyCourse(eventid,id){	
-			//window.location.href="{:UC('Wechat/Share/userInfo')}?productid="+id+'&eventid='+eventid;
-		}
-	</script>
-</block>

@@ -1,5 +1,6 @@
 <?php
 
+
 return array(
 	
 	/* 微信公众号配置 */

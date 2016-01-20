@@ -1,0 +1,84 @@
+<extend name="template/template" />
+
+<block name="css">
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+</block>
+
+<block name="content">
+
+  <body>
+    <div class="banner">
+        <img src="__PUBLIC__/images/baijing.gif">
+    </div>
+
+    <div class="tuijian-info">
+        <div class="tuijiantext">
+            <img src="{$userinfo['headimgurl']}">
+            <span>
+                {$userinfo['nickname']}<br>
+                {$invitetext}
+            </span>
+        </div>
+
+    </div>
+
+        <div class="sharehelp-box margin-top">
+            <span>点击右上角分享，赢20元奖励</span><img src="__PUBLIC__/images/jiantao.png" width="50px">
+        </div>
+
+    <div class="tuijian-info">
+        <div class="margin-top30"></div>
+        <a class="btn-block" href="<?php echo UC('Wechat/Ticket/tickeList');?>">立即购票 畅想魔乐城</a>
+    </div>
+
+    <div class="mask default-mask hide">
+        <a href="javascript:" class="mask-close"><img src="__PUBLIC__/images/cha.png" width="50px"></a>
+        <p class="container text-nomal">
+            {$activity_text}
+        </p>
+    </div>
+
+    <a class="block text-guide helpbox" href="javascript:"><img src="__PUBLIC__/images/wen.png" width="15">活动说明</a>
+
+    <script type="text/javascript">
+        wx.config(<?php echo $signature;?>);
+        wx.ready(function(){
+            alert("456");
+        });
+        wx.error(function(res){
+            alert("error!");
+            alert(res);
+        });
+
+        wx.onMenuShareTimeline({
+            title: '魔乐城',
+            link: "<?php echo $inviteurl;?>", // 分享链接
+            imgUrl: '', // 分享图标
+            success: function () {
+                alert("已分享到朋友圈，当您的朋友第一次关注魔乐城服务号，即可获得优惠券");
+            },
+            cancel: function () {
+                alert("您已取消分享");
+            }
+        });
+
+        $(".helpbox").click(function(){
+            showHelp();
+        });
+
+        $(".mask-close").click(function(){
+            hideHelp();
+        });
+
+        function showHelp(){
+            $(".default-mask").removeClass("hide");
+        }
+
+        function hideHelp(){
+            $(".default-mask").addClass("hide");
+        }
+    </script>
+
+  </body>
+
+</block>

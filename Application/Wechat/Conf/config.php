@@ -1,5 +1,8 @@
 <?php
 
+define("InviteCouponID", 1);
+define("NewerCouponID",2);
+
 return array(
 	
     /* 数据缓存设置 */

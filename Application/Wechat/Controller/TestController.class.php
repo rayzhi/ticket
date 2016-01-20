@@ -23,4 +23,8 @@ class TestController extends Controller {
         print_r(CouponLogic::getCoupon(1,2));
     }
 
+    public function testlogAct(){
+        slog("45646546456");
+    }
+
 }
