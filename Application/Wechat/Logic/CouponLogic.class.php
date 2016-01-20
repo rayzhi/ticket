@@ -22,7 +22,7 @@ class CouponLogic{
         $info['ctime'] = time();
         $info['note'] = "";
         $id = D('user_coupon')->add($info);
-        print_r($info);
+        return $id;
     }
 
 

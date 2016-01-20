@@ -12,7 +12,7 @@ class CommonController extends Controller {
     public function _initialize() {
 
         if(!session('openid')){
-            $this->_session_openid();
+            //$this->_session_openid();
         }
         
     }

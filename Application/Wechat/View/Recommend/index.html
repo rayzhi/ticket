@@ -1,0 +1,60 @@
+<extend name="template/template" />
+
+<block name="css">
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+</block>
+
+<block name="content">
+
+  <body>
+    <div class="banner">
+        <img src="__PUBLIC__/images/baijing.gif">
+    </div>
+
+    <div class="tuijian-info">
+        <div class="tuijiantext">
+            <img src="__PUBLIC__/images/head.jpg">
+            <span>
+                Cormier<br>
+                {$invitetext}
+            </span>
+        </div>
+
+    </div>
+
+        <div class="sharehelp-box margin-top">
+            <span>点击右上角分享，赢20元奖励</span><img src="__PUBLIC__/images/jiantao.png" width="50px">
+        </div>
+
+    <div class="tuijian-info">
+        <div class="margin-top30"></div><?php echo U('');?>
+        <a class="btn-block" href="">立即购票 畅想魔乐城</a>
+    </div>
+
+    <a class="block text-guide helpbox" href="#"><img src="__PUBLIC__/images/wen.png" width="15">活动说明</a>
+
+    <script type="text/javascript">
+        wx.config(<?php echo $signature;?>);
+        wx.ready(function(){
+
+        });
+        wx.onMenuShareTimeline({
+            title: '魔乐城',
+            link: '<?php echo $inviteurl;?>', // 分享链接
+            imgUrl: '', // 分享图标
+            success: function () {
+                $.post("/index.php/Wechat/Recommend/invited",function(resp){
+                    if(resp == 1){
+                        alert("代金券已发出，请查收代金券。");
+                    }
+                });
+            },
+            cancel: function () { 
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    </script>
+
+  </body>
+
+</block>
