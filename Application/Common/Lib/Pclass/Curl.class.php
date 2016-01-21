@@ -1,11 +1,6 @@
 <?php
 namespace Common\Lib\Pclass; 
-/**
- * Curl 模拟请求
- * @package  lib
- * @copyright   2014 GZSD
- * @version     SVN: $Id: index.php 43 2014-12-04 10:23:59 Cengp $
- */
+
 class Curl {
 	
 	private $cookie = '/Logs/cookie.txt'; //cookie保存路径
@@ -16,7 +11,7 @@ class Curl {
 	 * @param string $proxy 是否代理
 	 * @param int    $timeout 请求时间
 	 */
-	public function get($url, $proxy = null, $timeout = 10) {
+	public function get($url, $proxy = null, $timeout = 60) {
 		if (!$url) return false;
 		$ssl = substr($url, 0, 8) == 'https://' ? true : false;
 		$curl = curl_init();
@@ -46,7 +41,7 @@ class Curl {
 	 * @param string $proxy 是否代理
 	 * @param int    $timeout 请求时间
 	 */
-	public function post($url, $data, $header = null, $proxy = null, $timeout = 10) {
+	public function post($url, $data, $header = null, $proxy = null, $timeout = 60) {
 		if (!$url) return false;
 		$ssl = substr($url, 0, 8) == 'https://' ? true : false;
 		$curl = curl_init();
@@ -82,7 +77,7 @@ class Curl {
 	 * @param string $proxy 是否代理
 	 * @param int    $timeout 请求时间
 	 */
-	public function put($url, $data, $proxy = null, $timeout = 10) {
+	public function put($url, $data, $proxy = null, $timeout = 60) {
 		if (!$url) return false;
 		$ssl = substr($url, 0, 8) == 'https://' ? true : false;
 		$curl = curl_init();
@@ -117,7 +112,7 @@ class Curl {
 	 * @param string $proxy 是否代理
 	 * @param int    $timeout 请求时间
 	 */
-	public function del($url, $data, $proxy = null, $timeout = 10) {
+	public function del($url, $data, $proxy = null, $timeout = 60) {
 		if (!$url) return false;
 		$ssl = substr($url, 0, 8) == 'https://' ? true : false;
 		$curl = curl_init();
