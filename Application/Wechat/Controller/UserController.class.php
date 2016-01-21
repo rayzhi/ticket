@@ -30,6 +30,10 @@ class UserController extends CommonController {
         $this->display();
     }
     
-   
+   public function orderlistAct(){
+        $list = \Wechat\Logic\OrderLogic::getUserOrderList(getOpenid());
+        $this->assign('list',$list);
+        $this->display();
+   }
 
 }

@@ -1,4 +1,4 @@
-body{background: #eee;}
+body{background: #eee;padding-bottom: 10px;}
 *{font-family: "微软雅黑";}
 *,
 *:before,
@@ -120,3 +120,14 @@ animation: myfirst 5s;
 .list{display: block;}
 .list .item{padding: 20px 0;border-bottom: solid 1px #ccc; display: block;}
 .list .item .item-icon{vertical-align: middle;margin-right: 15px;}
+
+.orderinfo{display: block;}
+.orderinfo-topinfo{color: #666;font-size: 12px;margin-top: -5px;}
+.orderno{float: right;}
+.orderinfo h3{margin: 5px 0;}
+.orderinfo p {margin: 0;}
+.orderinfo-bottom{padding-top:20px;}
+.pricesp strong{color:#ff6600; }
+.orderstate{float: right; font-size: 25px;margin-top: -10px;}
+.orderstate.enable{color: #73ae1f;}
+.orderstate.disable{color: #666;}

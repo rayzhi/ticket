@@ -1,0 +1,45 @@
+<extend name="template/template" />
+
+<block name="css">
+    <style type="text/css">
+        
+    </style>
+</block>
+
+<block name="content">
+
+  <body>
+    
+   <div class="couponlist">
+      <volist name="list" id="info">
+        <a class="panel margin-top orderinfo"
+          href="<?php if($info['status'] == 0){echo "/index.php/Wechat/Ticket/sureOrder.html?order_id=".$info['id'];} else{echo "javascript:";}?>">
+          <p class="orderinfo-topinfo">
+            <span class="ordertime">{$info['add_time']|date="Y-m-d H:i:s",###}</span>
+            <span class="orderno">订单号：{$info['sn']}</span>
+          </p>
+          <h3 class="goodsname">魔乐城场馆体验票 {$info['amount']} 张</h3>
+          <p class="areaname">魔乐城场馆 天河区</p>
+          <p class="orderinfo-bottom">
+            <span class="pricesp">总价：<strong>{$info['total_cost']}元</strong></span>
+            <if condition="$info['status'] eq 0">
+              <span class="orderstate enable">待付款</span>
+              <else/>
+              <span class="orderstate disable">已支付</span>
+            </if>
+          </p>
+        </a>
+      </volist>
+    </div>
+
+    <div class="helpbox text-guide margin-top30">没有更多可用券了</div>
+
+  </body>
+</block>
+
+<block name="script">
+    <script>
+       
+    </script>
+</block>
+
