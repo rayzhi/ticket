@@ -31,7 +31,7 @@ class CommonController extends Controller {
             $this->_saveUserInfo($userInfo);
             session('openid',$result['openid']);
         }else{
-            $callBackUrl = __BASE__.UC(MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME);
+            $callBackUrl = __BASE__.substr(UC(MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME),1);
             $url = $wechatObj->getOauthRedirect($callBackUrl, '', 'snsapi_base');
             redirect($url);
         }
