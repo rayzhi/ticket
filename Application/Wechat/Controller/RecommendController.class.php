@@ -23,16 +23,6 @@ class RecommendController extends CommonController {
         $this->display();
     }
 
-
-    //完成邀请
-    public function invitedAct(){
-        if(IS_POST){
-            $openid = getOpenid();
-            \Wechat\Logic\CouponLogic::giveCoupon($openid,InviteCouponID); //赠送邀请优惠券
-            echo 1;
-        }
-        echo 0;
-    }
     
    
 

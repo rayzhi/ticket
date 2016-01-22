@@ -43,25 +43,21 @@
     <script type="text/javascript">
         wx.config(<?php echo $signature;?>);
         wx.ready(function(){
-            alert("456");
+            wx.onMenuShareTimeline({
+                title: '魔乐城',
+                link: "<?php echo $inviteurl;?>", // 分享链接
+                imgUrl: '', // 分享图标
+                success: function () {
+                    alert("已分享到朋友圈");
+                },
+                cancel: function () {
+                    alert("您已取消分享");
+                }
+            });
         });
         wx.error(function(res){
             alert("error!");
-            alert(res);
         });
-
-        wx.onMenuShareTimeline({
-            title: '魔乐城',
-            link: "<?php echo $inviteurl;?>", // 分享链接
-            imgUrl: '', // 分享图标
-            success: function () {
-                alert("已分享到朋友圈，当您的朋友第一次关注魔乐城服务号，即可获得优惠券");
-            },
-            cancel: function () {
-                alert("您已取消分享");
-            }
-        });
-
         $(".helpbox").click(function(){
             showHelp();
         });

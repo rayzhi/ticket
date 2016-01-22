@@ -18,7 +18,6 @@ class UserController extends CommonController {
     }
     
     public function orderDetailAct(){
-        
         $this->display();
     }
     
