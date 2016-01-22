@@ -16,7 +16,7 @@ class RecommendController extends CommonController {
         $userinfo = \Wechat\Logic\UserLogic::getUserinfo(getOpenid());
         $this->assign('userinfo',$userinfo);
 
-        $this->assign('inviteurl',domainurl().U('/Coupon/reciveCoupon'));
+        $this->assign('inviteurl',UC('Wechat/Coupon/reciveCoupon'));
         $this->assign('invitetext',getSysConfig('recommend-text'));
         $this->assign('signature',str_replace("\\/", "/", json_encode($signature)));
         $this->assign('activity_text',getSysConfig('activity-text'));
