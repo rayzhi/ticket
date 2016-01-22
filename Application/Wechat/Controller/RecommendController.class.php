@@ -12,11 +12,11 @@ class RecommendController extends CommonController {
         $weobj = wechatInstance();
         $signature = $weobj->getJsSign(currentUrl(),time(),md5(rand(1,9999)),C('WECHAT_APPID'));
         $signature['jsApiList'] = ['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone'];
-        $signature['debug'] = true;
+        //$signature['debug'] = true;
         $userinfo = \Wechat\Logic\UserLogic::getUserinfo(getOpenid());
         $this->assign('userinfo',$userinfo);
 
-        $this->assign('inviteurl',domainurl().U('/Coupon/reciveCoupon?inviter='.getOpenid()));
+        $this->assign('inviteurl',domainurl().U('/Coupon/reciveCoupon'));
         $this->assign('invitetext',getSysConfig('recommend-text'));
         $this->assign('signature',str_replace("\\/", "/", json_encode($signature)));
         $this->assign('activity_text',getSysConfig('activity-text'));
