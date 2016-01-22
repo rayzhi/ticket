@@ -2,7 +2,7 @@
     <div class="col-xs-12">
         <div class="well">
               <div class="btn-group ">
-                <a class="btn btn-success dropdown-toggle" href="<?php echo UC('Admin/Coupon/couponAdd')?>">&nbsp;添&nbsp;&nbsp;加&nbsp;</a>
+                <a class="btn btn-success dropdown-toggle" href="<?php echo UC('Admin/Coupon/home')?>">返回</a>
               </div>
         </div>   
         <div class="table-responsive">
@@ -15,11 +15,11 @@
                                 <span class="lbl"></span>
                             </label>
                         </th>
-                        <th>名称</th>
-                        <th>价值</th>
-                        <th>有效期</th>
-                        <th>备注</th>
-                        <th>操作</th>
+                        <th>领取人</th>
+                        <th>优惠券编号</th>
+                        <th>获取时间</th>
+                        <th>状态</th>
+                        <th>使用时间</th>
                     </tr>
                 </thead>
 
@@ -32,23 +32,17 @@
                                 <span class="lbl"></span>
                             </label>
                         </td>
-                        <td>{$vo.title}</td>
-                        <td>{$vo.price}</td>
-                        <td>{$vo.begin_time|date="Y.m.d",###} - {$vo.end_time|date="Y.m.d",###}</td>
-                        <td>{$vo.note}</td>
+                        <td>{$vo.name}</td>
+                        <td>{$vo.sn}</td>
+                        <td>{$vo.gettime|date="Y-m-d",###}</td>
                         <td>
-                            <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                <a class="green" href="<?php echo UC('Admin/Coupon/couponAdd')?>?id={$vo.id}" title="编辑">
-                                    编辑
-                                </a>
-                                <a class="red" href="javascript:;" onclick="remove_option({$vo.id}, '您确认要删除这条数据吗?')" title="删除">
-                                    删除
-                                </a>
-                                <a href="<?php echo UC('Admin/Coupon/lookupdetail',array('id'=>$vo['id']))?>">
-                                    查看领取情况
-                                </a>
-                            </div>
+                            <switch name="vo.status">
+                                <case value="0">未使用</case>
+                                <case value="1">已使用</case>
+                                <default />过期
+                            </switch>
                         </td>
+                        <td><if condition="$vo['usetime']">{$vo.usetime|date="Y-m-d",###}</if></td>
                     </tr>
                     </volist>
                 </tbody>
