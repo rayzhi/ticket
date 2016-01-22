@@ -14,13 +14,13 @@
 
     <if condition="$errormsg">
         <div class="pop">
-            <span class="poptext">{$errormsg}</span>
+            <span class="poptext">{$msg}</span>
         </div>
     </if>
     
 
     <div class="lingqu">
-        <img src="__PUBLIC__/images/head.jpg" class="lingqu-head">
+        <img src="{$userinfo['headimgurl']}" class="lingqu-head">
         <p class="lingqu-welcome">Hi,我是魔乐城新用户</p>
         <p class="lingqu-gifttext">送你<strong>50元</strong>魔乐城大礼包</p>
 

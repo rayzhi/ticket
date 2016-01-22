@@ -16,21 +16,24 @@ class CouponController extends CommonController {
 
     //领取优惠券
     public function reciveCouponAct(){
+        $openid = getOpenid();
+        $userinfo = \Wechat\Logic\UserLogic::getUserinfo($openid);
+        $this->assign('userinfo',$userinfo);
         if(IS_POST){
-            $openid = getOpenid();
             $phone = I('post.phone');
             if(preg_match("/1[3458]{1}\d{9}$/",$phone)){
                 $receviCount = \Wechat\Logic\CouponLogic::countCoupon($openid,NewerCouponID);
                 if($receviCount>0){
-                    $this->assign("errormsg","您已经领取过该优惠券了");
+                    $this->assign("msg","您已经领取过该优惠券了");
                 }
                 else{
                     \Wechat\Logic\UserLogic::updateByOpenid($openid,array('phone'=>$phone));
                     \Wechat\Logic\CouponLogic::giveCoupon($openid,NewerCouponID); //赠送优惠券
+                    $this->assign("msg","您成功领取优惠券，请关注我们的服务号后，到个人中心查看");
                 }
             }
             else{
-                $this->assign("errormsg","手机号码填写不正确");
+                $this->assign("msg","手机号码填写不正确");
             }
         }
         
