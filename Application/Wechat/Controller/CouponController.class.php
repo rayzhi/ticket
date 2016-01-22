@@ -29,7 +29,7 @@ class CouponController extends CommonController {
                 else{
                     \Wechat\Logic\UserLogic::updateByOpenid($openid,array('phone'=>$phone));
                     \Wechat\Logic\CouponLogic::giveCoupon($openid,NewerCouponID); //赠送优惠券
-                    $this->assign("msg","您成功领取优惠券，请关注我们的服务号到个人中心查看");
+                    $this->assign("msg","请关注魔乐城服务号后到个人中心查看");
                 }
             }
             else{
