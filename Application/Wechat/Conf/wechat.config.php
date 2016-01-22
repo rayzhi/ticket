@@ -23,4 +23,6 @@ return array(
         )
     ),
 	
+    //二维码存放路径
+    'ERWEIMA_PATH'          => "/qrcode/",
 );

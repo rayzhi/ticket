@@ -1,5 +1,11 @@
 <?php
 
+function createQr($strcon){
+	$qr = new \Common\Lib\phpqrcode\Qrcode();
+	return $qr->createQRcode($strcon);
+}
+
+
 /**
  * URL添加参数
  * @param string $url

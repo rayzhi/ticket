@@ -27,4 +27,8 @@ class TestController extends Controller {
         slog("45646546456");
     }
 
+    public function testqrAct(){
+        echo createQr("123456");
+    }
+
 }
