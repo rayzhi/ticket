@@ -24,12 +24,15 @@ class CouponController extends CommonController {
             if(preg_match("/1[3458]{1}\d{9}$/",$phone)){
                 $receviCount = \Wechat\Logic\CouponLogic::countCoupon($openid,NewerCouponID);
                 if($receviCount>0){
-                    $this->assign("msg","您已经领取过该优惠券了");
+                    $this->success('您已经领取过该优惠券了', 'index');
+                    return;
+                    //$this->assign("msg","您已经领取过该优惠券了");
                 }
                 else{
                     \Wechat\Logic\UserLogic::updateByOpenid($openid,array('phone'=>$phone));
                     \Wechat\Logic\CouponLogic::giveCoupon($openid,NewerCouponID); //赠送优惠券
-                    $this->assign("msg","请关注魔乐城服务号后到个人中心查看");
+                    $this->success('领取成功', 'index');
+                    return;
                 }
             }
             else{
