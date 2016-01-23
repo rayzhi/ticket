@@ -10,14 +10,21 @@ class UserController extends CommonController {
 
     public function indexAct(){
         
-        $userInfo = D('User')->getUserInfo();
-        $this->assign('userInfo',$userInfo);
+        $userinfo = \Wechat\Logic\UserLogic::getUserinfo(getOpenid());
+        $this->assign('userinfo',$userinfo);
         
         $this->display();
         
     }
     
     public function orderDetailAct(){
+        
+        $order_id = I('order_id');
+        if(!$order_id) $this->error('非法操作');
+        $orderSn = D('TicketOrder')->getOrderTicketSn($order_id);
+      
+        $this->assign('orderSn',$orderSn);
+
         $this->display();
     }
     

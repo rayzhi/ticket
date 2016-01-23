@@ -12,17 +12,21 @@
  
 	 <form id="h-form" method="post" enctype="multipart/form-data" action="javascript:;" >
 	    <div class="panel margin-top">
-	        <h3 class="maintext">魔乐城场馆体验票</h3>
-	        <p class="mainprice">￥99.0</p>
-	        <input type="hidden" name="ticket_id" value="1">
+	        <h3 class="maintext ticketName">{$areaName}魔乐城场馆体验票</h3>
+	        <p class="mainprice">￥<span id="price">{$ticketInfo.price}</span></p>
+	        <input type="hidden" name="ticket_type_id" value="{$ticketInfo.ticketTypeId}" />	        
 	    </div>
 	
 	    <div class="panel margin-top" href="#">
-	        <select name="area" class="selectarea required">
-	            <option value="">请选择场地</option>
-	            <option value="0">天河</option>
-	            <option value="1">海珠</option>
-	            <option value="2">越秀</option>
+	        <select name="venues_id" class="selectarea required">
+	        	<empty name="venuesinfo">
+	        		<option value="">暂无场地</option>
+	        	<else />
+	        		<option value="">请选择场地</option>
+	        		<volist name="venuesinfo" id="vo">
+	        			<option value="{$vo.id}">{$vo.name}</option>
+	        		</volist>
+	        	</empty>
 	        </select>
 	        <div class="selectnum">
 	            <span class="text">数量</span>
@@ -48,9 +52,13 @@
 		
 		//提交表单
 		$('.btn-block').click(function(){
+			price = Number($('#price').html());
+			if(price <= 0) return alert('票价必须大于0哦');
+			ticketName = $('.ticketName').html();
 			if($("#h-form").valid()){
 				var index = layer.load(0,{shade:[0.3,'#676767']});
 				data = $("form").serialize();
+				data = data+'&price='+price+'&ticketName='+ticketName;
 				$.post(
 					"{:UC('Wechat/Ticket/makeOrder')}", 
 					data, 
