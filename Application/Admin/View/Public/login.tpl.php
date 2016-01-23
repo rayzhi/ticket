@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title><?php echo $G_VAR['title']; ?> 后台管理</title>
+    <title><?php echo $G_VAR['title']; ?>后台管理</title>
     <link rel="stylesheet" type="text/css" href="__STATIC__/admin/login/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="__STATIC__/admin/login/css/bootstrap.extend.css">
     <script type="text/javascript" src="__STATIC__/admin/login/js/jquery-1.11.1.min.js" charset="utf-8"></script>
@@ -128,7 +128,7 @@
         <div class="panel panel-default login-panel border-none padding-none col-xs-12 col-md-4 col-md-offset-4">
             <div class="panel-heading">
                 <h3 class="panel-title text-center"><img class="logo" src="__STATIC__/admin/login/images/logo.png" style="width:100px;height:53px;"></h3>
-                <div class="info text-right" style="margin-top:25px;">————乐炼部落管理后台</div>
+                <div class="info text-right" style="margin-top:25px;">————<?php echo $G_VAR['title']; ?>管理后台</div>
             </div>
             <div class="panel-body">
                 <form class="login-form" action="<?php echo UC('Admin/Public/postLogin');?>" method="post">

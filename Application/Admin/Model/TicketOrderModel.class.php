@@ -9,12 +9,6 @@ class TicketOrderModel extends Model {
     const TICKET_ORDER = 'ticket_order';
     
     public static $orderStatus = array('待付款','已支付','已取消');
-
-    //自动验证
-    protected $_validate = array(
-        //array(验证字段,验证规则,错误提示,验证条件,附加规则,验证时间)
-        //array('role_id', 'require', '角色不能为空！', 1, 'regex', 3),
-    );
     
     /**
      * 订单列表
@@ -33,19 +27,26 @@ class TicketOrderModel extends Model {
         }
         
         $tbUser = \Admin\Model\UserModel::USER;//需要数据表
-        $count  = $this->count();
+        $tbTicketOrderDetail = \Admin\Model\TicketOrderDetailModel::TICKET_ORDER_DETAIL;//需要数据表
+
+        //药品各种参数
+        $count =  $this->table(self::TICKET_ORDER.' a')
+                       ->where($cond)
+                       ->count(1);
+        
         //药品各种参数
         $result = $this->table(self::TICKET_ORDER.' a')
                        ->join('left join '.$tbUser.' b ON a.open_id=b.open_id')
-                       ->where($cond)
-                       ->field('a.*,b.nickname')
+                       ->join('left join '.$tbTicketOrderDetail.' c ON a.id=c.order_id')
+                       ->where($cond) 
+                       ->field('a.*,b.nickname,c.amount')
                        ->order('a.id DESC')
                        ->limit($page,$pagesize)
                        ->select();
 
         foreach($result as $k=>$v){
             $result[$k]['add_time'] = $v['add_time'] ? date('Y-m-d H:i:s',$v['add_time']) : '';
-            $result[$k]['statusName'] = $this->orderStatus[$v['status']];
+            $result[$k]['statusName'] = self::$orderStatus[$v['status']];
         }
         $array['count'] = $count ? $count : 0;
         $array['data']  = $result;
