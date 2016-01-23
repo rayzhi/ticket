@@ -159,9 +159,10 @@ class TicketController extends CommonController {
         if($result['data']){
             recordLog($result['data'],'wechatPay');
             foreach($result['data'] as $k=>$v){
-                D('TicketSn')->addTicketSn($orderInfo['did'],$v['ticketNo']);
-                //返回票的价格
-                R('Api/wxcallback',array($v['ticketNo'],$orderInfo['price']));
+                if($v['ticketNo']){
+                    D('TicketSn')->addTicketSn($orderInfo['did'],$v['ticketNo'],createQr($v['ticketNo']));
+                    R('Api/wxcallback',array($v['ticketNo'],$orderInfo['price']));//返回票的价格
+                }
             }
         }else{
             recordLog('返回票sn失败','wechatPay');
