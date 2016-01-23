@@ -12,9 +12,15 @@ class TicketController extends CommonController {
      * 魔幻城首页
      */
     public function indexAct(){
+        
         $userinfo = \Wechat\Logic\UserLogic::getUserinfo(getOpenid());
         $this->assign('userinfo',$userinfo);
         $this->assign('activity_text',getSysConfig('activity-text'));
+        
+        //票的信息4--微信支付   场馆id 2--成人票
+        $ticketInfo = R('Api/queryprice',array(4,3,2));
+        $this->assign('ticketInfo',$ticketInfo['data'][0]);
+        
         $this->display();
     }
     
@@ -22,6 +28,21 @@ class TicketController extends CommonController {
      * 列表
      */
     public function tickeListAct(){
+        
+        $areainfo = R('Api/areainfo');
+       
+        //测试时候地区暂时取----佛山
+        $area_id = $areainfo['data'][2]['id'];
+        $areaName = $areainfo['data'][2]['name'];
+        $this->assign('areaName',$areaName);
+   
+        //该地区的场馆
+        $venuesinfo = R('Api/venuesinfo',array($area_id));
+        $this->assign('venuesinfo',$venuesinfo['data']);
+       
+        //票的信息4--微信支付   场馆id 2--成人票
+        $ticketInfo = R('Api/queryprice',array(4,$area_id,2));
+        $this->assign('ticketInfo',$ticketInfo['data'][0]);
         
         $this->display(); 
         
@@ -97,27 +118,57 @@ class TicketController extends CommonController {
     }
     
     public function notifyurlAct(){
+        
         recordLog('异步通知开始','wechatPay');
         $wechatPay    = new \Common\Lib\Pay\pay_wap_wechat\wap_wechat();
         $check = $wechatPay->serverCallback(C('WECHAT_PAY_KEY'));
         if($check){           
             recordLog('验证成功','wechatPay');
             recordLog($check,'wechatPay');
-            $order_id = $check['out_trade_no'];
-            $checkOrder = D('TicketOrder')->where(array('sn'=>$order_id))->find();
+            $order_sn = $check['out_trade_no'];
+            $checkOrder = D('TicketOrder')->where(array('sn'=>$order_sn))->find();
             if($checkOrder['status'] == 0){
-                $result = D('TicketOrder')->where(array('sn'=>$order_id))->save(array('status'=>1));
+                $save['status'] = 1;
+                $save['third_pay_id'] = 4;
+                $result = D('TicketOrder')->where(array('sn'=>$order_sn))->save($save);              
                 if($result){
+                    //调用取票sn接口
+                    $this->addTicketSn($order_sn);
                     recordLog('订单修改状态成功','wechatPay');                   
                     $wechatPay->notifyStop();
                 }
             }else{
-                recordLog('订单修改状态失败','wechatPay');            
+                recordLog('订单已经支付或取消','wechatPay');            
             }
         }else{
             recordLog('验证失败','wechatPay');           
         }
         recordLog('异步通知结束','wechatPay');
+    }
+    
+    /**
+     * 支付成功，获取票序列号入库
+     * @param string $order_sn
+     */
+    private function addTicketSn($order_sn){
+        
+        recordLog('调取weixinbuy接口开始','wechatPay');
+        $orderInfo = D('TicketOrder')->orderAllInfo($order_sn);
+        recordLog($orderInfo,'wechatPay');
+        $result = R('Api/weixinbuy',array($orderInfo));
+        if($result['data']){
+            recordLog($result['data'],'wechatPay');
+            foreach($result['data'] as $k=>$v){
+                D('TicketSn')->addTicketSn($orderInfo['did'],$v['ticketNo']);
+                //返回票的价格
+                R('Api/wxcallback',array($v['ticketNo'],$orderInfo['price']));
+            }
+        }else{
+            recordLog('返回票sn失败','wechatPay');
+        }
+        recordLog('调取weixinbuy接口结束','wechatPay');
+        return true;
+        
     }
 
 

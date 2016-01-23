@@ -6,17 +6,16 @@ use Think\Model;
 class TicketOrderModel extends Model{
     
     protected $tableName = 'ticket_order';
+    CONST TICKET_ORDER = 'ticket_order';
  
     public function makeOrder($postData){
         
-        $ticketInfo = D('Ticket')->where(array('id'=>$postData['ticket_id']))->find();
-        
         $array['sn']              = time().rand(100000,999999);
         $array['open_id']         = session('openid');
-        $array['total_cost']      = $ticketInfo['price'] * $postData['amount'];
+        $array['total_cost']      = $postData['price'] * $postData['amount'];
         $array['add_time']        = time();
         $array['status']          = 0;
-        $array['third_party_pay'] = $ticketInfo['price'] * $postData['amount'];
+        $array['third_party_pay'] = $postData['price'] * $postData['amount'];
         
         $order_id = $this->add($array);
         if($order_id){
@@ -31,6 +30,43 @@ class TicketOrderModel extends Model{
     public function getOrderInfo($order_id){
         return $this->where(array('id'=>$order_id))->find();
     }
+    
+    public function orderAllInfo($order_sn){
+        
+        $tbUser = \Wechat\Model\UserModel::USER;//需要数据表
+        $tbTicketOrderDetail = \Wechat\Model\TicketOrderDetailModel::TICKET_ORDER_DETAIL;
+        
+        //药品各种参数
+        $result =  $this->table(self::TICKET_ORDER.' a')
+                        ->join('left join '.$tbUser.' b ON a.open_id=b.open_id')
+                        ->join('left join '.$tbTicketOrderDetail.' c ON a.id=c.order_id')                    
+                        ->field('a.*,b.nickname,b.sex,c.*')
+                        ->where(array('a.sn'=>$order_sn))
+                        ->find();
+        
+        return $result;
+    }
+    
+    public function getOrderTicketSn($order_id){
+        
+        $tbTicketSn = \Wechat\Model\TicketSnModel::TICKET_SN;//需要数据表
+        $tbTicketOrderDetail = \Wechat\Model\TicketOrderDetailModel::TICKET_ORDER_DETAIL;
+        
+        //药品各种参数
+        $result =  $this->table(self::TICKET_ORDER.' a')
+                        ->join('left join '.$tbTicketOrderDetail.' b ON a.id=b.order_id')
+                        ->join('left join '.$tbTicketSn.' c ON b.did=c.did')
+                        ->field('a.id,b.price,c.*')
+                        ->where(array('a.id'=>$order_id))
+                        ->select();
+        
+        foreach($result as $k=>$v){
+            $result[$k]['qrurl'] = createQr($v['ticket_sn']);
+        }
+        return $result;
+        
+    }
 
+    
 
 }

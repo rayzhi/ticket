@@ -9,15 +9,16 @@
 <block name="content">
 
   <body>
+    <volist name="orderSn" id="vo">
+    	<div class="panel margin-top">
+	        <p class="text">票号 <span class="field-value">{$vo.ticket_sn}</span></p>
+	        <hr>
+	        <p class="text">扫码入场</p>
+	        <img src="{$vo.qrurl}" class="fiximg">
+	        <p class="text">单价：￥{$vo.price}</p>
+    	</div>
+    </volist>
     
-    <div class="panel margin-top">
-        <p class="text">票号 <span class="field-value">2015 1144 8577 8892</span></p>
-        <hr>
-        <p class="text">扫码入场</p>
-        <img src="__PUBLIC__/images/saomiaoma.gif" class="fiximg">
-        <p class="text">总价：￥99.8</p>
-    </div>
-
     <div class="helpbox margin-top30">
         <span class="noallowitem text-help"><img src="__PUBLIC__/images/cha.gif" width="16px">不支持退票</span>
         <span class="noallowitem text-help"><img src="__PUBLIC__/images/cha.gif" width="16px">不支持更换场次</span>
