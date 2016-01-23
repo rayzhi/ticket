@@ -18,7 +18,7 @@ return array(
     'WECHAT_MENU'           => array(
         'button' => array(
             array('type'=>'view','name'=>'魔幻城','url'=>__BASE__."index.php/Wechat/Ticket/index"),
-            array('type'=>'view','name'=>'推荐有礼','url'=>__BASE__."index.php/Wechat/Coupon/index"),
+            array('type'=>'view','name'=>'推荐有礼','url'=>__BASE__."index.php/Wechat/Recommend/index"),
             array('type'=>'view','name'=>'个人中心','url'=>__BASE__."index.php/Wechat/User/index"),
         )
     ),
