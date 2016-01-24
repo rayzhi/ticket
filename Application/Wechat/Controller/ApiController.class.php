@@ -18,15 +18,17 @@ class ApiController extends CommonController {
      * @param $ticketType  1 儿童票     2 成人票
      * 
      */
-    public function querypriceAct($payType,$venuesId,$ticketType){
+    public function querypriceAct($payType,$venuesId,$ticketType=null){
    
-        $token  = $this->getToken(md5($payType.$venuesId.$ticketType));
+        $token  = $this->getToken(md5($payType.$venuesId));
         $url    = $this->apiurl.'/sys/buytype/queryprice?token='.$token;
-        $param  = '&payType='.$payType.'&venuesId='.$venuesId.'&ticketType='.$ticketType;
+        $param  = '&payType='.$payType.'&venuesId='.$venuesId;
+        if($ticketType) $param .= '&ticketType='.$ticketType;
         $url    = $url.$param;
         $curl   = new t\Curl();
         $return = $curl->get($url);
         $return = json_decode($return,true);
+        
         return $return;
         
     }
@@ -40,7 +42,7 @@ class ApiController extends CommonController {
         $url    = $this->apiurl.'/sys/ticket/weixinbuy?token='.$token;
 
         $param = array(
-            'ticketMainType' => '0', //票主要类型，1：套票；0：普通类型票-单票
+            'ticketMainType' => $orderInfo['ticket_main_type'], //票主要类型，1：套票；0：普通类型票-单票
             'venuesId'       => $orderInfo['venues_id'],
             'payType'        => $orderInfo['third_pay_id'],
             'ticketType'     => $orderInfo['ticket_type'],
@@ -67,10 +69,13 @@ class ApiController extends CommonController {
     /**
      * 套票信息
      */
-    public function priceAct($venuesId,$payType){
+    public function priceAct($venuesId,$payType,$id=null){
     
         $token  = $this->getToken(md5($venuesId));
         $url    = $this->apiurl.'/sys/ticketset/price?token='.$token;
+        $param  = '&payType='.$payType.'&venuesId='.$venuesId;
+        if($id) $param .= '&id='.$id;
+        $url    = $url.$param;
         $curl   = new t\Curl();
         $return = $curl->get($url);
         $return = json_decode($return,true);

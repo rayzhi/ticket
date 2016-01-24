@@ -33,7 +33,7 @@ return array(
     'COOKIE_PREFIX'  => 'ticket_admin', // Cookie前缀 避免冲突
     
     /* 自定义参数 */
-    'SITE_TITLE' => '售票系统',
+    'SITE_TITLE' => '魔乐城售票后台管理系统',
     'TITLE' => '售票系统',
     'SITE_COMPANY' => '售票系统',
     
