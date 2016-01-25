@@ -1,0 +1,42 @@
+<extend name="template/template" />
+
+<block name="css">
+    <style type="text/css">
+        #usercenterbox{width:100%;}
+    </style>
+</block>
+
+<block name="content">
+
+  <body>
+    
+    <div class="usercenter user_index" id="userc">   
+        <div class="panel usercenter-box open left-move" id="usercenterbox">
+            <div class="list">
+                <a class="item" href="#">
+                    <img src="{$userinfo.headimgurl}" class="imghead">
+                    <img src="__PUBLIC__/images/tao.gif" class="item-icon margin-left">{$userinfo['nickname']}
+                </a>
+                <a class="item" href="{:UC('Wechat/User/orderlist')}">
+                    <img src="__PUBLIC__/images/jianping.gif" class="item-icon"> 我的订单
+                </a>
+                <a class="item" href="{:UC('Wechat/User/coupon')}">
+                    <img src="__PUBLIC__/images/youhuij.gif" class="item-icon"> 我的优惠券
+                </a>               
+            </div>
+        </div>
+    </div>
+
+  </body>
+</block>
+
+<block name="script">
+    <script>
+       
+          
+    
+        
+    
+    </script>
+</block>
+

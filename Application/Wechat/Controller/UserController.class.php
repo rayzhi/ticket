@@ -42,4 +42,9 @@ class UserController extends CommonController {
         $this->display();
    }
 
+   public function activityInfoAct(){
+        $this->assign('activity_text',getSysConfig('activity-text'));
+        $this->display();
+   }
+
 }
