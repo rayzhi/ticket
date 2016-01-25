@@ -127,8 +127,8 @@
     <div class="container">
         <div class="panel panel-default login-panel border-none padding-none col-xs-12 col-md-4 col-md-offset-4">
             <div class="panel-heading">
-                <h3 class="panel-title text-center"><img class="logo" src="__STATIC__/admin/login/images/logo.png" style="width:100px;height:53px;"></h3>
-                <div class="info text-right" style="margin-top:25px;">————<?php echo $G_VAR['title']; ?>管理后台</div>
+                <h3 class="panel-title text-center"><img class="logo" src="__STATIC__/admin/login/images/logo1.png" style="width:100px;height:53px;"></h3>
+                <div class="info text-right" style="margin-top:25px;">————<?php echo $G_VAR['title']; ?></div>
             </div>
             <div class="panel-body">
                 <form class="login-form" action="<?php echo UC('Admin/Public/postLogin');?>" method="post">
@@ -162,7 +162,7 @@
         </div>
     </div>
     <div class="bottom navbar-fixed-bottom text-center padding-top padding-bottom">
-        <span>Copyright © 乐炼部落   All rights reserved.</span>
+        <span>Copyright © 传奇互动  All rights reserved.</span>
     </div>
     <script language="JavaScript">
 	function freshCaptcha(){ 

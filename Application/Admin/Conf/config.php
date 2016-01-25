@@ -34,7 +34,7 @@ return array(
     
     /* 自定义参数 */
     'SITE_TITLE' => '魔乐城售票后台管理系统',
-    'TITLE' => '售票系统',
-    'SITE_COMPANY' => '售票系统',
+    'TITLE' => '魔乐城售票系统',
+    'SITE_COMPANY' => '魔乐城售票系统',
     
 );

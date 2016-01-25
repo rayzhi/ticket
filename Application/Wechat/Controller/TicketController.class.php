@@ -12,7 +12,7 @@ class TicketController extends CommonController {
      * 魔幻城首页
      */
     public function indexAct(){
-        
+    	
         $userinfo = \Wechat\Logic\UserLogic::getUserinfo(getOpenid());
         $this->assign('userinfo',$userinfo);
         $this->assign('activity_text',getSysConfig('activity-text'));
@@ -67,7 +67,7 @@ class TicketController extends CommonController {
                 $ticketInfo = R('Api/price',array($_POST['venues_id'],4,$_POST['ticket_type_id']));
                 $price = 0;
                 foreach($ticketInfo['data'][0]['tickets'] as $k=>$v){
-                    $price += $v['price'];
+                    $price += $v['price'] * $v['count'];
                 }               
             }else{
                 $ticketInfo = R('Api/queryprice',array(4,$_POST['venues_id'],$_POST['ticket_type_id']));
@@ -190,9 +190,10 @@ class TicketController extends CommonController {
             recordLog($result['data'],'wechatPay');
             foreach($result['data'] as $k=>$v){
                 if($v['ticketNo']){
-                    D('TicketSn')->addTicketSn($orderInfo['did'],$v['ticketNo'],createQr($v['ticketNo']),$v['expiryDate']);
-                    R('Api/wxcallback',array($v['ticketNo'],$orderInfo['price']));//返回票的价格
+                    D('TicketSn')->addTicketSn($orderInfo['did'],$v['ticketNo'],createQr($v['ticketNo']),$v['expiryDate'],$v['price']);                   
                 }
+                $snResult = D('TicketOrder')->ticketPriceUseCoupon($order_sn);
+  				$this->returnPrice($snResult);//返回价格
             }
         }else{
             recordLog('返回票sn失败','wechatPay');
@@ -200,6 +201,33 @@ class TicketController extends CommonController {
         recordLog('调取weixinbuy接口结束','wechatPay');
         return true;
         
+    }
+    
+    /**
+     * 回传价格
+     * @param unknown $snResult
+     */
+    private function returnPrice($snResult){
+    	
+    	if($snResult){
+    		$count = count($snResult);
+    		$coupon = $snResult[0]['total_cost'] - $snResult[0]['third_party_pay'];
+    		$i = 0;
+    		while($coupon > 0 && $i <= $count){
+    			$coupon = $snResult[$i]['t_price'] - $coupon;
+    			if($coupon >= 0){
+    				$coupon = 0;
+    				$snResult[$i]['t_price'] = $coupon;
+    			}else{
+    				$coupon = abs($coupon);
+    				$i++;
+    			}
+    		}
+    		foreach($snResult as $k=>$v){
+    			R('Api/wxcallback',array($v['ticket_sn'],$v['t_price']));//返回票的价格
+    		}
+    	}
+    	
     }
 
 
