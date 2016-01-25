@@ -57,13 +57,13 @@ a{color: #000;text-decoration: none;}
 .lingqu-phonebox{display: block;width: 100%; margin: 25px auto;height: 40px; text-align: center;border: 1px solid #ccc;}
 
 .bg{position: fixed;z-index: -1; background:url(../images/beijing3.gif) no-repeat; width: 100%;height: 100%; background-size: 100%;}
-.index-container{background:url(../images/bjing.gif) no-repeat;background-size: 100%;padding: 20px;}
+.index-container{background:url(../images/bg.jpg) no-repeat;background-size: 100%;padding: 20px;}
 .index-menubtn{display: block;width: 50px;}
 .index-title{margin:0;margin-top: 30px;color: #ff6600;text-align: center;font-size: 56px;}
 .index-titlemore{margin: 0;margin-top: 5px;text-align: center;color: #fff;font-size: 24px;}
 .index-desc{margin-top: 50px;color: #fff;text-align: center;}
 .index-price{background:url(../images/gang.png) no-repeat; height: 110px;background-size: 100%;text-align: center;line-height: 110px;font-size: 50px;color: #fff;}
-.index-btngroup{margin-top: 30px;}
+.index-btngroup{margin-top: 400px;}
 .index-btn{display: inline-block;width: 49%;}
 
 
