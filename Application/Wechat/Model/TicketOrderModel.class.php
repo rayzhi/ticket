@@ -101,6 +101,7 @@ class TicketOrderModel extends Model{
          
         $cond['a.open_id'] = $openid;
         $cond['a.status']  = 1;
+        $cond['c.status']  = 0;
         $cond['c.expiry_date'] = array('between',array(time()-60*60*48,time()));
         
         //药品各种参数
