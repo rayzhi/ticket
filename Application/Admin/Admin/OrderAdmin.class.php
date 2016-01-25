@@ -40,7 +40,7 @@ class OrderAdmin extends CommonAdmin {
         
         $order_id = I('id');
 
-        $data = D('TicketOrderDetail')->where(array('order_id'=>$order_id))->select();
+        $data = D('TicketOrderDetail')->getOrderSn($order_id);
         $this->assign('data',$data);
         
         $this->display();

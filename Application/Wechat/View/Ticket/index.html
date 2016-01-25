@@ -15,7 +15,7 @@
         <h3 class="index-titlemore">Molo Vision</h3>
         <p class="index-desc">穿越“时空裂缝”情境体验馆门票</p>
 
-        <div class="index-price">￥{$ticketInfo.price}</div>
+        <div class="index-price"></div>
 
         <div class="index-btngroup">
             <div class="index-btn">
@@ -35,12 +35,13 @@
                     <img src="{$userinfo['headimgurl']}" class="imghead">
                     <img src="__PUBLIC__/images/tao.gif" class="item-icon margin-left"> {$userinfo['nickname']}
                 </a>
-                <a class="item" href="<?php echo UC('Wechat/User/orderlist');?>">
-                    <img src="__PUBLIC__/images/guanpiao.gif" class="item-icon"> 我的馆场券
+                <a class="item" href="{:UC('Wechat/User/orderlist')}">
+                    <img src="__PUBLIC__/images/jianping.gif" class="item-icon"> 我的订单
                 </a>
-                <a class="item" href="<?php echo UC('Wechat/Coupon/index');?>">
+                <a class="item" href="{:UC('Wechat/User/coupon')}">
                     <img src="__PUBLIC__/images/youhuij.gif" class="item-icon"> 我的优惠券
-                </a>
+                </a> 
+                <!--  
                 <a class="item" href="<?php echo UC('Wechat/Recommend/index');?>">
                     <img src="__PUBLIC__/images/jianping.gif" class="item-icon"> 推荐有奖
                 </a>
@@ -49,7 +50,7 @@
                 </a>
                 <a class="item" href="#">
                     <img src="__PUBLIC__/images/szhi.gif" class="item-icon"> 设置
-                </a>
+                </a>-->  
             </div>
         </div>
     </div>

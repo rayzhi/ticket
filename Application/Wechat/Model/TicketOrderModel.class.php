@@ -61,7 +61,16 @@ class TicketOrderModel extends Model{
                         ->select();
         
         foreach($result as $k=>$v){
-            $result[$k]['qrurl'] = createQr($v['ticket_sn']);
+            if($v['qrcode']){
+                $result[$k]['qrurl'] = $v['qrcode'];
+            }else{
+                $qrcode = createQr($v['ticket_sn']);
+                $result[$k]['qrurl'] = $qrcode;
+                $cond['ticket_sn']   = $v['ticket_sn'];
+                $cond['did']         = $v['did'];
+                D('TicketSn')->where($cond)->save(array('qrcode'=>$qrcode));
+            }   
+            $result[$k]['expiry_date'] = $v['expiry_date'] ? date('Y-m-d H:i:s') : '';        
         }
         return $result;
         

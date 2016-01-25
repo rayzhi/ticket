@@ -12,6 +12,7 @@
 				<td>{$vo.id}</td>
 				<td>{$vo.nickname}</td>
 				<td>{$vo.third_party_pay}</td>
+				<td>{$vo.amount}</td>
 				<td>{$vo.statusName}</td>
 				<td>{$vo.add_time}</td>
 				<td>

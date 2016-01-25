@@ -11,11 +11,12 @@
   <body>
     <volist name="orderSn" id="vo">
     	<div class="panel margin-top">
-	        <p class="text">票号 <span class="field-value">{$vo.ticket_sn}</span></p>
+	        <p class="text">票号 <span class="field-value">{$vo.ticket_sn}</span></p>	       
 	        <hr>
 	        <p class="text">扫码入场</p>
 	        <img src="{$vo.qrurl}" class="fiximg">
 	        <p class="text">单价：￥{$vo.price}</p>
+	        <p class="text">有效时间至：{$vo.expiry_date}</p>
     	</div>
     </volist>
     

@@ -11,14 +11,15 @@
  <body>
  
 	 <form id="h-form" method="post" enctype="multipart/form-data" action="javascript:;" >
+	    
 	    <div class="panel margin-top">
 	        <h3 class="maintext ticketName">{$areaName}魔乐城场馆体验票</h3>
-	        <p class="mainprice">￥<span id="price">{$ticketInfo.price}</span></p>
-	        <input type="hidden" name="ticket_type_id" value="{$ticketInfo.ticketTypeId}" />	        
+	        <p class="mainprice">￥<span id="price">{$ticketInfo.price}</span></p>	        	        
 	    </div>
 	
 	    <div class="panel margin-top" href="#">
-	        <select name="venues_id" class="selectarea required">
+	    
+	        <select name="venues_id" id="venues_id" class="selectarea required">
 	        	<empty name="venuesinfo">
 	        		<option value="">暂无场地</option>
 	        	<else />
@@ -28,6 +29,17 @@
 	        		</volist>
 	        	</empty>
 	        </select>
+	        
+	        <select name="ticket_type_id" id="ticket_type_id" class="selectarea required">
+	        	<option value="">请选择票类型</option>
+        		<volist name="ticketType" id="vo">
+        			<option value="{$vo.id}" main="{$vo.ticketMainType}">{$vo.name}</option>
+        		</volist>
+        		<volist name="ticketType1" id="vt">
+        			<option value="{$vt.id}" main="{$vt.ticketMainType}">{$vt.name}</option>
+        		</volist>
+	        </select>
+	        
 	        <div class="selectnum">
 	            <span class="text">数量</span>
 	            <div class="numer margin-left30">
@@ -36,12 +48,14 @@
 	                <span class="plus">+</span>
 	            </div>
 	        </div>
+	        
 	    </div>
 	
 	    <div class="margin-top30">&nbsp;</div>
 	    <div class="container">
 	    	<button type="submit" class="btn-block margin-top">立即购买</button>
 	    </div>
+	    
 	</form>
   </body>
 </block>
@@ -58,7 +72,8 @@
 			if($("#h-form").valid()){
 				var index = layer.load(0,{shade:[0.3,'#676767']});
 				data = $("form").serialize();
-				data = data+'&price='+price+'&ticketName='+ticketName;
+				main_type = $('#ticket_type_id option:selected').attr('main');
+				data = data+'&price='+price+'&ticketName='+ticketName+'&main_type='+main_type;
 				$.post(
 					"{:UC('Wechat/Ticket/makeOrder')}", 
 					data, 
@@ -73,6 +88,24 @@
 					'json'
 				);
 			}
+		})
+		
+		$('#ticket_type_id').change(function(){
+			var index = layer.load(0,{shade:[0.3,'#676767']});
+			venues_id = $('#venues_id option:selected').val();
+			ticket_type_id = $('#ticket_type_id option:selected').val();
+			main_type = $('#ticket_type_id option:selected').attr('main');
+			$.post(
+					"{:UC('Wechat/Ticket/getTicketPrice')}", 
+					{'venues_id':venues_id,'ticket_type_id':ticket_type_id,'main_type':main_type}, 
+				    function(obj){
+						if(obj.status == 1){
+							$('#price').html(obj.url);							
+						}
+						layer.close(index);
+					},
+					'json'
+				);
 		})
 		
 		$('.plus').click(function(){
