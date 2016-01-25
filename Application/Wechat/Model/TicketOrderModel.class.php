@@ -75,6 +75,24 @@ class TicketOrderModel extends Model{
         return $result;
         
     }
+    
+    public function ticketPriceUseCoupon($order_sn){
+    	
+    	$tbTicketSn = \Wechat\Model\TicketSnModel::TICKET_SN;//需要数据表
+    	$tbTicketOrderDetail = \Wechat\Model\TicketOrderDetailModel::TICKET_ORDER_DETAIL;
+    	
+    	//药品各种参数
+    	$result =  $this->table(self::TICKET_ORDER.' a')
+				    	->join('left join '.$tbTicketOrderDetail.' b ON a.id=b.order_id')
+				    	->join('left join '.$tbTicketSn.' c ON b.did=c.did')
+				    	->field('a.id,a.total_cost,a.tirhd_party_pay,c.*')
+				    	->where(array('a.sn'=>$order_sn))
+				    	->order('c.t_price DESC')
+				    	->select();
+    	
+    	return $result;
+    	
+    }
 
     
 

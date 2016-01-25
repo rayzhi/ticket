@@ -31,4 +31,8 @@ class TestController extends Controller {
         echo createQr("123456");
     }
 
+    public function testPushAct(){
+        $d = \Wechat\Logic\PushLogic::pushTextMsg('oZcK7wlC8I_MN-ye8RIeJg0SPWmo',"test");
+        print_r($d);
+    }
 }
