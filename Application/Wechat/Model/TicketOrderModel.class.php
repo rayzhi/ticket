@@ -69,7 +69,8 @@ class TicketOrderModel extends Model{
                 $cond['ticket_sn']   = $v['ticket_sn'];
                 $cond['did']         = $v['did'];
                 D('TicketSn')->where($cond)->save(array('qrcode'=>$qrcode));
-            }            
+            }   
+            $result[$k]['expiry_date'] = $v['expiry_date'] ? date('Y-m-d H:i:s') : '';        
         }
         return $result;
         
