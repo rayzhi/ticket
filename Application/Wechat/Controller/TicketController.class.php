@@ -192,9 +192,9 @@ class TicketController extends CommonController {
                 if($v['ticketNo']){
                     D('TicketSn')->addTicketSn($orderInfo['did'],$v['ticketNo'],createQr($v['ticketNo']),$v['expiryDate'],$v['price']);                   
                 }
-                $snResult = D('TicketOrder')->ticketPriceUseCoupon($order_sn);
-  				$this->returnPrice($snResult);//返回价格
             }
+            $snResult = D('TicketOrder')->ticketPriceUseCoupon($order_sn);
+            $this->returnPrice($snResult);//返回价格
         }else{
             recordLog('返回票sn失败','wechatPay');
         }
