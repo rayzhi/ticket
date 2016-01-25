@@ -93,6 +93,26 @@ class TicketOrderModel extends Model{
     	return $result;
     	
     }
+    
+    public function ifPushTicketMsg($openid){
+        
+        $tbTicketSn = \Wechat\Model\TicketSnModel::TICKET_SN;//需要数据表
+        $tbTicketOrderDetail = \Wechat\Model\TicketOrderDetailModel::TICKET_ORDER_DETAIL;
+         
+        $cond['a.open_id'] = $openid;
+        $cond['a.status']  = 1;
+        $cond['c.expiry_date'] = array('between',array(time()-60*60*48,time()));
+        
+        //药品各种参数
+        $result =  $this->table(self::TICKET_ORDER.' a')
+                        ->join('left join '.$tbTicketOrderDetail.' b ON a.id=b.order_id')
+                        ->join('left join '.$tbTicketSn.' c ON b.did=c.did')
+                        ->where($cond)
+                        ->find();
+         
+        return $result ? true : false;
+        
+    }
 
     
 
