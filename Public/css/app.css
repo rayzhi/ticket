@@ -24,7 +24,7 @@ a{color: #000;text-decoration: none;}
 .container{padding: 15px;}
 
 .mask{position: fixed;width: 100%;height: 100%;background:rgba(0,0,0,0.8);background:#000\9;top:0;left:0;filter:alpha(opacity=20)\9;}
-.mask .text-nomal-box{margin-top: 60px;overflow: scroll;position: absolute;bottom: 100px;}
+.mask .text-nomal-box{overflow: scroll;position: absolute;bottom: 100px; top: 100px;}
 .mask .mask-close{position: absolute;right: 10px;top: 10px;display: block;}
 
 .panel{display: block;background: #fff;padding: 20px 20px;}
