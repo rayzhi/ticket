@@ -1,7 +1,14 @@
 <?php
 
-define("InviteCouponID", 1);
-define("NewerCouponID",2);
+define("NewerCouponID",1);
+define("InviteCouponID1", 2);
+define("InviteCouponID2", 3);
+
+define("ShareCoupon1", 7);
+define("ShareCoupon2", 8);
+define("ShareCoupon3", 9);
+define("ShareCoupon4", 10);
+define("ShareCoupon5", 11);
 
 return array(
 	

@@ -27,7 +27,6 @@ class CouponController extends CommonController {
                 if($receviCount>0){
                     $this->success('您已经领取过该优惠券了', 'index');
                     return;
-                    //$this->assign("msg","您已经领取过该优惠券了");
                 }
                 else{
                     if($openid == $invate){
