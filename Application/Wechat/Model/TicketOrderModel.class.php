@@ -94,13 +94,11 @@ class TicketOrderModel extends Model{
     	
     }
     
-    public function ifPushTicketMsg($openid){
+    public function ifPushTicketMsg(){
         
         $tbTicketSn = \Wechat\Model\TicketSnModel::TICKET_SN;//需要数据表
         $tbTicketOrderDetail = \Wechat\Model\TicketOrderDetailModel::TICKET_ORDER_DETAIL;
-         
-        $cond['a.open_id'] = $openid;
-        $cond['a.status']  = 1;
+                 $cond['a.status']  = 1;
         $cond['c.status']  = 0;
         $cond['c.expiry_date'] = array('between',array(time()-60*60*48,time()));
         
@@ -109,6 +107,7 @@ class TicketOrderModel extends Model{
                         ->join('left join '.$tbTicketOrderDetail.' b ON a.id=b.order_id')
                         ->join('left join '.$tbTicketSn.' c ON b.did=c.did')
                         ->where($cond)
+                        ->field('a.open_id as open_id,c.did as sn')
                         ->find();
          
         return $result ? true : false;

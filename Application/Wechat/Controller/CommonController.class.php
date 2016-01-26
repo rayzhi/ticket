@@ -64,15 +64,6 @@ class CommonController extends Controller {
         
     }
     
-    /**
-     * 推送消息
-     * @param string $openid 用户openid
-     */
-    protected function checkIfPushTicketMsg($openid){
-        
-        return D('TicketOrder')->ifPushTicketMsg($openid);
-        
-    }
 
    
 

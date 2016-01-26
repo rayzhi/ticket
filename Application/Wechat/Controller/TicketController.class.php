@@ -16,7 +16,6 @@ class TicketController extends CommonController {
         $userinfo = \Wechat\Logic\UserLogic::getUserinfo(getOpenid());
         $this->assign('userinfo',$userinfo);
         $this->assign('activity_text',getSysConfig('activity-text'));
-        
         $this->display();
     }
     
