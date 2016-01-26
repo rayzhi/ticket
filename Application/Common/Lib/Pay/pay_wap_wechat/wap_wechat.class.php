@@ -2,7 +2,7 @@
 /**
  * @class wap_wechat
  * @brief 移动微信支付
- * @date 2015/4/21 15:45:40
+ * @date 2016/1/21 15:45:40 
  */
 namespace Common\Lib\Pay\pay_wap_wechat;
 
@@ -230,8 +230,8 @@ class wap_wechat
 
 			//签名结果与签名方式加入请求提交参数组中
 			$return['paySign']    = $mysign;
-			$return['successUrl'] = __BASE__.UC('Wechat/Ticket/index');
-			$return['failUrl']    = __BASE__.UC('Wechat/Ticket/index');
+			$return['successUrl'] = __BASE__.UC('Wechat/User/orderlist');
+			$return['failUrl']    = __BASE__.UC('Wechat/User/orderlist');
 			include(dirname(__FILE__).'/template/pay.php');
 		}
 		else

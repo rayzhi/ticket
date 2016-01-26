@@ -16,7 +16,6 @@ class TicketController extends CommonController {
         $userinfo = \Wechat\Logic\UserLogic::getUserinfo(getOpenid());
         $this->assign('userinfo',$userinfo);
         $this->assign('activity_text',getSysConfig('activity-text'));
-        
         $this->display();
     }
     
@@ -190,7 +189,7 @@ class TicketController extends CommonController {
             recordLog($result['data'],'wechatPay');
             foreach($result['data'] as $k=>$v){
                 if($v['ticketNo']){
-                    D('TicketSn')->addTicketSn($orderInfo['did'],$v['ticketNo'],createQr($v['ticketNo']),$v['expiryDate'],$v['price']);                   
+                    D('TicketSn')->addTicketSn($orderInfo['did'],$v['ticketNo'],createQr($v['ticketNo']),$v['expiryDate'],$v['price'],$v['ticketTypeId'],$v['ticketTypeName']);                   
                 }
             }
             $snResult = D('TicketOrder')->ticketPriceUseCoupon($order_sn);

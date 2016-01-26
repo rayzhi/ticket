@@ -2,7 +2,7 @@
 
 <block name="css">
 	<style type="text/css">
-		
+		.fiximg{width:60%;}
 	</style>
 </block>
 
@@ -15,7 +15,7 @@
 	        <hr>
 	        <p class="text">扫码入场</p>
 	        <img src="{$vo.qrurl}" class="fiximg">
-	        <p class="text">单价：￥{$vo.price}</p>
+	        <p class="text">单价：￥{$vo.t_price}</p>
 	        <p class="text">有效时间至：{$vo.expiry_date}</p>
     	</div>
     </volist>
