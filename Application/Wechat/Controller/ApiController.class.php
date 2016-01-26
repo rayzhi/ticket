@@ -141,6 +141,37 @@ class ApiController extends CommonController {
     }
     
     /**
+     * 查询票的状态
+     * @param string $ticket_sn 票的序列号  可传单个或者多个   多个用英文逗号隔开   
+     */
+    public function ticket_use_timeAct($ticket_sn){
+    	
+    	$token  = $this->getToken(md5('ticketusetime'));
+    	$url    = $this->apiurl.'/sys/ticket/ticket_use_time?token='.$token.'&ticketNo='.$ticket_sn;
+    	echo $url;exit;
+    	$curl   = new t\Curl();
+    	$return = $curl->get($url);
+    	$return = json_decode($return,true);
+    	return $return;
+    	exit;
+    	
+    	$param = array(
+    			'ticketNo' => $ticket_sn
+    	);
+    	$token    = $this->getToken(md5('ticketusetime'));
+    	$data[]   = $param;
+    
+    	$url      = $this->apiurl.'/sys/ticket/ticket_use_time?token='.$token;
+    	$curlData = json_encode($data);
+    	$curl     = new t\Curl();
+    	$return   = $curl->post($url,$curlData,1);
+    	 var_dump($return);
+    	return $return;
+    	
+    }
+    
+    
+    /**
      * 计算token的方式
      * @param string md5($aString + b)  
      * 
