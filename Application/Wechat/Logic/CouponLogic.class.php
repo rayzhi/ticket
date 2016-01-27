@@ -65,6 +65,8 @@ class CouponLogic{
 
     //发布分享优惠券
     public static function publicShareCoupon($openid){
+        $share = S('sharecoupon_'.$openid);
+        if($share) return;
         $couponlist = array(ShareCoupon1,ShareCoupon2,ShareCoupon3,ShareCoupon4,ShareCoupon5);
         shuffle($couponlist);
         S('sharecoupon_'.$openid,$couponlist);
