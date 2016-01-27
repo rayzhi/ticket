@@ -20,8 +20,10 @@ class CouponController extends CommonController {
             $acinfo['status'] = $acdd['status'];
             $actilist[] = $acinfo;
         }
-            
-        $list = array_merge($list,$actilist);
+        if($actilist){
+            $list = array_merge($list,$actilist);
+        }
+        
         $this->assign('list',$list);
         $this->display();
     }

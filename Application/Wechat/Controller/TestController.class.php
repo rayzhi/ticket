@@ -53,5 +53,8 @@ class TestController extends Controller {
     }
 
     public function testClearCacheAct(){
+        $dd = array('sada','asd','111');
+        $dd = array_merge($dd ,false);
+        print_r($dd);
     }
 }
