@@ -20,6 +20,12 @@ class CommonController extends Controller {
                 $this->_session_openid();
             }
         }
+
+        $weobj = wechatInstance();
+        $signature = $weobj->getJsSign(currentUrl(),time(),md5(rand(1,9999)),C('WECHAT_APPID'));
+        $signature['jsApiList'] = ['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone'];
+        $this->assign('signature',str_replace("\\/", "/", json_encode($signature)));
+        $this->assign('inviteurl',domainurl().UC('Wechat/Coupon/reciveCoupon',array('invate'=>getOpenid())));
         
     }
     
@@ -32,7 +38,8 @@ class CommonController extends Controller {
             $this->_saveUserInfo($userInfo);
             session('openid',$result['openid']);
         }else{
-            $callBackUrl = __BASE__.substr(UC(MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME),1);
+            //$callBackUrl = __BASE__.substr(UC(MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME),1);
+            $callBackUrl = currentUrl();
             $url = $wechatObj->getOauthRedirect($callBackUrl, '', 'snsapi_base');
             redirect($url);
         }

@@ -13,11 +13,6 @@ class ActivityController extends CommonController {
         $info = D('activity')->where(array('id'=>$id))->find();
         $this->assign('info',$info);
 
-        $weobj = wechatInstance();
-        $signature = $weobj->getJsSign(currentUrl(),time(),md5(rand(1,9999)),C('WECHAT_APPID'));
-        $signature['jsApiList'] = ['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone'];
-        $this->assign('signature',str_replace("\\/", "/", json_encode($signature)));
-
         $this->assign('inviteurl',currentUrl());
 
         $this->display();

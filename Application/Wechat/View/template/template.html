@@ -12,6 +12,7 @@
     <script src="__PUBLIC__/static/admin/js/jquery.validate.js"></script>
 	<script src="__PUBLIC__/static/admin/js/messages_cn.js"></script>
     <script src="__PUBLIC__/static/admin/layer-v1.9.3/layer.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <style>
 		.error{color:red;}
 	</style>
@@ -30,6 +31,32 @@
     	});
     });
 </script>
+
+<script type="text/javascript">
+    wx.config(<?php echo $signature;?>);
+    wx.ready(function(){
+        var share = {
+            title: '魔乐城',
+            link: "<?php echo $inviteurl;?>", // 分享链接
+            desc: "",
+            imgUrl: '', // 分享图标
+            success: function () {
+                alert("已分享到朋友圈");
+            },
+            cancel: function () {
+                alert("您已取消分享");
+            }
+        };
+        wx.onMenuShareTimeline(share);
+        wx.onMenuShareAppMessage(share);
+        wx.onMenuShareQQ(share);
+        wx.onMenuShareWeibo(share);
+    });
+    wx.error(function(res){
+        alert("error!");
+    });
+</script>
+
 <block name="script"></block>
 
 </html>

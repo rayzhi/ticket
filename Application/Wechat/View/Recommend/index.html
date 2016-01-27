@@ -1,7 +1,6 @@
 <extend name="template/template" />
 
 <block name="css">
-    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 </block>
 
 <block name="content">
@@ -41,29 +40,7 @@
     <a class="block text-guide helpbox" href="javascript:"><img src="__PUBLIC__/images/wen.png" width="15">活动说明</a>
 
     <script type="text/javascript">
-        wx.config(<?php echo $signature;?>);
-        wx.ready(function(){
-            var share = {
-                title: '魔乐城',
-                link: "<?php echo $inviteurl;?>", // 分享链接
-                desc: "",
-                imgUrl: '', // 分享图标
-                success: function () {
-                    $.post("<?php echo UC('Wechat/Recommend/releaseShareCoupon');?>");
-                    alert("已分享到朋友圈");
-                },
-                cancel: function () {
-                    alert("您已取消分享");
-                }
-            };
-            wx.onMenuShareTimeline(share);
-            wx.onMenuShareAppMessage(share);
-            wx.onMenuShareQQ(share);
-            wx.onMenuShareWeibo(share);
-        });
-        wx.error(function(res){
-            alert("error!");
-        });
+        
         $(".helpbox").click(function(){
             showHelp();
         });

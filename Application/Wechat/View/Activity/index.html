@@ -1,9 +1,7 @@
 <extend name="template/template" />
 
 <block name="css">
-    <style type="text/css">
-       
-    </style>
+    
 </block>
 
 <block name="content">
@@ -25,31 +23,6 @@
         <span>点击右上角 分享更多好友</span><img src="__PUBLIC__/images/jiantao.png" width="50px">
     </div>
 
-
-    <script type="text/javascript">
-        wx.config(<?php echo $signature;?>);
-        wx.ready(function(){
-            var share = {
-                title: '魔乐城',
-                link: "<?php echo $inviteurl;?>", // 分享链接
-                desc: "",
-                imgUrl: '', // 分享图标
-                success: function () {
-                    alert("已分享到朋友圈");
-                },
-                cancel: function () {
-                    alert("您已取消分享");
-                }
-            };
-            wx.onMenuShareTimeline(share);
-            wx.onMenuShareAppMessage(share);
-            wx.onMenuShareQQ(share);
-            wx.onMenuShareWeibo(share);
-        });
-        wx.error(function(res){
-            alert("error!");
-        });
-    </script>
 </body>
 </block>
 
