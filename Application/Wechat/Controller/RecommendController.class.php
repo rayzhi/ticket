@@ -23,6 +23,16 @@ class RecommendController extends CommonController {
         $this->display();
     }
 
+    //发布分享优惠券
+    public function releaseShareCouponAct(){
+        if(IS_POST){
+            $openid = getOpenid();
+            \Wechat\Logic\CouponLogic::publicShareCoupon($openid);
+            return true;
+        }
+        return false;
+    }
+
     
    
 

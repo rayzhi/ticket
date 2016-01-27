@@ -166,6 +166,8 @@ class TicketController extends CommonController {
                 $save['third_pay_id'] = 4;
                 $result = D('TicketOrder')->where(array('sn'=>$order_sn))->save($save);              
                 if($result){
+                    //赠送支付人的推荐人优惠券
+                    \Wechat\Logic\CouponLogic::givePayInvertCoupon($checkOrder['open_id']);
                     //调用取票sn接口
                     $this->addTicketSn($order_sn);
                     recordLog('订单修改状态成功','wechatPay');                   

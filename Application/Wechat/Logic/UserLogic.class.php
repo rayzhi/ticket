@@ -31,7 +31,7 @@ class UserLogic{
     }
 
     public static function updateByOpenid($openid,$update){
-        D('User')->where(array("openid"=>$openid))->save($update);
+        D('User')->where(array("open_id"=>$openid))->save($update);
     }
 
     public static function is_exists($openid){
@@ -39,5 +39,6 @@ class UserLogic{
         if($userinfo) return true;
         return false;
     }
+
 
 }

@@ -25,6 +25,17 @@ class CouponLogic{
         return $id;
     }
 
+    //用户支付后，给邀请人优惠券
+    public static function givePayInvertCoupon($openid){
+        //先判断$openid是不是第一次支付成功
+        $ordercount = D('ticket_order')->where(array('open_id'=>$openid,'status'=>1))->count(1);
+        if($ordercount != 1){
+            return;
+        }
+        $inviter = D('User')->where(array('open_id'=>$openid))->getField('inviter');
+        self::giveCoupon($inviter,InviteCouponID2);
+    }
+
     //获取用户优惠券列表
     public static function getUserCoupon($openid){
         $now = time();
@@ -48,6 +59,27 @@ class CouponLogic{
             return D('user_coupon')->where(array('open_id'=>$openid))->count(1);
         }
         return D('user_coupon')->where(array('open_id'=>$openid,'coupon_id'=>$couponid))->count(1);
+    }
+
+
+
+    //发布分享优惠券
+    public static function publicShareCoupon($openid){
+        $couponlist = array(ShareCoupon1,ShareCoupon2,ShareCoupon3,ShareCoupon4,ShareCoupon5);
+        shuffle($couponlist);
+        S('sharecoupon_'.$openid,$couponlist);
+    }
+
+    //领取分享优惠券
+    public static function receviceShareCoupon($receter,$inviter){
+        if($receter == $inviter){
+            return;
+        }
+        $couponlist = S('sharecoupon_'.$inviter);
+        $coupon = array_pop($couponlist);
+        if(!$coupon) return;
+        self::giveCoupon($receter,$coupon);
+        S('sharecoupon_'.$openid,$couponlist);
     }
    
 

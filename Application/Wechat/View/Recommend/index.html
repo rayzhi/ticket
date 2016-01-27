@@ -48,6 +48,7 @@
                 link: "<?php echo $inviteurl;?>", // 分享链接
                 imgUrl: '', // 分享图标
                 success: function () {
+                    $.post("<?php echo UC('Wechat/Recommend/releaseShareCoupon');?>");
                     alert("已分享到朋友圈");
                 },
                 cancel: function () {

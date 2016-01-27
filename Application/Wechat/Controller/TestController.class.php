@@ -35,4 +35,8 @@ class TestController extends Controller {
         $d = \Wechat\Logic\PushLogic::pushTextMsg('oZcK7wlC8I_MN-ye8RIeJg0SPWmo',"test");
         print_r($d);
     }
+
+    public function testPayCouponAct(){
+        \Wechat\Logic\CouponLogic::givePayInvertCoupon('oZcK7wtW4NB-hr5I1_XKKfoC6zV8');
+    }
 }
