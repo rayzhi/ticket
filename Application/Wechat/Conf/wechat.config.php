@@ -12,8 +12,8 @@ return array(
     
     /*** 支付配置  **/
     
-    'WECHAT_MCH_ID'         => '1282838201',   //微信商户id
-    'WECHAT_PAY_KEY'        => '8F24AE8E4975A8E8A370EF2505E6332C',  //微信支付key
+    'WECHAT_MCH_ID'         => '1295302101',   //微信商户id
+    'WECHAT_PAY_KEY'        => 'guangdongchuanqihudongmolechengf',  //微信支付key
 
     'WECHAT_MENU'           => array(
         'button' => array(
