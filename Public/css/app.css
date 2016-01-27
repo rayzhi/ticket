@@ -20,6 +20,7 @@ a{color: #000;text-decoration: none;}
 
 .btn-block{display: block;width: 100%;padding: 10px;background: #ff6600;border:none;margin: 0 auto;border-radius: 5px; color: #fff;text-align: center;}
 .btn-block.blue{background: #599ef4;}
+.btn-block.white{background: #eee;border: 2px solid #ff6600; color: #ff6600;}
 .helpbox{text-align: center;}
 .container{padding: 15px;}
 
@@ -99,7 +100,7 @@ animation: myfirst 5s;
 .payicon{width: 25px;vertical-align: text-top;margin-right: 10px;}
 .couponlist{padding: 10px;}
 .couponinfo{height: 100px;}
-.couponinfo .coupon{position: absolute;right: 9px;width: 100px;height: 100px;margin-top: -75px;line-height: 80px;text-align: center;font-size: 35px;color: #fff;}
+.couponinfo .coupon{position: absolute;right: 9px;width: 100px;height: 100px;margin-top: -74px;line-height: 80px;text-align: center;font-size: 35px;color: #fff;}
 .couponinfo .coupon.notuse{background: url(../images/youhuijuan1.gif);background-size: 100%;}
 .couponinfo .coupon.used{background: url(../images/youhuijuan2.gif);background-size: 100%;}
 .couponinfo .coupon .unit{font-size: 16px;}
@@ -135,3 +136,10 @@ animation: myfirst 5s;
 .orderstate{float: right; font-size: 25px;margin-top: -10px;}
 .orderstate.enable{color: #73ae1f;}
 .orderstate.disable{color: #666;}
+
+.activity-imgbox{width: 100%;}
+.activity-imgbox img{width: 100%;}
+.activity-btns{margin-top: 60px;padding: 0 20px;}
+.activity-btn{display: inline-block;width: 49%;}
+.activity-sharebox{margin-top: 20px;}
+.activity-sharebox img{width: 20px;position: relative;}

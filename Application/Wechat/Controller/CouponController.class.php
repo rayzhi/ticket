@@ -10,6 +10,18 @@ class CouponController extends CommonController {
 
     public function indexAct(){
         $list = \Wechat\Logic\CouponLogic::getUserCoupon(getOpenid());
+        $activity_couponlist = D('user_activitycoupon')->where(array('open_id'=>getOpenid()))->select();
+        foreach($activity_couponlist as $actinfo){
+            $acdd = D('activity_coupon')->where(array('id'=>$actinfo['activitycoupon_id']))->find();
+            $acinfo['title'] = $acdd['name'];
+            $acinfo['price'] = $acdd['price'];
+            $acinfo['begin_time'] = $acdd['stime'];
+            $acinfo['end_time'] = $acdd['etime'];
+            $acinfo['status'] = $acdd['status'];
+            $actilist[] = $acinfo;
+        }
+            
+        $list = array_merge($list,$actilist);
         $this->assign('list',$list);
         $this->display();
     }

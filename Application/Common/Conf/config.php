@@ -1,5 +1,7 @@
 <?php
 
+defined('UPLOAD_PATH') or define("UPLOAD_PATH" , "./Public/data/img/pharmacy");
+
 return array(
     
 	/*设置允许访问列表和默认模块*/
