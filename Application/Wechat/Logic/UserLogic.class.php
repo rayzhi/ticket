@@ -25,7 +25,7 @@ class UserLogic{
             $userinfo['nickname'] = "游客";
         }
         if(!$userinfo['headimgurl']){
-            $userinfo['headimgurl'] = __PUBLIC__."/images/tao3.png";
+            $userinfo['headimgurl'] = __BASE__."public/images/tao3.png";
         }
         return $userinfo;
     }

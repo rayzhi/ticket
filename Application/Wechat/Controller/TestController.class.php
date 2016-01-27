@@ -10,6 +10,10 @@ class TestController extends Controller {
         print_r(\Wechat\Logic\MenuLogic::initMenu());
     }
 
+    public function testRemoveMenuAct(){
+        print_r(\Wechat\Logic\MenuLogic::removeMenu());
+    }
+
     public function testAddCouponAct(){
         $couponinfo['title'] = "测试";
         $couponinfo['price'] = 50;
