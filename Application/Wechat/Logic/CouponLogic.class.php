@@ -77,11 +77,20 @@ class CouponLogic{
         if($receter == $inviter){
             return;
         }
+        $readyusers = S('sharecoupon_user'.$openid);
+        if(in_array($receter, $readyusers)){
+            //如果已经领取就直接返回
+            return;
+        }
         $couponlist = S('sharecoupon_'.$inviter);
         $coupon = array_pop($couponlist);
         if(!$coupon) return;
         self::giveCoupon($receter,$coupon);
+        //更新优惠券
         S('sharecoupon_'.$openid,$couponlist);
+        //更新领取人
+        $readyusers[] = $receter;
+        S('sharecoupon_user'.$openid,$readyusers);
     }
    
 
