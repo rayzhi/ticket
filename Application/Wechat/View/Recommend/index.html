@@ -43,9 +43,10 @@
     <script type="text/javascript">
         wx.config(<?php echo $signature;?>);
         wx.ready(function(){
-            wx.onMenuShareTimeline({
+            var share = {
                 title: '魔乐城',
                 link: "<?php echo $inviteurl;?>", // 分享链接
+                desc: "",
                 imgUrl: '', // 分享图标
                 success: function () {
                     $.post("<?php echo UC('Wechat/Recommend/releaseShareCoupon');?>");
@@ -54,7 +55,11 @@
                 cancel: function () {
                     alert("您已取消分享");
                 }
-            });
+            };
+            wx.onMenuShareTimeline(share);
+            wx.onMenuShareAppMessage(share);
+            wx.onMenuShareQQ(share);
+            wx.onMenuShareWeibo(share);
         });
         wx.error(function(res){
             alert("error!");
