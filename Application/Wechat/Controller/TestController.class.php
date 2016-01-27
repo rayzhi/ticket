@@ -43,4 +43,15 @@ class TestController extends Controller {
     public function testPayCouponAct(){
         \Wechat\Logic\CouponLogic::givePayInvertCoupon('oZcK7wtW4NB-hr5I1_XKKfoC6zV8');
     }
+
+    public function testReceviceAct(){
+        $couponlist = array(ShareCoupon1,ShareCoupon2,ShareCoupon3,ShareCoupon4,ShareCoupon5);
+        shuffle($couponlist);
+        $coupon = array_pop($couponlist);
+        print_r($coupon);
+        print_r($couponlist);
+    }
+
+    public function testClearCacheAct(){
+    }
 }
