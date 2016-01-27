@@ -7,6 +7,8 @@ class TicketOrderModel extends Model{
     
     protected $tableName = 'ticket_order';
     CONST TICKET_ORDER = 'ticket_order';
+    
+    var $orderStatus = array('未使用','已使用','已过期');
  
     public function makeOrder($postData){
         
@@ -70,11 +72,20 @@ class TicketOrderModel extends Model{
                 $cond['did']         = $v['did'];
                 D('TicketSn')->where($cond)->save(array('qrcode'=>$qrcode));
             }   
-            $result[$k]['expiry_date'] = $v['expiry_date'] ? date('Y-m-d H:i:s') : '';        
+            $result[$k]['statusName']  = $this->orderStatus[$v['status']];
+            //过期修改状态为已使用
+            if($v['status'] == 0 && $v['expiry_date'] && $v['expiry_date'] < time()){
+            	$result[$k]['statusName']= '已过期';
+            	$this->where(array('ticket_sn'=>$v['ticket_sn']))->save(array('status'=>2));
+            	$result[$k]['status'] = 2;
+            }            
+            $result[$k]['expiry_date'] = $v['expiry_date'] ? date('Y-m-d H:i:s') : '';
+            
         }
         return $result;
         
     }
+
     
     public function ticketPriceUseCoupon($order_sn){
     	

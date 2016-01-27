@@ -146,15 +146,6 @@ class ApiController extends CommonController {
      */
     public function ticket_use_timeAct($ticket_sn){
     	
-    	$token  = $this->getToken(md5('ticketusetime'));
-    	$url    = $this->apiurl.'/sys/ticket/ticket_use_time?token='.$token.'&ticketNo='.$ticket_sn;
-    	echo $url;exit;
-    	$curl   = new t\Curl();
-    	$return = $curl->get($url);
-    	$return = json_decode($return,true);
-    	return $return;
-    	exit;
-    	
     	$param = array(
     			'ticketNo' => $ticket_sn
     	);
@@ -165,7 +156,7 @@ class ApiController extends CommonController {
     	$curlData = json_encode($data);
     	$curl     = new t\Curl();
     	$return   = $curl->post($url,$curlData,1);
-    	 var_dump($return);
+    	 
     	return $return;
     	
     }

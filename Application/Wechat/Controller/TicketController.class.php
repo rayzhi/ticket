@@ -13,11 +13,6 @@ class TicketController extends CommonController {
      */
     public function indexAct(){
     	
-    	 $taoPiao = R('Api/ticket_use_time',array('1000252141001204'));
-    	 echo "<pre>";
-    	 print_r($taoPiao);
-    	 exit;
-    	
         $userinfo = \Wechat\Logic\UserLogic::getUserinfo(getOpenid());
         $this->assign('userinfo',$userinfo);
         $this->assign('activity_text',getSysConfig('activity-text'));
