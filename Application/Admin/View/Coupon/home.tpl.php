@@ -41,9 +41,6 @@
                                 <a class="green" href="<?php echo UC('Admin/Coupon/couponAdd')?>?id={$vo.id}" title="编辑">
                                     编辑
                                 </a>
-                                <a class="red" href="javascript:;" onclick="remove_option({$vo.id}, '您确认要删除这条数据吗?')" title="删除">
-                                    删除
-                                </a>
                                 <a href="<?php echo UC('Admin/Coupon/lookupdetail',array('id'=>$vo['id']))?>">
                                     查看领取情况
                                 </a>

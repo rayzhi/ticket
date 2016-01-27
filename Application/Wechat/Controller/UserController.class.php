@@ -18,11 +18,29 @@ class UserController extends CommonController {
     }
     
     public function orderDetailAct(){
-        
+    	
         $order_id = I('order_id');
         if(!$order_id) $this->error('非法操作');
         $orderSn = D('TicketOrder')->getOrderTicketSn($order_id);
-      
+        
+        $check = in_array('0',array_column($orderSn,'status'));
+        //查看票是否已经使用
+        if($check){
+        	$ticketNo  = array_column($orderSn,'ticket_sn');
+        	$ticketNos = implode(',',$ticketNo);
+        	$taoPiao = R('Api/ticket_use_time',array($ticketNos));
+        	if($taoPiao){
+        		foreach($orderSn as $k=>$v){
+        			foreach($taoPiao['data'] as $t=>$r){
+        				if($v['ticket_sn'] == $r['ticketNo'] && $r['useTime']){
+        					$orderSn[$k]['statusName'] = '已使用';
+        					$this->where(array('ticket_sn'=>$v['ticket_sn']))->save(array('status'=>1));
+        				}
+        			}
+        		}
+        	}
+        }
+        
         $this->assign('orderSn',$orderSn);
 
         $this->display();

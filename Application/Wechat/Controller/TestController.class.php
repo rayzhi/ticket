@@ -10,6 +10,10 @@ class TestController extends Controller {
         print_r(\Wechat\Logic\MenuLogic::initMenu());
     }
 
+    public function testRemoveMenuAct(){
+        print_r(\Wechat\Logic\MenuLogic::removeMenu());
+    }
+
     public function testAddCouponAct(){
         $couponinfo['title'] = "测试";
         $couponinfo['price'] = 50;
@@ -34,5 +38,9 @@ class TestController extends Controller {
     public function testPushAct(){
         $d = \Wechat\Logic\PushLogic::pushTextMsg('oZcK7wlC8I_MN-ye8RIeJg0SPWmo',"test");
         print_r($d);
+    }
+
+    public function testPayCouponAct(){
+        \Wechat\Logic\CouponLogic::givePayInvertCoupon('oZcK7wtW4NB-hr5I1_XKKfoC6zV8');
     }
 }

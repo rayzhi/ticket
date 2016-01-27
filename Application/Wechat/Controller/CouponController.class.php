@@ -20,22 +20,28 @@ class CouponController extends CommonController {
         $invate = I('get.invate');
         $userinfo = \Wechat\Logic\UserLogic::getUserinfo($openid);
         $this->assign('userinfo',$userinfo);
+        //先领分享优惠券，然后判断是否已经领取了新人优惠券
+        \Wechat\Logic\CouponLogic::receviceShareCoupon($openid,$invate);
+        $receviCount = \Wechat\Logic\CouponLogic::countCoupon($openid,NewerCouponID);
+        if($receviCount>0){
+            $this->success(' ', 'index');
+            return;
+        }
+        //再领新人优惠券
         if(IS_POST){
             $phone = I('post.phone');
             if(preg_match("/1[3458]{1}\d{9}$/",$phone)){
-                $receviCount = \Wechat\Logic\CouponLogic::countCoupon($openid,NewerCouponID);
-                if($receviCount>0){
-                    $this->success('您已经领取过该优惠券了', 'index');
-                    return;
-                    //$this->assign("msg","您已经领取过该优惠券了");
-                }
+                
                 else{
                     if($openid == $invate){
                         $this->success('本人不可领取', 'index');
                         return;
                     }
-                    \Wechat\Logic\UserLogic::updateByOpenid($openid,array('phone'=>$phone));
-                    \Wechat\Logic\CouponLogic::giveCoupon($openid,NewerCouponID); //赠送优惠券
+                    \Wechat\Logic\UserLogic::updateByOpenid($openid,array('phone'=>$phone,'inviter'=>$invate));
+                    //赠送优惠券
+                    \Wechat\Logic\CouponLogic::giveCoupon($openid,NewerCouponID); //给本人
+                    \Wechat\Logic\CouponLogic::giveCoupon($invate,InviteCouponID1); //给推荐者
+
 
                     $username = D('User')->where(array('open_id'=>$openid))->getField('nickname');
                     $invatename = D('User')->where(array('open_id'=>$invate))->getField('nickname');

@@ -25,13 +25,13 @@ class UserLogic{
             $userinfo['nickname'] = "游客";
         }
         if(!$userinfo['headimgurl']){
-            $userinfo['headimgurl'] = __PUBLIC__."/images/tao3.png";
+            $userinfo['headimgurl'] = __BASE__."public/images/tao3.png";
         }
         return $userinfo;
     }
 
     public static function updateByOpenid($openid,$update){
-        D('User')->where(array("openid"=>$openid))->save($update);
+        D('User')->where(array("open_id"=>$openid))->save($update);
     }
 
     public static function is_exists($openid){
@@ -39,5 +39,6 @@ class UserLogic{
         if($userinfo) return true;
         return false;
     }
+
 
 }
