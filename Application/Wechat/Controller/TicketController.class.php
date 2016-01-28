@@ -198,6 +198,7 @@ class TicketController extends CommonController {
             if($checkOrder['status'] == 0){
                 $save['status'] = 1;
                 $save['third_pay_id'] = $this->payType;
+                $save['pay_time'] = time();
                 $result = D('TicketOrder')->where(array('sn'=>$order_sn))->save($save);              
                 if($result){
                     //调用取票sn接口

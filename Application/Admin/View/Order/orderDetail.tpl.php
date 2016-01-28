@@ -7,18 +7,20 @@
 			<table id="sample-table-2" class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
-					    <th>票名称</th>
+					    <th>票类型</th>
 						<th>票sn</th>
 						<th>票价</th>
+						<th>有效时间</th>
 					</tr>
 				</thead>
 
 				<tbody>
 					<volist name="data" id="vo">
 					<tr id="div_{$vo.id}">	
-					    <td>{$vo.ticket_name}</td>					
+					    <td>{$vo.ticket_type_name}</td>					
 						<td>{$vo.ticket_sn}</td>
-						<td>{$vo.price}</td>
+						<td>{$vo.t_price}</td>
+						<td>{$vo.etime}</td>
 					</tr>
 					</volist>
 				</tbody>
@@ -33,6 +35,7 @@
 	jQuery(function($) {
 		var oTable1 = $('#sample-table-2').dataTable( {
 			"aoColumns": [
+		      { "bSortable": false },
 		      { "bSortable": false },
 		      { "bSortable": false },		     
 			  { "bSortable": false }

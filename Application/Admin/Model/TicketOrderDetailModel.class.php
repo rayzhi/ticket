@@ -17,9 +17,13 @@ class TicketOrderDetailModel extends Model {
         //药品各种参数
         $result =  $this->table(self::TICKET_ORDER_DETAIL.' a')
                         ->join('left join '.$tbTicketSn.' b ON a.did=b.did')
-                        ->field('a.*,b.ticket_sn,b.qrcode')
+                        ->field('a.*,b.ticket_sn,b.qrcode,b.ticket_type_name,b.t_price')
                         ->where(array('order_id'=>$order_id))
-                        ->select();
+                        ->select();  
+
+        foreach($result as $k=>$v){
+        	$result[$k]['etime'] = $v['expiry_date'] ? date('Y-m-d H:i:s',$v['expiry_date']) : '';
+        }
     
         return $result;
     }
