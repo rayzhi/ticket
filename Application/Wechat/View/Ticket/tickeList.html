@@ -102,7 +102,7 @@
 		$('.btn-block').click(function(){
 			
 			price = Number($('#price').html());
-			if(price <= 0) return alert('票价不能必须大于0哦');
+			if(price <= 0) return alert('票价必须大于0哦');
 			ticketName = $('.ticketName').html();
 			
 			if($("#h-form").valid()){
