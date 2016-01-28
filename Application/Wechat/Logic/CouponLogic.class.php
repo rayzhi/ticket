@@ -27,12 +27,14 @@ class CouponLogic{
 
     //用户支付后，给邀请人优惠券
     public static function givePayInvertCoupon($openid){
+        if(!$openid) return;
         //先判断$openid是不是第一次支付成功
         $ordercount = D('ticket_order')->where(array('open_id'=>$openid,'status'=>1))->count(1);
         if($ordercount != 1){
             return;
         }
         $inviter = D('User')->where(array('open_id'=>$openid))->getField('inviter');
+        if(!$inviter) return;
         self::giveCoupon($inviter,InviteCouponID2);
     }
 

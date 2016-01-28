@@ -202,10 +202,10 @@ class TicketController extends CommonController {
                 if($result){
                     //调用取票sn接口
                     $this->addTicketSn($order_sn);
-                    recordLog('订单修改状态成功','wechatPay');                   
-                    $wechatPay->notifyStop();
+                    recordLog('订单修改状态成功','wechatPay');             
                     //赠送支付人的推荐人优惠券
-                    \Wechat\Logic\CouponLogic::givePayInvertCoupon($checkOrder['open_id']);
+                    \Wechat\Logic\CouponLogic::givePayInvertCoupon($checkOrder['open_id']);      
+                    $wechatPay->notifyStop();
                 }
             }else{
                 recordLog('订单已经支付或取消','wechatPay');            
