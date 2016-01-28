@@ -6,7 +6,7 @@ class SpaceAdmin extends CommonAdmin {
 
     public function indexAct(){
         $this->meta_title = '管理场地';
-        $list = D('SpaceArea')->order('id desc')->select();
+        $list = D('SpaceArea')->order('sorder asc')->select();
         $this->assign('list',$list);
         $this->display();
     }
