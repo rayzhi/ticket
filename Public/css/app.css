@@ -88,9 +88,9 @@ animation: myfirst 5s;
 }
 
 .maintext{text-align: center;font-weight: normal;}
-.mainprice{font-size: 40px;color: #ff6600; text-align: center;margin: 10px;}
+.mainprice{font-size: 30px;color: #ff6600; text-align: right;margin: 10px;}
 .selectarea{width: 100%;padding: 10px 10px 20px 10px;border:none;border-bottom: 1px solid #ccc;-webkit-appearance:listbox; -moz-appearance:listbox;}
-.selectnum{margin-top: 20px;padding: 10px;}
+.selectnum{margin-top: 10px;padding: 0 10px;}
 .numer{display: inline-block;}
 .numer .minus,.numer .plus{border: 1px solid #ccc;width: 35px;height: 33px;text-align: center; line-height: 33px;display: inline-block;}
 .numer .minus{margin-right: -6px;}
@@ -139,12 +139,19 @@ animation: myfirst 5s;
 
 .activity-imgbox{width: 100%;}
 .activity-imgbox img{width: 100%;}
-.activity-btns{margin-top: 60px;padding: 0 20px;}
+.activity-btns{padding: 0 20px;position: fixed;bottom: 60px; left: 0;width: 100%;}
 .activity-btn{display: inline-block;width: 49%;}
 .activity-sharebox{margin-top: 20px;}
 .activity-sharebox img{width: 20px;position: relative;}
+.fixedp{position: fixed;bottom: 30px; width: 100%;left: 0;}
 
 .spacelist{}
 .space-item{display: block;background: #fff;margin-top: 10px;padding: 10px 20px;border: 1px solid #ccc;border-radius: 5px;}
 .space-item:before{content: " ";display: inline-block;width: 5px;height: 43px;background: #ff6600;position: absolute;margin-top: -11px;margin-left: -20px;}
 .space-item:after{content: "》";display: inline-block;float: right;color: #666;}
+
+.ticketlist-banner > img{width: 100%;}
+.ticketlist-list{width: 100%;}
+.ticketlist-item .item-icon{width: 10px;position: absolute;margin-top: 18px;}
+.ticketlist-moreinfo{text-align: right;padding: 0 15px;font-size: 12px; color: blue;}
+.ticketlist-moreinfo a{color: blue;}

@@ -23,7 +23,7 @@ return array(
             array('type'=>'view','name'=>'微信购票',
                 'sub_button'=>array(
                                 array('type'=>'view','name'=>'一键购票','url'=>__BASE__."index.php/Wechat/Ticket/tickeList"),
-                                array('type'=>'view','name'=>'推荐有礼','url'=>__BASE__."index.php/Wechat/Recommend/index"),
+                                array('type'=>'view','name'=>'分享有礼','url'=>__BASE__."index.php/Wechat/Recommend/index"),
                                 array('type'=>'view','name'=>'新春活动','url'=>__BASE__."index.php/Wechat/Activity/index?id=5"))),
             array('type'=>'view','name'=>'个人中心','url'=>__BASE__."index.php/Wechat/User/index"),
         )
