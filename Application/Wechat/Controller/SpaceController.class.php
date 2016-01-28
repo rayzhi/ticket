@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 场地模块
+ * 场馆模块
  * 
  */
 namespace Wechat\Controller;

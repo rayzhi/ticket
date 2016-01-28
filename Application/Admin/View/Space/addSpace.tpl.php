@@ -7,7 +7,7 @@
         {$headline}
         <a href="<?php echo UC('Admin/Space/index')?>">
             <button class="btn btn-sm" style="float:right;margin-right:35px;">
-                返回场地列表
+                返回场馆列表
             </button>
         </a>
     </h1>
@@ -25,10 +25,10 @@
             </div>
             
             <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">场地名称 </label>
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">场馆名称 </label>
 
                 <div class="col-sm-9">
-                    <input type="text" name="name" class="required" value="{$info.name}" placeholder="场地名称" style="width:450px;" />
+                    <input type="text" name="name" class="required" value="{$info.name}" placeholder="场馆名称" style="width:450px;" />
                 </div>
             </div>
 
