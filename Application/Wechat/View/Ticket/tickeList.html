@@ -9,57 +9,66 @@
 <block name="content">
 
  <body>
+ 	<div class="ticketlist-banner">
+ 		<img src="__PUBLIC__/images/ticketbanner.jpg">
+ 	</div>
  
-	 <form id="h-form" method="post" enctype="multipart/form-data" action="javascript:;" >
-	    
-	    <div class="panel margin-top">
-	        <h3 class="maintext ticketName">{$areaName}魔乐城场馆体验票</h3>
-	        <p class="mainprice">￥<span id="price">{$ticketInfo.price}</span></p>	        	        
-	    </div>
-	
-	    <div class="panel margin-top" href="#">
-	    
-	        <select name="venues_id" id="venues_id" class="selectarea required">
-	        	<empty name="venuesinfo">
-	        		<option value="">暂无场地</option>
-	        	<else />
-	        		<option value="">请选择场地</option>
-	        		<volist name="venuesinfo" id="vo">
-	        			<option value="{$vo.id}">{$vo.name}</option>
-	        		</volist>
-	        	</empty>
-	        </select>
-	        
-	        <select name="ticket_type_id" id="ticket_type_id" class="selectarea required">
-	        	<option value="">请选择票类型</option>
-        		<volist name="ticketType" id="vo">
-        			<option value="{$vo.id}" main="{$vo.ticketMainType}">{$vo.name}</option>
-        		</volist>
-        		<volist name="ticketType1" id="vt">
-        			<option value="{$vt.id}" main="{$vt.ticketMainType}">{$vt.name}</option>
-        		</volist>
-	        </select>
-	        
-	        <div class="selectnum">
-	            <span class="text">数量</span>
-	            <div class="numer margin-left30">
-	                <span class="minus">-</span>
-	                <input type="text" name="amount" class="numval" value="1">
-	                <span class="plus">+</span>
-	            </div>
-	        </div>
-	        
-	    </div>
-	
-	    <div class="margin-top30">&nbsp;</div>
+	<form id="h-form" method="post" enctype="multipart/form-data" action="javascript:;" >
+		<div class="panel ticketlist-list">
+			<div class="ticketlist-item">
+				<img src="__PUBLIC__/images/xiaojuan.gif" class="item-icon">
+				<select name="venues_id" id="venues_id" class="selectarea required">
+				<empty name="venuesinfo">
+					<option value="">暂无场地</option>
+				<else />
+					<option value="">请选择场地</option>
+					<volist name="venuesinfo" id="vo">
+						<option value="{$vo.id}">{$vo.name}</option>
+					</volist>
+				</empty>
+			</select>
+			</div>
+			<div class="ticketlist-item">
+				<img src="__PUBLIC__/images/xiaojuan.gif" class="item-icon">
+				<select name="ticket_type_id" id="ticket_type_id" class="selectarea required">
+				<option value="">请选择票类型</option>
+				<volist name="ticketType" id="vo">
+					<option value="{$vo.id}" main="{$vo.ticketMainType}">{$vo.name}</option>
+				</volist>
+				<volist name="ticketType1" id="vt">
+					<option value="{$vt.id}" main="{$vt.ticketMainType}">{$vt.name}</option>
+				</volist>
+			</select>
+			</div>
+			<div class="ticketlist-item">
+				<div class="selectnum">
+			    <span class="text">数量</span>
+			    <div class="numer margin-left30">
+			        <span class="minus">-</span>
+			        <input type="text" name="amount" class="numval" value="1">
+			        <span class="plus">+</span>
+			    </div>
+			</div>
+			</div>
+		</div>
+		<p class="mainprice">￥<span id="price">{$ticketInfo.price}</span></p>	
+		<div class="margin-top30">&nbsp;</div>
 	    <div class="container">
 	    	<button type="submit" class="btn-block margin-top">立即购买</button>
 	    </div>
 	    
 	</form>
 
+	<p class="ticketlist-moreinfo"><a href="javascript:" id="helpbox">查看详情</a></p>
 	<div class="sharehelp-box activity-sharebox">
         <span>点击右上角 分享更多好友</span><img src="__PUBLIC__/images/jiantao.png" width="50px">
+    </div>
+
+    <div class="mask default-mask hide">
+        <a href="javascript:" class="mask-close"><img src="__PUBLIC__/images/cha.png" width="50px"></a>
+        <div class="container text-nomal-box text-nomal">
+            {$activity_text}
+        </div>
     </div>
   </body>
 </block>
@@ -67,6 +76,22 @@
 
 <block name="script">
 	<script>
+
+		$("#helpbox").click(function(){
+            showHelp();
+        });
+
+        $(".mask-close").click(function(){
+            hideHelp();
+        });
+
+        function showHelp(){
+            $(".default-mask").removeClass("hide");
+        }
+
+        function hideHelp(){
+            $(".default-mask").addClass("hide");
+        }
 		
 		//提交表单
 		$('.btn-block').click(function(){

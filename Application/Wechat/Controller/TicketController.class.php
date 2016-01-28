@@ -51,6 +51,7 @@ class TicketController extends CommonController {
            $ticketType1[$v['id']]['ticketMainType'] = 1;
         }
         
+        $this->assign('activity_text',getSysConfig('activity-text'));
         $this->assign('ticketType',$ticketType);
         $this->assign('ticketType1',$ticketType1);
         $this->assign('ticketInfo',$ticketInfo['data'][0]);
