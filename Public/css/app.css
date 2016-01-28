@@ -94,7 +94,7 @@ animation: myfirst 5s;
 .numer{display: inline-block;}
 .numer .minus,.numer .plus{border: 1px solid #ccc;width: 35px;height: 33px;text-align: center; line-height: 33px;display: inline-block;}
 .numer .minus{margin-right: -6px;}
-.numer .plus{margin-left: -7px;}
+.numer .plus{margin-left: -5px;}
 .numer .numval{width: 40px;margin: 0; border: 1px solid #ccc;height: 33px;line-height: 33px;vertical-align: top;text-align: center;}
 
 .payicon{width: 25px;vertical-align: text-top;margin-right: 10px;}
