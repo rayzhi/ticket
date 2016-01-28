@@ -36,10 +36,10 @@
     wx.config(<?php echo $signature;?>);
     wx.ready(function(){
         var share = {
-            title: '魔乐城',
+            title: "<?php echo $sharetitle;?>",
             link: "<?php echo $inviteurl;?>", // 分享链接
-            desc: "",
-            imgUrl: '', // 分享图标
+            desc: "<?php echo $sharedesc;?>",
+            imgUrl: "<?php echo $shareimgUrl;?>", // 分享图标
             success: function () {
                 alert("已成功分享");
             },
