@@ -23,10 +23,16 @@ class UserController extends CommonController {
         if(!$order_id) $this->error('非法操作');
         $orderSn = D('TicketOrder')->getOrderTicketSn($order_id);
         
-        $check = in_array('0',array_column($orderSn,'status'));
+        $statusList = array();
+        $ticketNo = array();
+        foreach($orderSn as $k=>$v){
+        	$statusList[] = $v['status'];
+        	$ticketNo[] = $v['ticket_sn'];
+        }
+        
+        $check = in_array('0',$statusList);
         //查看票是否已经使用
         if($check){
-        	$ticketNo  = array_column($orderSn,'ticket_sn');
         	$ticketNos = implode(',',$ticketNo);
         	$taoPiao = R('Api/ticket_use_time',array($ticketNos));
         	if($taoPiao){
