@@ -33,7 +33,7 @@ class ActivityController extends CommonController {
             $info['status'] = 0;
             D('user_activitycoupon')->add($info);
         }
-        $this->success('领取成功', '/Wechat/Coupon/index');
+        redirect('/Wechat/Coupon/index', 0, '页面跳转中...');
     }
 
 }
