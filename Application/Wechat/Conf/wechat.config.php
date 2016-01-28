@@ -15,7 +15,7 @@ return array(
 
     'WECHAT_MENU'           => array(
         'button' => array(
-            array('type'=>'view','name'=>'魔幻城主',
+            array('type'=>'view','name'=>'魔乐城主',
                 'sub_button'=>array(
                                 array('type'=>'view','name'=>'免费wifi','url'=>__BASE__."index.php/Wechat/Ticket/tickeList"),
                                 array('type'=>'view','name'=>'交通指引','url'=>__BASE__."index.php/Wechat/Ticket/tickeList"),
