@@ -110,9 +110,9 @@ class TicketController extends CommonController {
             }
             $amount = I('amount') ? I('amount') : 1;
             $price = $price ? $price : 0;
-            $back['total'] = $price * $amount;
-            $back['price'] = $price;
-            $this->success('成功',$back);
+            $back['total'] = sprintf('%.2f',$price * $amount);
+            $back['price'] = sprintf('%.2f',$price);
+            $this->success('成功',$back);   
         }
     }
     

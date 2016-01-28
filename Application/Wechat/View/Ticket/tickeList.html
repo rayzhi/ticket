@@ -19,9 +19,9 @@
 				<img src="__PUBLIC__/images/xiaojuan.gif" class="item-icon">
 				<select name="venues_id" id="venues_id" class="selectarea required">
 					<empty name="venuesinfo">
-						<option value="">暂无场馆</option>
+						<option value="">暂无场地</option>
 					<else />
-						<option value="">请选择场馆</option>
+						<option value="">请选择场地</option>
 						<volist name="venuesinfo" id="vo">
 							<option value="{$vo.id}">{$vo.name}</option>
 						</volist>
@@ -56,13 +56,15 @@
 			<input type="hidden" id="eachPrice" name="eachPrice" value="0" />
 			
 		</div>
-		<p class="mainprice"><a href="javascript:" id="helpbox" class="ticketlist-desc">购票说明</a> ￥<span id="price">0</span></p>
+		<p class="mainprice">￥<span id="price">0</span></p>	
+		<div class="margin-top30">&nbsp;</div>
 	    <div class="container">
-	    	<button type="submit" class="btn-block">立即购买</button>
+	    	<button type="submit" class="btn-block margin-top">立即购买</button>
 	    </div>
 	    
 	</form>
 
+	<p class="ticketlist-moreinfo"><a href="javascript:" id="helpbox">查看详情</a></p>
 	<div class="sharehelp-box activity-sharebox">
         <span>点击右上角 分享更多好友</span><img src="__PUBLIC__/images/jiantao.png" width="50px">
     </div>
@@ -175,7 +177,7 @@
 			$('.numval').val(numval);
 			total = Number($('#price').html());
 			eachPrice = Number($('#eachPrice').val());
-			$('#price').html(eachPrice * numval);
+			$('#price').html((eachPrice * numval).toFixed(2));
 		})
 		
 		$('.minus').click(function(){
@@ -183,7 +185,7 @@
 			if(numval > 1) $('.numval').val(numval-1);
 			numval = Number($('.numval').val());
 			eachPrice = Number($('#eachPrice').val());
-			$('#price').html(eachPrice * numval);
+			$('#price').html((eachPrice * numval).toFixed(2));
 		})
 		
 	</script>
