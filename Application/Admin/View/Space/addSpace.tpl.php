@@ -7,7 +7,7 @@
         {$headline}
         <a href="<?php echo UC('Admin/Space/index')?>">
             <button class="btn btn-sm" style="float:right;margin-right:35px;">
-                返回场地列表
+                返回场馆列表
             </button>
         </a>
     </h1>
@@ -15,12 +15,20 @@
 <div class="row">
     <div class="col-xs-12">
         <form class="form-horizontal" role="form" method="post"  enctype="multipart/form-data" action="javascript:;" >
-            
+
             <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">场地名称 </label>
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">排序号 </label>
 
                 <div class="col-sm-9">
-                    <input type="text" name="name" class="required" value="{$info.name}" placeholder="场地名称" class="col-xs-10 col-sm-5" />
+                    <input type="text" name="sorder" class="required" value="{$info.sorder}" placeholder="排序号（越小越排前）" style="width:450px;" />
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">场馆名称 </label>
+
+                <div class="col-sm-9">
+                    <input type="text" name="name" class="required" value="{$info.name}" placeholder="场馆名称" style="width:450px;" />
                 </div>
             </div>
 
@@ -28,7 +36,7 @@
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1">跳转地址</label>
 
                 <div class="col-sm-9">
-                    <input type="text" name="url" class="required" value="{$info.url}" placeholder="跳转地址" class="col-xs-10 col-sm-5" />
+                    <input type="text" name="url" class="required" value="{$info.url}" placeholder="跳转地址" style="width:450px;" />
                 </div>
             </div>
 

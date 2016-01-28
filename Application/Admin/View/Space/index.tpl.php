@@ -15,6 +15,7 @@
                                 <span class="lbl"></span>
                             </label>
                         </th>
+                        <th>排序</th>
                         <th>名称</th>
                         <th>跳转地址</th>
                         <th>操作</th>
@@ -30,6 +31,7 @@
                                 <span class="lbl"></span>
                             </label>
                         </td>
+                        <td>{$vo.sorder}</td>
                         <td>{$vo.name}</td>
                         <td>{$vo.url}</td>
                         <td>

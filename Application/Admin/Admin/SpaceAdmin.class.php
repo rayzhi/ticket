@@ -5,8 +5,8 @@ namespace Admin\Admin;
 class SpaceAdmin extends CommonAdmin {
 
     public function indexAct(){
-        $this->meta_title = '管理场地';
-        $list = D('SpaceArea')->order('id desc')->select();
+        $this->meta_title = '管理场馆';
+        $list = D('SpaceArea')->order('sorder asc')->select();
         $this->assign('list',$list);
         $this->display();
     }
@@ -28,10 +28,10 @@ class SpaceAdmin extends CommonAdmin {
         if($id){
             $info = D('SpaceArea')->where(array('id'=>$id))->find();
             $this->assign('info',$info);
-            $this->assign('headline','修改场地');
+            $this->assign('headline','修改场馆');
         }
         else{
-            $this->assign('headline','添加场地');
+            $this->assign('headline','添加场馆');
         }
         $this->display();
     }
