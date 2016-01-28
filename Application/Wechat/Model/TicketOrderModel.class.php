@@ -79,7 +79,7 @@ class TicketOrderModel extends Model{
             	$this->where(array('ticket_sn'=>$v['ticket_sn']))->save(array('status'=>2));
             	$result[$k]['status'] = 2;
             }            
-            $result[$k]['expiry_date'] = $v['expiry_date'] ? date('Y-m-d H:i:s') : '';
+            $result[$k]['expiry_date'] = $v['expiry_date'] ? date('Y-m-d H:i:s',$v['expiry_date']) : '';
             
         }
         return $result;
