@@ -86,8 +86,11 @@ class TicketController extends CommonController {
                 $ticketInfo = R('Api/queryprice',array($this->payType,$_POST['venues_id'],$_POST['ticket_type_id']));
                 $price = $ticketInfo['data'][0]['price'];
             }
+            $amount = I('amount') ? I('amount') : 1;
             $price = $price ? $price : 0;
-            $this->success('成功',$price);
+            $back['total'] = sprintf('%.2f',$price * $amount);
+            $back['price'] = sprintf('%.2f',$price);
+            $this->success('成功',$back);
         }
     }
     
