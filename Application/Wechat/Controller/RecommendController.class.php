@@ -14,7 +14,7 @@ class RecommendController extends CommonController {
         $this->assign('userinfo',$userinfo);
 
         $this->assign('invitetext',getSysConfig('recommend-text'));
-        $this->assign('activity_text',getSysConfig('activity-text'));
+        $this->assign('activity_text',getSysConfig('share-info'));
         $this->display();
     }
 

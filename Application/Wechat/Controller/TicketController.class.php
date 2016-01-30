@@ -71,7 +71,7 @@ class TicketController extends CommonController {
                     $price += $v['price'] * $v['count'];
                 }               
             }else{
-                $ticketInfo = R('Api/queryprice',array(4,$_POST['venues_id'],$_POST['ticket_type_id']));
+                $ticketInfo = R('Api/queryprice',array($this->payType,$_POST['venues_id'],$_POST['ticket_type_id']));
                 $price = $ticketInfo['data'][0]['price'];
             }
             $price = $price ? $price : 0;

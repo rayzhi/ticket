@@ -25,7 +25,16 @@ class CommonController extends Controller {
         $signature = $weobj->getJsSign(currentUrl(),time(),md5(rand(1,9999)),C('WECHAT_APPID'));
         $signature['jsApiList'] = ['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone'];
         $this->assign('signature',str_replace("\\/", "/", json_encode($signature)));
-        $this->assign('inviteurl',domainurl().UC('Wechat/Coupon/reciveCoupon',array('invate'=>getOpenid())));
+
+        $sharetitle = getSysConfig('share-title');
+        $sharedesc = getSysConfig('share-desc');
+        $shareimgUrl = getSysConfig('share-imgUrl');
+        $sharelink = getSysConfig('share-link');
+
+        $this->assign('sharetitle',$sharetitle);
+        $this->assign('sharedesc',$sharedesc);
+        $this->assign('shareimgUrl',$shareimgUrl);
+        $this->assign('inviteurl',domainurl().UC($sharelink,array('invate'=>getOpenid())));
         
     }
     

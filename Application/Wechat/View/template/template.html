@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>魔乐城</title>
     <link href="__PUBLIC__/css/normalize.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/app.css?a=5">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/app.css?a=13">
     <script src="__PUBLIC__/static/admin/js/jquery-1.9.1.js"></script>
     <script src="__PUBLIC__/static/admin/js/jquery.validate.js"></script>
 	<script src="__PUBLIC__/static/admin/js/messages_cn.js"></script>
@@ -36,12 +36,12 @@
     wx.config(<?php echo $signature;?>);
     wx.ready(function(){
         var share = {
-            title: '魔乐城',
+            title: "<?php echo $sharetitle;?>",
             link: "<?php echo $inviteurl;?>", // 分享链接
-            desc: "",
-            imgUrl: '', // 分享图标
+            desc: "<?php echo $sharedesc;?>",
+            imgUrl: "<?php echo $shareimgUrl;?>", // 分享图标
             success: function () {
-                alert("已分享到朋友圈");
+                alert("已成功分享");
             },
             cancel: function () {
                 alert("您已取消分享");

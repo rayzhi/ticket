@@ -41,7 +41,7 @@ class TestController extends Controller {
     }
 
     public function testPayCouponAct(){
-        \Wechat\Logic\CouponLogic::givePayInvertCoupon('oZcK7wtW4NB-hr5I1_XKKfoC6zV8');
+        \Wechat\Logic\CouponLogic::givePayInvertCoupon(getOpenid());
     }
 
     public function testReceviceAct(){
@@ -57,4 +57,5 @@ class TestController extends Controller {
         $dd = array_merge($dd ,false);
         print_r($dd);
     }
+
 }

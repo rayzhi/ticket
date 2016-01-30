@@ -14,10 +14,10 @@ class TicketOrderModel extends Model{
         
         $array['sn']              = time().rand(100000,999999);
         $array['open_id']         = session('openid');
-        $array['total_cost']      = $postData['price'] * $postData['amount'];
+        $array['total_cost']      = $postData['price'];
         $array['add_time']        = time();
         $array['status']          = 0;
-        $array['third_party_pay'] = $postData['price'] * $postData['amount'];
+        $array['third_party_pay'] = $postData['price'];
         
         $order_id = $this->add($array);
         if($order_id){
@@ -79,7 +79,7 @@ class TicketOrderModel extends Model{
             	$this->where(array('ticket_sn'=>$v['ticket_sn']))->save(array('status'=>2));
             	$result[$k]['status'] = 2;
             }            
-            $result[$k]['expiry_date'] = $v['expiry_date'] ? date('Y-m-d H:i:s') : '';
+            $result[$k]['expiry_date'] = $v['expiry_date'] ? date('Y-m-d H:i:s',$v['expiry_date']) : '';
             
         }
         return $result;
