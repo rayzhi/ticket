@@ -34,7 +34,7 @@ class TicketController extends CommonController {
                 $areaName[$v1['id']]['name'] = $v['name'].$v1['name'];
             }
         }
-
+        $this->assign('activity_text',getSysConfig('activity-text'));
         $this->assign('venuesinfo',$areaName);
        
         $this->display(); 
