@@ -6,7 +6,7 @@ return array(
 	'WECHAT_APPID' 			=> 'wxb3cb5fc99dbe663d',
 	'WECHAT_APPSECRET' 	    => 'e587e53438f778407ae22091b6cf2e56', 
 	'WECHAT_ENCODINGAESKEY' => 'mwZcAgJFmqdjExG7Dny9oOaaFOsUTwdEaHQVOJ6SOJ6',
-	'WECHAT_WELCOME' 		=> '欢迎关注微信公众号！功能正在开发中，请耐心等待哦！期待你的加入哦~',
+	'WECHAT_WELCOME' 		=> '欢迎关注魔乐世界！我们为您定制了很棒的活动，详情请查看菜单。',
     
     /*** 支付配置  **/
     
