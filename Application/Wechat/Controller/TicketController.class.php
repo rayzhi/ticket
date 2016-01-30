@@ -7,6 +7,8 @@
 namespace Wechat\Controller;
 
 class TicketController extends CommonController {
+    
+    protected $payType = 4;  //支付方式----微信支付
 
     /**
      * 魔幻城首页
@@ -36,7 +38,7 @@ class TicketController extends CommonController {
         $this->assign('venuesinfo',$venuesinfo['data']);
        
         //单票的信息4--微信支付   场馆id 2--成人票
-        $ticketInfo = R('Api/queryprice',array(4,$area_id));
+        $ticketInfo = R('Api/queryprice',array($this->payType,$area_id));
         foreach($ticketInfo['data'] as $k=>$v){
            $ticketType[$v['ticketTypeId']]['id'] = $v['ticketTypeId'];
            $ticketType[$v['ticketTypeId']]['name'] = $v['ticketType'];
@@ -44,7 +46,7 @@ class TicketController extends CommonController {
         }
         
         //套票
-        $taoPiao = R('Api/price',array($area_id,4));
+        $taoPiao = R('Api/price',array($area_id,$this->payType));
         foreach($taoPiao['data'] as $k=>$v){
            $ticketType1[$v['id']]['id'] = $v['id'];
            $ticketType1[$v['id']]['name'] = $v['name'];
@@ -63,7 +65,7 @@ class TicketController extends CommonController {
         
         if(IS_POST){       
             if($_POST['main_type'] == 1){
-                $ticketInfo = R('Api/price',array($_POST['venues_id'],4,$_POST['ticket_type_id']));
+                $ticketInfo = R('Api/price',array($_POST['venues_id'],$this->payType,$_POST['ticket_type_id']));
                 $price = 0;
                 foreach($ticketInfo['data'][0]['tickets'] as $k=>$v){
                     $price += $v['price'] * $v['count'];
@@ -135,7 +137,7 @@ class TicketController extends CommonController {
         $payment['mch_id']     = C('WECHAT_MCH_ID');
         $payment['key']        = C('WECHAT_PAY_KEY');
         $payment['M_OrderNO']  = $orderInfo['sn'];
-        $payment['M_Amount']   = '0.01';//测试金额
+        $payment['M_Amount']   = $orderInfo['third_party_pay'];
         $payment['notify_url'] = __BASE__.UC('Wechat/Ticket/notifyurl');
 
         recordLog($payment,'wechatPay');        
