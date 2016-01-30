@@ -131,7 +131,9 @@
 			
 			var index = layer.load(0,{shade:[0.3,'#676767']});
 			venues_id = $('#venues_id option:selected').val();
-			
+			if(venues_id == ''){
+				$('#price').html(0);				
+			}
 			$.post(
 					"{:UC('Wechat/Ticket/getVenues')}", 
 					{'venues_id':venues_id}, 
