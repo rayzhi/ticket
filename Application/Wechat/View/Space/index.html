@@ -1,0 +1,22 @@
+<extend name="template/template" />
+
+<block name="css">
+    <style type="text/css">
+       
+    </style>
+</block>
+
+<block name="content">
+<body>
+    
+    <div class="container">
+        <div class="spacelist">
+            <volist name="list" id="info">
+                <a href="{$info['url']}" class="space-item">{$info['name']}</a>
+            </volist>
+        </div>
+    </div>
+
+</body>
+</block>
+

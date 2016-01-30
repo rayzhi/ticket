@@ -489,15 +489,15 @@ function unifile_upload($param)
 	$up_url = UC('Admin/Upload/img_upload');
 	$up_del = UC('Admin/Upload/del');
 	$str='';
-	$str .= "<script type='text/javascript' src='".__BASE__."static/admin/js/zxxFile_1.0.js?=1'></script>";
-	$str .= "<script type='text/javascript' src='".__BASE__."static/admin/js/mobileBUGFix.mini.js'></script>";
+	$str .= "<script type='text/javascript' src='".__BASE__."Public/static/admin/js/zxxFile_1.0.js?=1'></script>";
+	$str .= "<script type='text/javascript' src='".__BASE__."Public/static/admin/js/mobileBUGFix.mini.js'></script>";
 	$str .= '<div class="zxx_img" id="addPic">';
 	if($content){
-		$str .= '<img src="'.__BASE__.$content.'" onerror="this.src=';
+		$str .= '<img src="'.__BASE__.'Public/'.$content.'" onerror="this.src=';
 	}else{
-		$str .= '<img src="'.__BASE__.'static/admin/img/default.gif" onerror="this.src=';
+		$str .= '<img src="'.__BASE__.'Public/static/admin/img/default.gif" onerror="this.src=';
 	}
-	$str .= "'".__BASE__."static/admin/img/default.gif'\"";
+	$str .= "'".__BASE__."Public/static/admin/img/default.gif'\"";
 	$str .= 'height="80" width="80" />';	
 	$str .= '<input type="file" id="fileImage" name="fileselect[]" multiple style="z-index:200;opacity:0;filter:alpha(opacity=0);-ms-filter:alpha(opacity=0); position:absolute; top:0; left:0; width:60px; height:60px;">';
 	if(!$content){
@@ -607,9 +607,9 @@ function multi_upload_pic($param)
 	$edit_del = UC('Admin/Upload/del_exist_img');
 	$str = '';
 
-	$str .= "<script type='text/javascript' src='".__BASE__."static/Keditor/kindeditor.js'></script>";
-	$str .= "<script type='text/javascript' src='".__BASE__."static/Keditor/lang/zh_CN.js'></script>";
-	$str .= "<link rel='stylesheet' href='".__BASE__."static/Keditor/themes/default/default.css'></script>";
+	$str .= "<script type='text/javascript' src='".__BASE__."Public/static/Keditor/kindeditor.js'></script>";
+	$str .= "<script type='text/javascript' src='".__BASE__."Public/static/Keditor/lang/zh_CN.js'></script>";
+	$str .= "<link rel='stylesheet' href='".__BASE__."Public/static/Keditor/themes/default/default.css'></script>";
 	
 	$str .= '<div class="col-sm-3" id="image" >
 				<p id="addPic">
@@ -622,7 +622,7 @@ function multi_upload_pic($param)
 		foreach(explode(';',$param['content']) as $k=>$v){
 			$k += 1;	
 			$str .= '<div style="width:500px;" class="fli" id="del'.$k.'">
-			<img src="'.__BASE__.$v.'" class="picture" style="width:80px;height:70px;float:left;" />
+			<img src="'.__BASE__.'Public/'.$v.'" class="picture" style="width:80px;height:70px;float:left;" />
 			<input type="button" class="button" title="" style="margin-top:80px;margin-left:-60px;" onclick="del('.$k.','.'\''.$v.'\''.');" value="删除"  />
 			<div class="blank"></div>
 			</div>';			

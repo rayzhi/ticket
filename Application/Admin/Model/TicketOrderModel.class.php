@@ -26,7 +26,8 @@ class TicketOrderModel extends Model {
             $cond['a.add_time'] = array('between',$time);
         }
         
-        $tbUser = \Admin\Model\UserModel::USER;//需要数据表
+        $tbUser              = \Admin\Model\UserModel::USER;//需要数据表
+        $tbTicketSn          = \Admin\Model\TicketSnModel::TICKET_SN;//需要数据表
         $tbTicketOrderDetail = \Admin\Model\TicketOrderDetailModel::TICKET_ORDER_DETAIL;//需要数据表
 
         //药品各种参数
@@ -38,8 +39,10 @@ class TicketOrderModel extends Model {
         $result = $this->table(self::TICKET_ORDER.' a')
                        ->join('left join '.$tbUser.' b ON a.open_id=b.open_id')
                        ->join('left join '.$tbTicketOrderDetail.' c ON a.id=c.order_id')
+                       ->join('left join '.$tbTicketSn.' d ON c.did=d.did')
                        ->where($cond) 
-                       ->field('a.*,b.nickname,c.amount')
+                       ->field('a.*,b.nickname,count(d.did) as amount')
+                       ->group('a.id')
                        ->order('a.id DESC')
                        ->limit($page,$pagesize)
                        ->select();

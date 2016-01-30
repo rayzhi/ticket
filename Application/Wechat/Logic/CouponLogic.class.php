@@ -27,12 +27,14 @@ class CouponLogic{
 
     //用户支付后，给邀请人优惠券
     public static function givePayInvertCoupon($openid){
+        if(!$openid) return;
         //先判断$openid是不是第一次支付成功
         $ordercount = D('ticket_order')->where(array('open_id'=>$openid,'status'=>1))->count(1);
         if($ordercount != 1){
             return;
         }
         $inviter = D('User')->where(array('open_id'=>$openid))->getField('inviter');
+        if(!$inviter) return;
         self::giveCoupon($inviter,InviteCouponID2);
     }
 
@@ -65,6 +67,8 @@ class CouponLogic{
 
     //发布分享优惠券
     public static function publicShareCoupon($openid){
+        $share = S('sharecoupon_'.$openid);
+        if($share) return;
         $couponlist = array(ShareCoupon1,ShareCoupon2,ShareCoupon3,ShareCoupon4,ShareCoupon5);
         shuffle($couponlist);
         S('sharecoupon_'.$openid,$couponlist);
@@ -75,11 +79,24 @@ class CouponLogic{
         if($receter == $inviter){
             return;
         }
+        $readyusers = S('sharecoupon_user'.$openid);
+        if(in_array($receter, $readyusers)){
+            //如果已经领取就直接返回
+            return;
+        }
         $couponlist = S('sharecoupon_'.$inviter);
         $coupon = array_pop($couponlist);
         if(!$coupon) return;
         self::giveCoupon($receter,$coupon);
+
+        $invatename = D('User')->where(array('open_id'=>$inviter))->getField('nickname');
+        \Wechat\Logic\PushLogic::pushTextMsg($receter,"恭喜您领到您的好友@".$invatename."分享的魔乐城优惠劵，优惠劵能抵消魔乐城场馆票价，记得使用哦！");
+        
+        //更新优惠券
         S('sharecoupon_'.$openid,$couponlist);
+        //更新领取人
+        $readyusers[] = $receter;
+        S('sharecoupon_user'.$openid,$readyusers);
     }
    
 

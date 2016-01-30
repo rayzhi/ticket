@@ -9,71 +9,109 @@
 <block name="content">
 
  <body>
+ 	<div class="ticketlist-banner">
+ 		<img src="__PUBLIC__/images/ticketbanner.jpg">
+ 	</div>
  
-	 <form id="h-form" method="post" enctype="multipart/form-data" action="javascript:;" >
-	    
-	    <div class="panel margin-top">
-	        <h3 class="maintext ticketName">{$areaName}魔乐城场馆体验票</h3>
-	        <p class="mainprice">￥<span id="price">{$ticketInfo.price}</span></p>	        	        
-	    </div>
-	
-	    <div class="panel margin-top" href="#">
-	    
-	        <select name="venues_id" id="venues_id" class="selectarea required">
-	        	<empty name="venuesinfo">
-	        		<option value="">暂无场地</option>
-	        	<else />
-	        		<option value="">请选择场地</option>
-	        		<volist name="venuesinfo" id="vo">
-	        			<option value="{$vo.id}">{$vo.name}</option>
-	        		</volist>
-	        	</empty>
-	        </select>
-	        
-	        <select name="ticket_type_id" id="ticket_type_id" class="selectarea required">
-	        	<option value="">请选择票类型</option>
-        		<volist name="ticketType" id="vo">
-        			<option value="{$vo.id}" main="{$vo.ticketMainType}">{$vo.name}</option>
-        		</volist>
-        		<volist name="ticketType1" id="vt">
-        			<option value="{$vt.id}" main="{$vt.ticketMainType}">{$vt.name}</option>
-        		</volist>
-	        </select>
-	        
-	        <div class="selectnum">
-	            <span class="text">数量</span>
-	            <div class="numer margin-left30">
-	                <span class="minus">-</span>
-	                <input type="text" name="amount" class="numval" value="1">
-	                <span class="plus">+</span>
-	            </div>
-	        </div>
-	        
-	    </div>
-	
-	    <div class="margin-top30">&nbsp;</div>
+	<form id="h-form" method="post" enctype="multipart/form-data" action="javascript:;" >
+		<div class="panel ticketlist-list">
+			<div class="ticketlist-item">
+				<img src="__PUBLIC__/images/xiaojuan.gif" class="item-icon">
+				<select name="venues_id" id="venues_id" class="selectarea required">
+					<empty name="venuesinfo">
+						<option value="">暂无场地</option>
+					<else />
+						<option value="">请选择场地</option>
+						<volist name="venuesinfo" id="vo">
+							<option value="{$vo.id}">{$vo.name}</option>
+						</volist>
+					</empty>
+				</select>
+			</div>
+			
+			<div class="ticketlist-item">
+				<img src="__PUBLIC__/images/xiaojuan.gif" class="item-icon">
+				<select name="ticket_type_id" id="ticket_type_id" class="selectarea required">
+					<option value="">请选择票类型</option>
+					<volist name="ticketType" id="vo">
+						<option value="{$vo.id}" main="{$vo.ticketMainType}">{$vo.name}</option>
+					</volist>
+					<volist name="ticketType1" id="vt">
+						<option value="{$vt.id}" main="{$vt.ticketMainType}">{$vt.name}</option>
+					</volist>
+				</select>
+			</div>
+			
+			<div class="ticketlist-item">
+				<div class="selectnum">
+				    <span class="text">数量</span>
+				    <div class="numer margin-left30">
+				        <span class="minus">-</span>
+				        <input type="text" name="amount" class="numval" readonly value="1">
+				        <span class="plus">+</span>
+				    </div>
+				</div>
+			</div>
+			
+			<input type="hidden" id="eachPrice" name="eachPrice" value="0" />
+			
+		</div>
+		<p class="mainprice">￥<span id="price">0</span></p>	
+		<div class="margin-top30">&nbsp;</div>
 	    <div class="container">
 	    	<button type="submit" class="btn-block margin-top">立即购买</button>
 	    </div>
 	    
 	</form>
+
+	<p class="ticketlist-moreinfo"><a href="javascript:" id="helpbox">查看详情</a></p>
+	<div class="sharehelp-box activity-sharebox">
+        <span>点击右上角分享 获取魔乐优惠券</span><img src="__PUBLIC__/images/jiantao.png" width="50px">
+    </div>
+
+    <div class="mask default-mask hide">
+        <a href="javascript:" class="mask-close"><img src="__PUBLIC__/images/cha.png" width="50px"></a>
+        <div class="container text-nomal-box text-nomal">
+            {$activity_text}
+        </div>
+    </div>
   </body>
 </block>
 
 
 <block name="script">
 	<script>
+
+		$("#helpbox").click(function(){
+            showHelp();
+        });
+
+        $(".mask-close").click(function(){
+            hideHelp();
+        });
+
+        function showHelp(){
+            $(".default-mask").removeClass("hide");
+        }
+
+        function hideHelp(){
+            $(".default-mask").addClass("hide");
+        }
 		
 		//提交表单
 		$('.btn-block').click(function(){
+			
 			price = Number($('#price').html());
 			if(price <= 0) return alert('票价必须大于0哦');
 			ticketName = $('.ticketName').html();
+			
 			if($("#h-form").valid()){
+				
 				var index = layer.load(0,{shade:[0.3,'#676767']});
 				data = $("form").serialize();
 				main_type = $('#ticket_type_id option:selected').attr('main');
 				data = data+'&price='+price+'&ticketName='+ticketName+'&main_type='+main_type;
+				
 				$.post(
 					"{:UC('Wechat/Ticket/makeOrder')}", 
 					data, 
@@ -90,17 +128,43 @@
 			}
 		})
 		
-		$('#ticket_type_id').change(function(){
+		$('#venues_id').change(function(){
+			
 			var index = layer.load(0,{shade:[0.3,'#676767']});
+			venues_id = $('#venues_id option:selected').val();
+			
+			$.post(
+					"{:UC('Wechat/Ticket/getVenues')}", 
+					{'venues_id':venues_id}, 
+				    function(obj){
+						if(obj.status == 1){
+							$('#ticket_type_id').html(obj.info);							
+						}
+						layer.close(index);
+					},
+					'json'
+				);
+		})
+		
+		$('#ticket_type_id').change(function(){
+			
 			venues_id = $('#venues_id option:selected').val();
 			ticket_type_id = $('#ticket_type_id option:selected').val();
 			main_type = $('#ticket_type_id option:selected').attr('main');
+			if(venues_id == '') {
+				$('#price').html(0);
+				return alert('请先选择场馆');
+			}
+			
+			var index = layer.load(0,{shade:[0.3,'#676767']});
+			amount = $('.numval').val();
 			$.post(
 					"{:UC('Wechat/Ticket/getTicketPrice')}", 
-					{'venues_id':venues_id,'ticket_type_id':ticket_type_id,'main_type':main_type}, 
+					{'venues_id':venues_id,'ticket_type_id':ticket_type_id,'main_type':main_type,'amount':amount}, 
 				    function(obj){
 						if(obj.status == 1){
-							$('#price').html(obj.url);							
+							$('#price').html(obj.url.total);
+							$('#eachPrice').val(obj.url.price);
 						}
 						layer.close(index);
 					},
@@ -111,11 +175,17 @@
 		$('.plus').click(function(){
 			numval = Number($('.numval').val())+1;
 			$('.numval').val(numval);
+			total = Number($('#price').html());
+			eachPrice = Number($('#eachPrice').val());
+			$('#price').html((eachPrice * numval).toFixed(2));
 		})
 		
 		$('.minus').click(function(){
 			numval = Number($('.numval').val());
 			if(numval > 1) $('.numval').val(numval-1);
+			numval = Number($('.numval').val());
+			eachPrice = Number($('#eachPrice').val());
+			$('#price').html((eachPrice * numval).toFixed(2));
 		})
 		
 	</script>

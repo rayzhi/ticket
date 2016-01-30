@@ -7,11 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>魔乐城</title>
     <link href="__PUBLIC__/css/normalize.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/app.css?a=4">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/app.css?a=13">
     <script src="__PUBLIC__/static/admin/js/jquery-1.9.1.js"></script>
     <script src="__PUBLIC__/static/admin/js/jquery.validate.js"></script>
 	<script src="__PUBLIC__/static/admin/js/messages_cn.js"></script>
     <script src="__PUBLIC__/static/admin/layer-v1.9.3/layer.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <style>
 		.error{color:red;}
 	</style>
@@ -30,6 +31,30 @@
     	});
     });
 </script>
+
+<script type="text/javascript">
+    wx.config(<?php echo $signature;?>);
+    wx.ready(function(){
+        var share = {
+            title: "<?php echo $sharetitle;?>",
+            link: "<?php echo $inviteurl;?>", // 分享链接
+            desc: "<?php echo $sharedesc;?>",
+            imgUrl: "<?php echo $shareimgUrl;?>", // 分享图标
+            success: function () {
+                alert("已成功分享");
+            },
+            cancel: function () {
+                alert("您已取消分享");
+            }
+        };
+        wx.onMenuShareTimeline(share);
+        wx.onMenuShareAppMessage(share);
+        wx.onMenuShareQQ(share);
+        wx.onMenuShareWeibo(share);
+    });
+    
+</script>
+
 <block name="script"></block>
 
 </html>
