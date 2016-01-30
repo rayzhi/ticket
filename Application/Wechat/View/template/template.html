@@ -41,6 +41,7 @@
             desc: "<?php echo $sharedesc;?>",
             imgUrl: "<?php echo $shareimgUrl;?>", // 分享图标
             success: function () {
+                $.post("<?php echo UC('Wechat/Recommend/releaseShareCoupon');?>");
                 alert("已成功分享");
             },
             cancel: function () {
