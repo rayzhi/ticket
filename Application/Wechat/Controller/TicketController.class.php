@@ -8,7 +8,7 @@ namespace Wechat\Controller;
 
 class TicketController extends CommonController {
     
-    protected $payType = 4;  //支付方式----微信支付
+    protected $payType = PAYTYPE;  //支付方式----微信支付
 
     /**
      * 魔幻城首页
@@ -27,38 +27,50 @@ class TicketController extends CommonController {
     public function tickeListAct(){
         
         $areainfo = R('Api/areainfo');
-       
-        //测试时候地区暂时取----佛山
-        $area_id = $areainfo['data'][2]['id'];
-        $areaName = $areainfo['data'][2]['name'];
-        $this->assign('areaName',$areaName);
-   
-        //该地区的场馆
-        $venuesinfo = R('Api/venuesinfo',array($area_id));
-        $this->assign('venuesinfo',$venuesinfo['data']);
-       
-        //单票的信息4--微信支付   场馆id 2--成人票
-        $ticketInfo = R('Api/queryprice',array($this->payType,$area_id));
-        foreach($ticketInfo['data'] as $k=>$v){
-           $ticketType[$v['ticketTypeId']]['id'] = $v['ticketTypeId'];
-           $ticketType[$v['ticketTypeId']]['name'] = $v['ticketType'];
-           $ticketType[$v['ticketTypeId']]['ticketMainType'] = 0;
+        foreach($areainfo['data'] as $k=>$v){
+            $venuesinfo = R('Api/venuesinfo',array($v['id']));
+            foreach($venuesinfo['data'] as $k1=>$v1){
+                $areaName[$v1['id']]['id'] = $v1['id']; 
+                $areaName[$v1['id']]['name'] = $v['name'].$v1['name'];
+            }
         }
-        
-        //套票
-        $taoPiao = R('Api/price',array($area_id,$this->payType));
-        foreach($taoPiao['data'] as $k=>$v){
-           $ticketType1[$v['id']]['id'] = $v['id'];
-           $ticketType1[$v['id']]['name'] = $v['name'];
-           $ticketType1[$v['id']]['ticketMainType'] = 1;
-        }
-        
-        $this->assign('ticketType',$ticketType);
-        $this->assign('ticketType1',$ticketType1);
-        $this->assign('ticketInfo',$ticketInfo['data'][0]);
 
+        $this->assign('venuesinfo',$areaName);
+       
         $this->display(); 
         
+    }
+    
+    public function getVenuesAct(){
+         
+        if(IS_POST){
+    
+            $venues_id = I('venues_id');
+            if($venues_id){
+    
+                //单票的信息4--微信支付   场馆id 2--成人票
+                $ticketInfo = R('Api/queryprice',array($this->payType,$venues_id));
+                foreach($ticketInfo['data'] as $k=>$v){
+                    $ticketType[$v['ticketTypeId']]['id'] = $v['ticketTypeId'];
+                    $ticketType[$v['ticketTypeId']]['name'] = $v['ticketType'];
+                    $ticketType[$v['ticketTypeId']]['ticketMainType'] = 0;
+                }
+                 
+                //套票
+                $taoPiao = R('Api/price',array($venues_id,$this->payType));
+                foreach($taoPiao['data'] as $k=>$v){
+                    $ticketType1[$v['id']]['id'] = $v['id'];
+                    $ticketType1[$v['id']]['name'] = $v['name'];
+                    $ticketType1[$v['id']]['ticketMainType'] = 1;
+                }
+            }
+    
+            $this->assign('ticketType',$ticketType);
+            $this->assign('ticketType1',$ticketType1);
+    
+            $this->success($this->fetch('Ticket:venuesLib'));
+        }
+         
     }
     
     public function getTicketPriceAct(){
