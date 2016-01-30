@@ -33,15 +33,38 @@ class UserCouponModel extends Model{
     }
     
     /**
+     * 获取用户面额最大的一张优惠券
+     * @param string $openid
+     * @return boolean
+     */
+    public function getUserCoupon($openid){
+    
+        $cond['a.open_id']    = $openid;
+        $cond['a.status']     = 0;
+        $cond['b.begin_time'] = array('lt',time());
+        $cond['b.end_time']   = array('gt',time());
+        
+        $tbCoupon = \Wechat\Model\CouponModel::COUPON;//需要数据表
+
+        $result =  $this->table(self::USER_COUPON.' a')
+                        ->join('left join '.$tbCoupon.' b ON a.coupon_id=b.id')
+                        ->field('b.*')
+                        ->where($cond)
+                        ->order('price DESC')
+                        ->select();
+        
+        return $result;
+    
+    }
+    
+    /**
      * 使用优惠券
      * @param int $order_id
      * @param int $coupon_id
      */
     public function useCoupon($order_id,$coupon_id){
         
-        $arr['id']         = $coupon_id;
-        $arr['begin_time'] = array('lt',time());
-        $arr['end_time']   = array('gt',time());
+        $arr['id'] = $coupon_id;
         $couponInfo = D('Coupon')->where($arr)->find();
         if($couponInfo){
             $cond['open_id']   = session('openid');
@@ -50,28 +73,27 @@ class UserCouponModel extends Model{
             $userCouponInfo = $this->where($cond)->find();
             if($userCouponInfo){
                 $orderInfo = D('TicketOrder')->getOrderInfo($order_id);
+                if($orderInfo['coupon_pay'] > 0) return false;
+                
                 if($orderInfo['third_party_pay'] > $couponInfo['price']){
                     $save['third_party_pay'] = $orderInfo['third_party_pay']-$couponInfo['price'];
-                    $save['coupon_id'] = $coupon_id;
-                    $save['coupon_pay'] = $couponInfo['price'];
-                    $saveResult = D('TicketOrder')->where(array('id'=>$order_id))->save($save);
-                    //用户优惠券状态修改
-                    $cSave['status'] = 1;
-                    $cSave['usetime'] = time();
-                    $cSave['coupon_pay'] = $couponInfo['price'];
-                    $cSave['order_id'] = $order_id;
-                    $cResult = $this->where(array('id'=>$userCouponInfo['id']))->save($cSave);
-                    if($saveResult && $cResult){
-                        return true;
-                    }
                 }else{
-                    return array('code'=>2,'msg'=>'优惠券金额太大');
+                    $save['third_party_pay'] = 0;
                 }
-            }else{
-                return array('code'=>2,'msg'=>'用户优惠券不存在');
+                $save['coupon_id']  = $coupon_id;
+                $save['coupon_pay'] = $couponInfo['price'];
+                $saveResult = D('TicketOrder')->where(array('id'=>$order_id))->save($save);
+                //用户优惠券状态修改
+                $cSave['status'] = 1;
+                $cSave['usetime'] = time();
+                $cSave['coupon_pay'] = $couponInfo['price'];
+                $cSave['order_id'] = $order_id;
+                $cResult = $this->where(array('id'=>$userCouponInfo['id']))->save($cSave);
+                if($saveResult && $cResult){
+                    return true;
+                }
+                
             }
-        }else{
-            return array('code'=>2,'msg'=>'优惠券已过期');
         }
         
     }
