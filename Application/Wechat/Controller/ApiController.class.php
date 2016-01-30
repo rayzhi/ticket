@@ -9,7 +9,8 @@ use \Common\Lib\Pclass as t;
 
 class ApiController extends CommonController {
     
-    protected $apiurl = 'http://120.76.43.54:8082';//接口的基本域名
+    //protected $apiurl = 'http://120.76.43.54:8082';//接口的基本域名
+    protected $apiurl = 'http://120.76.43.54:80';//接口的基本域名
 
     /**
      * 查询票价
