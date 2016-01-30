@@ -120,11 +120,13 @@ class TicketController extends CommonController {
         if(!$order_id) $this->error('参数错误！');
         $orderInfo = D('TicketOrder')->getOrderInfo($order_id);
         $couponInfo = D('UserCoupon')->getMaxCoupon($openid);
- 
-        if($couponInfo && $orderInfo['third_party_pay'] > $couponInfo['price']){
-            $orderInfo['third_party_pay'] = $orderInfo['third_party_pay'] - $couponInfo['price'];            
-        }else{
-            $couponInfo['id'] = $couponInfo['price'] = 0;
+        
+        if($couponInfo['coupon_pay'] == 0){
+            if($couponInfo && $orderInfo['third_party_pay'] > $couponInfo['price']){
+                $orderInfo['third_party_pay'] = $orderInfo['third_party_pay'] - $couponInfo['price'];            
+            }else{
+                $couponInfo['id'] = $couponInfo['price'] = 0;
+            }
         }
         
         $this->assign('orderInfo',$orderInfo);
