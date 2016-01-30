@@ -96,7 +96,7 @@ class TicketOrderModel extends Model{
     	$result =  $this->table(self::TICKET_ORDER.' a')
 				    	->join('left join '.$tbTicketOrderDetail.' b ON a.id=b.order_id')
 				    	->join('left join '.$tbTicketSn.' c ON b.did=c.did')
-				    	->field('a.id,a.total_cost,a.tirhd_party_pay,c.*')
+				    	->field('a.id,a.total_cost,a.third_party_pay,c.*')
 				    	->where(array('a.sn'=>$order_sn))
 				    	->order('c.t_price DESC')
 				    	->select();
