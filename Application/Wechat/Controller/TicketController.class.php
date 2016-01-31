@@ -143,6 +143,9 @@ class TicketController extends CommonController {
             $couponId = $tmp[0];
             $couponType = $tmp[1];
         }
+        if(!$couponType){
+            $couponType = 0;
+        }
         
         $oid = I('oid');
         
