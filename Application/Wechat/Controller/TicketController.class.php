@@ -14,7 +14,7 @@ class TicketController extends CommonController {
      * 魔幻城首页
      */
     public function indexAct(){
-    	
+        
         $userinfo = \Wechat\Logic\UserLogic::getUserinfo(getOpenid());
         $this->assign('userinfo',$userinfo);
         $this->assign('activity_text',getSysConfig('activity-text'));
@@ -186,9 +186,9 @@ class TicketController extends CommonController {
         $payment['mch_id']     = C('WECHAT_MCH_ID');
         $payment['key']        = C('WECHAT_PAY_KEY');
         $payment['M_OrderNO']  = $orderInfo['sn'];
-        $payment['M_Amount']   = $orderInfo['third_party_pay'];
+        //$payment['M_Amount']   = $orderInfo['third_party_pay'];
         $payment['M_Amount']   = 0.01;
-        //$payment['notify_url'] = __BASE__.UC('Wechat/Ticket/notifyurl');
+        $payment['notify_url'] = __BASE__.UC('Wechat/Ticket/notifyurl');
 
         recordLog($payment,'wechatPay');        
         $sendData = $wechatPay->getSendData($payment);
@@ -274,26 +274,26 @@ class TicketController extends CommonController {
      * @param unknown $snResult
      */
     private function returnPrice($snResult){
-    	
-    	if($snResult){
-    		$count = count($snResult);
-    		$coupon = $snResult[0]['total_cost'] - $snResult[0]['third_party_pay'];
-    		$i = 0;
-    		while($coupon > 0 && $i <= $count){
-    			$coupon = $snResult[$i]['t_price'] - $coupon;
-    			if($coupon >= 0){
-    				$coupon = 0;
-    				$snResult[$i]['t_price'] = $coupon;
-    			}else{
-    				$coupon = abs($coupon);
-    				$i++;
-    			}
-    		}
-    		foreach($snResult as $k=>$v){
-    			R('Api/wxcallback',array($v['ticket_sn'],$v['t_price']));//返回票的价格
-    		}
-    	}
-    	
+        
+        if($snResult){
+            $count = count($snResult);
+            $coupon = $snResult[0]['total_cost'] - $snResult[0]['third_party_pay'];
+            $i = 0;
+            while($coupon > 0 && $i <= $count){
+                $coupon = $snResult[$i]['t_price'] - $coupon;
+                if($coupon >= 0){
+                    $coupon = 0;
+                    $snResult[$i]['t_price'] = $coupon;
+                }else{
+                    $coupon = abs($coupon);
+                    $i++;
+                }
+            }
+            foreach($snResult as $k=>$v){
+                R('Api/wxcallback',array($v['ticket_sn'],$v['t_price']));//返回票的价格
+            }
+        }
+        
     }
 
 
