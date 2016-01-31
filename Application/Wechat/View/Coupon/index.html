@@ -11,11 +11,11 @@
     
     <div class="couponlist">
         <volist name="list" id="info">
-        <div class="panel margin-top couponinfo">
+        <a class="panel margin-top couponinfo" href="{:UC('Wechat/Ticket/tickeList')}">
             <h3>{$info['title']}</h3>
             <span class="text-help">有效期：{$info['begin_time']|date="Y.m.d",###} - {$info['end_time']|date="Y.m.d",###}</span>
             <div class="coupon <if condition="$info['status'] eq 0">notuse<else/>used</if>"><span class="unit">￥</span>{$info['price']}</div>
-        </div>
+        </a>
         </volist>
     </div>
 
