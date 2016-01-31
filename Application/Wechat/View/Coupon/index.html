@@ -7,7 +7,7 @@
 </block>
 <block name="script">
     <script type="text/javascript">
-        $("#helpbox").click(function(){
+        $(".helpboxbtn").click(function(){
             showHelp();
         });
 
@@ -28,16 +28,21 @@
 <block name="content">
 <body>
     
-    <if condition="$subscribe eq 0">
-        <a href="javascript:" class="coupontopbtn" id="helpbox">恭喜您领取到2张魔乐城（成都洛带店）的优惠劵，请点击关注我们公众号购票吧！ </a>
-        <else/>
-        <a href="{:UC('Wechat/Ticket/tickeList')}" class="coupontopbtn">请点击去购票吧！ </a>
-    </if>
-    
     
     <div class="couponlist">
+
+        <if condition="$subscribe eq 0">
+            <a href="javascript:" class="coupontopbtn helpboxbtn">恭喜您领取到魔乐城（成都洛带店）的优惠劵，请点击关注我们公众号购票吧！ </a>
+            <else/>
+            <a href="{:UC('Wechat/Ticket/tickeList')}" class="coupontopbtn">请点击去购票吧！ </a>
+        </if>
+
         <volist name="list" id="info">
-        <a class="panel margin-top couponinfo" href="{:UC('Wechat/Ticket/tickeList')}">
+        <if condition="$subscribe eq 0">
+            <a class="panel margin-top couponinfo helpboxbtn" href="javascript:">
+            <else/>
+            <a class="panel margin-top couponinfo" href="{:UC('Wechat/Ticket/tickeList')}">
+        </if>
             <h3>{$info['title']}</h3>
             <span class="text-help">有效期：{$info['begin_time']|date="Y.m.d",###} - {$info['end_time']|date="Y.m.d",###}</span>
             <div class="coupon <if condition="$info['status'] eq 0">notuse<else/>used</if>"><span class="unit">￥</span>{$info['price']}</div>
@@ -46,7 +51,7 @@
     </div>
 
     <div class="helpbox text-guide margin-top30">没有更多可用券了</div>
-    <p class="ticketlist-moreinfo"><a href="{:UC('Wechat/Ticket/tickeList')}">去购票？</a></p>
+    <!--<p class="ticketlist-moreinfo"><a href="{:UC('Wechat/Ticket/tickeList')}">去购票？</a></p>-->
 
     <div class="mask default-mask hide">
         <a href="javascript:" class="mask-close"><img src="__PUBLIC__/images/cha.png" width="50px"></a>
