@@ -58,4 +58,10 @@ class TestController extends Controller {
         print_r($dd);
     }
 
+    public function testAllCouponAct(){
+        echo getOpenid();
+        $dd = \Wechat\Logic\CouponLogic::getAllCoupon(getOpenid());
+        print_r($dd);
+    }
+
 }
