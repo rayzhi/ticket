@@ -21,7 +21,7 @@
 					<empty name="venuesinfo">
 						<option value="">暂无场地</option>
 					<else />
-						<option value="">请选择场地</option>
+						<option value="" selected="selected">请选择场地</option>
 						<volist name="venuesinfo" id="vo">
 							<option value="{$vo.id}">{$vo.name}</option>
 						</volist>
@@ -32,7 +32,7 @@
 			<div class="ticketlist-item">
 				<img src="__PUBLIC__/images/xiaojuan.gif" class="item-icon">
 				<select name="ticket_type_id" id="ticket_type_id" class="selectarea required">
-					<option value="">请选择票类型</option>
+					<option value="" selected="selected">请选择票类型</option>
 					<volist name="ticketType" id="vo">
 						<option value="{$vo.id}" main="{$vo.ticketMainType}">{$vo.name}</option>
 					</volist>
@@ -127,51 +127,57 @@
 			}
 		})
 		
-		$('#venues_id').change(function(){
-			
+		function areaChange(){
 			var index = layer.load(0,{shade:[0.3,'#676767']});
 			venues_id = $('#venues_id option:selected').val();
 			if(venues_id == ''){
 				$('#price').html(0);				
 			}
 			$.post(
-					"{:UC('Wechat/Ticket/getVenues')}", 
-					{'venues_id':venues_id}, 
-				    function(obj){
-						if(obj.status == 1){
-							$('#ticket_type_id').html(obj.info);							
-						}
-						layer.close(index);
-					},
-					'json'
-				);
-		})
+				"{:UC('Wechat/Ticket/getVenues')}", 
+				{'venues_id':venues_id}, 
+			    function(obj){
+					if(obj.status == 1){
+						$('#ticket_type_id').html(obj.info);							
+					}
+					layer.close(index);
+				},
+				'json'
+			);
+		}
+
+		$('#venues_id').change(areaChange);
+
 		
 		$('#ticket_type_id').change(function(){
-			
 			venues_id = $('#venues_id option:selected').val();
 			ticket_type_id = $('#ticket_type_id option:selected').val();
 			main_type = $('#ticket_type_id option:selected').attr('main');
 			if(venues_id == '') {
 				$('#price').html(0);
-				return alert('请先选择场馆');
+				//return alert('请先选择场馆');
+				return;
 			}
 			
 			var index = layer.load(0,{shade:[0.3,'#676767']});
 			amount = $('.numval').val();
 			$.post(
-					"{:UC('Wechat/Ticket/getTicketPrice')}", 
-					{'venues_id':venues_id,'ticket_type_id':ticket_type_id,'main_type':main_type,'amount':amount}, 
-				    function(obj){
-						if(obj.status == 1){
-							$('#price').html(obj.url.total);
-							$('#eachPrice').val(obj.url.price);
-						}
-						layer.close(index);
-					},
-					'json'
-				);
-		})
+				"{:UC('Wechat/Ticket/getTicketPrice')}", 
+				{'venues_id':venues_id,'ticket_type_id':ticket_type_id,'main_type':main_type,'amount':amount}, 
+			    function(obj){
+					if(obj.status == 1){
+						$('#price').html(obj.url.total);
+						$('#eachPrice').val(obj.url.price);
+					}
+					layer.close(index);
+				},
+				'json'
+			);
+		});
+
+		$(function(){
+			areaChange();
+		});
 		
 		$('.plus').click(function(){
 			numval = Number($('.numval').val())+1;
