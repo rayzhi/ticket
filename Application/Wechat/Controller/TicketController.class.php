@@ -201,7 +201,7 @@ class TicketController extends CommonController {
     public function enoughPayAct($orderInfo){
         
         $save['status'] = 1;
-        $save['third_pay_id'] = 5;//不用支付
+        $save['third_pay_id'] = 4;//不用支付
         $result = D('TicketOrder')->where(array('sn'=>$orderInfo['sn']))->save($save);
         recordLog('优惠券足够支付','wechatPay');
         recordLog($orderInfo,'wechatPay');
