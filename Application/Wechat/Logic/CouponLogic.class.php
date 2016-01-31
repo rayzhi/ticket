@@ -38,7 +38,7 @@ class CouponLogic{
         self::giveCoupon($inviter,InviteCouponID2);
     }
 
-    //获取用户优惠券列表
+    //获取用户普通优惠券列表
     public static function getUserCoupon($openid){
         $now = time();
         $userclist = D('user_coupon')
@@ -55,7 +55,7 @@ class CouponLogic{
         return $id;
     }
 
-    //获取已经拥有的优惠券个数
+    //获取已经拥有的普通优惠券个数
     public static function countCoupon($openid,$couponid=0){
         if($couponid==0){
             return D('user_coupon')->where(array('open_id'=>$openid))->count(1);
@@ -97,6 +97,59 @@ class CouponLogic{
         //更新领取人
         $readyusers[] = $receter;
         S('sharecoupon_user'.$openid,$readyusers);
+    }
+
+    //获取所有优惠券，包括普通优惠券，活动优惠券
+    public static function getAllCoupon($openid){
+        $list = self::getUserCoupon($openid);
+        $activity_couponlist = D('user_activitycoupon')->where(array('open_id'=>$openid))->select();
+        foreach($activity_couponlist as $actinfo){
+            $acdd = D('activity_coupon')->where(array('id'=>$actinfo['activitycoupon_id']))->find();
+            $acinfo['title'] = $acdd['name'];
+            $acinfo['price'] = $acdd['price'];
+            $acinfo['begin_time'] = $acdd['stime'];
+            $acinfo['end_time'] = $acdd['etime'];
+            $acinfo['status'] = $acdd['status'];
+            $acinfo['type'] = 1;
+            $actilist[] = $acinfo;
+        }
+        if($actilist){
+            $list = array_merge($list,$actilist);
+        }
+        usort($list, function($a,$b){
+            $pa = $a['price'];
+            $pb = $b['price'];
+            return $pb-$pa;
+        });
+        return $list;
+    }
+
+    //获得优惠券的价格,$couponType == 1 是活动优惠券，==0 是普通优惠券
+    public static function getCouponPrice($couponId,$couponType){
+        if($couponType == 0){
+            return D('coupon')->where(array('id'=>$couponId))->getField('price');
+        }
+        else if($couponType == 1){
+            return D('activity_coupon')->where(array('id'=>$couponId))->getField('price');
+        }
+    }
+
+
+    //修改优惠券的状态
+    public static function changeStatus($couponId,$couponType,$orderId){
+        if($couponType == 0){
+            $cSave['status'] = 1;
+            $cSave['usetime'] = time();
+            $cSave['coupon_pay'] = self::getCouponPrice($couponId,$couponType);
+            $cSave['order_id'] = $orderId;
+            return $cResult = D('user_coupon')->where(array('id'=>$couponId))->save($cSave);
+        }
+        else if($couponType == 1){
+            $cSave['status'] = 1;
+            $cSave['usetime'] = time();
+            $cSave['order_id'] = $orderId;
+            return $cResult = D('user_activitycoupon')->where(array('id'=>$couponId))->save($cSave);
+        }
     }
    
 

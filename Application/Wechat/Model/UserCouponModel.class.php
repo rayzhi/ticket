@@ -62,37 +62,25 @@ class UserCouponModel extends Model{
      * @param int $order_id
      * @param int $coupon_id
      */
-    public function useCoupon($order_id,$coupon_id){
+    public function useCoupon($order_id,$coupon_id,$couponType){
         
-        $arr['id'] = $coupon_id;
-        $couponInfo = D('Coupon')->where($arr)->find();
-        if($couponInfo){
-            $cond['open_id']   = session('openid');
-            $cond['status']    = 0;
-            $cond['coupon_id'] = $coupon_id;
-            $userCouponInfo = $this->where($cond)->find();
-            if($userCouponInfo){
-                $orderInfo = D('TicketOrder')->getOrderInfo($order_id);
-                if($orderInfo['coupon_pay'] > 0) return false;
-                
-                if($orderInfo['third_party_pay'] > $couponInfo['price']){
-                    $save['third_party_pay'] = $orderInfo['third_party_pay']-$couponInfo['price'];
-                }else{
-                    $save['third_party_pay'] = 0;
-                }
-                $save['coupon_id']  = $coupon_id;
-                $save['coupon_pay'] = $couponInfo['price'];
-                $saveResult = D('TicketOrder')->where(array('id'=>$order_id))->save($save);
-                //用户优惠券状态修改
-                $cSave['status'] = 1;
-                $cSave['usetime'] = time();
-                $cSave['coupon_pay'] = $couponInfo['price'];
-                $cSave['order_id'] = $order_id;
-                $cResult = $this->where(array('id'=>$userCouponInfo['id']))->save($cSave);
-                if($saveResult && $cResult){
-                    return true;
-                }
-                
+        $price = \Wechat\Logic\CouponLogic::getCouponPrice($coupon_id,$couponType);
+        if($price){
+            $orderInfo = D('TicketOrder')->getOrderInfo($order_id);
+            if($orderInfo['coupon_pay'] > 0) return false;
+            
+            if($orderInfo['third_party_pay'] > $price){
+                $save['third_party_pay'] = $orderInfo['third_party_pay']-$price;
+            }else{
+                $save['third_party_pay'] = 0;
+            }
+            $save['coupon_id']  = $coupon_id;
+            $save['coupon_pay'] = $price;
+            $saveResult = D('TicketOrder')->where(array('id'=>$order_id))->save($save);
+            //用户优惠券状态修改
+            $cResult = \Wechat\Logic\CouponLogic::changeStatus($coupon_id,$couponType,$order_id);
+            if($saveResult && $cResult){
+                return true;
             }
         }
         
