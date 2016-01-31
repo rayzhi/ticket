@@ -44,6 +44,7 @@ class CouponLogic{
         $userclist = D('user_coupon')
             ->join("coupon on user_coupon.coupon_id=coupon.id")
             ->where("user_coupon.open_id='$openid' and coupon.end_time>$now and status=0")
+            ->field("coupon.title,coupon.price,coupon.begin_time,coupon.end_time,user_coupon.status,user_coupon.id")
             ->select();
         return $userclist;
     }
@@ -128,9 +129,11 @@ class CouponLogic{
     //获得优惠券的价格,$couponType == 1 是活动优惠券，==0 是普通优惠券
     public static function getCouponPrice($couponId,$couponType){
         if($couponType == 0){
+            $couponId = D('user_coupon')->where(array('id'=>$couponId))->getField('coupon_id');
             return D('coupon')->where(array('id'=>$couponId))->getField('price');
         }
         else if($couponType == 1){
+            $couponId = D('user_activitycoupon')->where(array('id'=>$couponId))->getField('activitycoupon_id');
             return D('activity_coupon')->where(array('id'=>$couponId))->getField('price');
         }
     }

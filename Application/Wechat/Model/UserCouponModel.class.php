@@ -63,7 +63,9 @@ class UserCouponModel extends Model{
      * @param int $coupon_id
      */
     public function useCoupon($order_id,$coupon_id,$couponType){
-        
+        if(!$couponType){
+            $couponType =0;
+        }
         $price = \Wechat\Logic\CouponLogic::getCouponPrice($coupon_id,$couponType);
         if($price){
             $orderInfo = D('TicketOrder')->getOrderInfo($order_id);
