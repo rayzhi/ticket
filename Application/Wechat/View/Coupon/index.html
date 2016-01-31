@@ -5,12 +5,36 @@
        
     </style>
 </block>
+<block name="script">
+    <script type="text/javascript">
+        $("#helpbox").click(function(){
+            showHelp();
+        });
 
+        $(".mask-close").click(function(){
+            hideHelp();
+        });
+
+        function showHelp(){
+            $(".default-mask").removeClass("hide");
+        }
+
+        function hideHelp(){
+            $(".default-mask").addClass("hide");
+        }
+    </script>
+    
+</block>
 <block name="content">
 <body>
     
-    <a href="#" class="coupontopbtn">恭喜您领取到2张魔乐城（成都洛带店）的优惠劵，请点击关注我们公众号购票吧！ </a>
-    <a href="#" class="coupontopbtn">请点击去购票吧！ </a>
+    <if condition="$subscribe eq 0">
+        <a href="javascript:" class="coupontopbtn" id="helpbox">恭喜您领取到2张魔乐城（成都洛带店）的优惠劵，请点击关注我们公众号购票吧！ </a>
+        <else/>
+        <a href="{:UC('Wechat/Ticket/tickeList')}" class="coupontopbtn">请点击去购票吧！ </a>
+    </if>
+    
+    
     <div class="couponlist">
         <volist name="list" id="info">
         <a class="panel margin-top couponinfo" href="{:UC('Wechat/Ticket/tickeList')}">
@@ -23,6 +47,17 @@
 
     <div class="helpbox text-guide margin-top30">没有更多可用券了</div>
     <p class="ticketlist-moreinfo"><a href="{:UC('Wechat/Ticket/tickeList')}">去购票？</a></p>
+
+    <div class="mask default-mask hide">
+        <a href="javascript:" class="mask-close"><img src="__PUBLIC__/images/cha.png" width="50px"></a>
+        <p class="container text-nomal-box">
+            <div class="guanzhutext">
+                <img src="__PUBLIC__/images/qrcode.jpg">
+                <br>长按此二维码，点击“识别二维码”即可关注。
+            </div>
+            
+        </p>
+    </div>
 
 </body>
 </block>
