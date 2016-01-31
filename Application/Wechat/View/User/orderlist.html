@@ -23,8 +23,8 @@
             <span class="ordertime">{$info['add_time']|date="Y-m-d H:i:s",###}</span>
             <span class="orderno">订单号：{$info['sn']}</span>
           </p>
-          <h3 class="goodsname">魔乐城场馆体验票 {$info['amount']} 份</h3>
-          <p class="areaname">魔乐城场馆 {$info['venuesName']}</p>
+          <h3 class="goodsname">魔乐城(成都洛带店)</h3>
+          <p class="areaname">{$info['venuesName']}体验票 {$info['amount']} 份</p>
           <p class="orderinfo-bottom">
             <span class="pricesp">总价：<strong>{$info['third_party_pay']}元</strong></span>
             <if condition="$info['status'] eq 0">
