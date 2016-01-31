@@ -5,11 +5,16 @@
  * 
  */
 namespace Wechat\Controller;
+use Wechat\Common\WechatWrap;
 
 class CouponController extends CommonController {
 
     public function indexAct(){
         $list = \Wechat\Logic\CouponLogic::getAllCoupon(getOpenid());
+
+        $weobj = WechatWrap::getInstance();
+        $userinfo = $weobj->getUserInfo(getOpenid());
+        $this->assign('subscribe',$userinfo['subscribe']);
         
         $this->assign('list',$list);
         $this->display();

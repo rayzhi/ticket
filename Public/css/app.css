@@ -26,7 +26,7 @@ a{color: #000;text-decoration: none;}
 
 .mask{position: fixed;width: 100%;height: 100%;background:rgba(0,0,0,0.8);background:#000\9;top:0;left:0;filter:alpha(opacity=20)\9;}
 .mask .text-nomal-box{overflow: scroll;position: absolute;bottom: 80px; top: 80px;font-size: 14px;font-weight: normal;color: #fff;}
-.mask .mask-close{position: absolute;right: 10px;top: 10px;display: block;}
+.mask .mask-close{position: fixed;right: 10px;top: 10px;display: block;}
 
 .panel{display: block;background: #fff;padding: 20px 20px;}
 .panel h3{margin: 0;line-height: 35px;}
@@ -160,3 +160,5 @@ animation: myfirst 5s;
 .lingqu-lighttext{margin: 0;text-align: center;font-size: 12px;margin-top: -15px;}
 .order-lookup{font-size: 12px;text-align: right;border-top: 1px solid #eee;padding-top: 5px;margin-bottom: -10px;margin-top: 10px;color: #666;}
 .coupontopbtn{display: block;width: 80%;padding: 10px;background: #fff;border:1px solid #ff6600;margin: 0 auto;border-radius: 5px; color: #666;text-align: center;margin-top: 10px;}
+.guanzhutext{text-align: center;color: #fff;margin-top: 150px;}
+.guanzhutext img{width: 200px;}
