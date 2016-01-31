@@ -68,7 +68,6 @@ class UserCouponModel extends Model{
         if($price){
             $orderInfo = D('TicketOrder')->getOrderInfo($order_id);
             if($orderInfo['coupon_pay'] > 0) return false;
-            
             if($orderInfo['third_party_pay'] > $price){
                 $save['third_party_pay'] = $orderInfo['third_party_pay']-$price;
             }else{

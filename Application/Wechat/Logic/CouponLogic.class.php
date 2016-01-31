@@ -110,7 +110,7 @@ class CouponLogic{
             $acinfo['begin_time'] = $acdd['stime'];
             $acinfo['end_time'] = $acdd['etime'];
             $acinfo['status'] = $acdd['status'];
-            $acinfo['id'] = $acdd['id'];
+            $acinfo['id'] = $actinfo['id'];
             $acinfo['coutype'] = 1;
             $actilist[] = $acinfo;
         }
