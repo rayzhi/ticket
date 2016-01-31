@@ -119,20 +119,40 @@ class TicketController extends CommonController {
         $order_id = I('order_id');
         if(!$order_id) $this->error('参数错误！');
         $orderInfo = D('TicketOrder')->getOrderInfo($order_id);
-        $couponInfo = D('UserCoupon')->getMaxCoupon($openid);
-        
-        if($couponInfo['coupon_pay'] == 0){
-            if($couponInfo && $orderInfo['third_party_pay'] > $couponInfo['price']){
-                $orderInfo['third_party_pay'] = $orderInfo['third_party_pay'] - $couponInfo['price'];            
-            }else{
-                $couponInfo['id'] = $couponInfo['price'] = 0;
+        if($orderInfo['coupon_pay'] == 0){
+            $couponInfo = \Wechat\Logic\CouponLogic::getAllCoupon($openid);
+            $this->assign('couponInfo',$couponInfo);
+            
+            if($couponInfo && $orderInfo['third_party_pay'] > $couponInfo[0]['price']){
+                $orderInfo['third_party_pay'] = $orderInfo['third_party_pay'] - $couponInfo[0]['price'];            
+            }elseif($couponInfo && $orderInfo['third_party_pay'] <= $couponInfo[0]['price']){
+                $orderInfo['third_party_pay'] = 0;
             }
         }
         
         $this->assign('orderInfo',$orderInfo);
-        $this->assign('couponInfo',$couponInfo);
         
         $this->display();
+    }
+    
+    public function changeCouponAct(){
+        
+        $coupon_id = I('coupon_id');
+        if($coupon_id != 0){
+            $tmp = explode("-", $coupon_id);
+            $couponId = $tmp[0];
+            $couponType = $tmp[1];
+        }
+        
+        $oid = I('oid');
+        
+        $price = \Wechat\Logic\CouponLogic::getCouponPrice($couponId,$couponType);
+        $order = D('TicketOrder')->where(array('id'=>$oid))->find();
+        
+        $p = $order['third_party_pay'] - $price;
+        $p = $p > 0 ? $p : 0;
+        $this->success($p);
+        
     }
     
     /**
@@ -142,12 +162,21 @@ class TicketController extends CommonController {
     
         $order_id = I('oid');
         $coupon_id = I('cid');
+        if($coupon_id != 0){
+            $tmp = explode("-", $coupon_id);
+            $coupon_id = $tmp[0];
+            $couponType = $tmp[1];
+        }
         if(!$order_id) $this->error('参数错误！');
         if($coupon_id){
-            $useResult = D('UserCoupon')->useCoupon($order_id,$coupon_id);//使用优惠券
-            if($useResult['code'] == 2) $this->error($useResult['msg']);
+            $useResult = D('UserCoupon')->useCoupon($order_id,$coupon_id,$couponType);//使用优惠券
         }
         $orderInfo = D('TicketOrder')->where(array('id'=>$order_id))->find();
+        if($orderInfo['third_party_pay'] == 0){
+            $this->enoughPayAct($orderInfo);
+            exit;
+        }
+        
         if(!$order_id) $this->error('订单不存在！');
         $wechatPay = new \Common\Lib\Pay\pay_wap_wechat\wap_wechat();
         $payment['appid']      = C('WECHAT_APPID'); 
@@ -162,6 +191,19 @@ class TicketController extends CommonController {
         header('Content-Type:text/html;charset=utf-8');
         $wechatPay->doPay($sendData);
         exit;
+        
+    }
+    
+    public function enoughPayAct($orderInfo){
+        
+        $save['status'] = 1;
+        $save['third_pay_id'] = 5;//不用支付
+        $result = D('TicketOrder')->where(array('sn'=>$orderInfo['sn']))->save($save);
+        recordLog('优惠券足够支付','wechatPay');
+        recordLog($orderInfo,'wechatPay');
+        //调用取票sn接口
+        $this->addTicketSn($orderInfo['sn']);
+        redirect(__BASE__.UC('Wechat/User/orderlist'));
         
     }
     
