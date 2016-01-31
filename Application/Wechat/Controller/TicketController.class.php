@@ -183,7 +183,8 @@ class TicketController extends CommonController {
         $payment['mch_id']     = C('WECHAT_MCH_ID');
         $payment['key']        = C('WECHAT_PAY_KEY');
         $payment['M_OrderNO']  = $orderInfo['sn'];
-        $payment['M_Amount']   = $orderInfo['third_party_pay'];
+        //$payment['M_Amount']   = $orderInfo['third_party_pay'];
+        $payment['M_Amount']   = 0.01;
         $payment['notify_url'] = __BASE__.UC('Wechat/Ticket/notifyurl');
 
         recordLog($payment,'wechatPay');        

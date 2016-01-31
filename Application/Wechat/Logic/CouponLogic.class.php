@@ -119,8 +119,7 @@ class CouponLogic{
         usort($list, function($a,$b){
             $pa = $a['price'];
             $pb = $b['price'];
-            if($pa == $pb) return 0;
-            return ($a < $b) ? -1 : 1;
+            return $pb-$pa;
         });
         return $list;
     }

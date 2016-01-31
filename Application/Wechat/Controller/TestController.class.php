@@ -64,4 +64,19 @@ class TestController extends Controller {
         print_r($dd);
     }
 
+    public function testUsortAct(){
+        $aa[] = array('name'=>'aaa','price'=>55);
+        $aa[] = array('name'=>'bbb','price'=>5);
+        $aa[] = array('name'=>'ccc','price'=>15);
+        $aa[] = array('name'=>'ddd','price'=>25);
+        $aa[] = array('name'=>'eee','price'=>35);
+        $aa[] = array('name'=>'fff','price'=>85);
+        usort($aa, function($a,$b){
+            $pa = $a['price'];
+            $pb = $b['price'];
+            return $pb-$pa;
+        });
+        print_r($aa);
+    }
+
 }
