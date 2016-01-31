@@ -53,6 +53,7 @@
         </div>
         <p class="mainprice"><a href="javascript:" id="helpbox" class="ticketlist-desc">购票说明</a>￥<span id="price">0</span></p>  
         <div class="container">
+            <div class="tickettip"><if condition="$isHasCoupon eq 1">您有20元优惠劵可抵扣<else/>分享好友可获得最高20元优惠劵</if></div>
             <button type="submit" class="btn-block margin-top">立即购买</button>
         </div>
         
@@ -100,11 +101,13 @@
             ticketName = $('.ticketName').html();
             
             if($("#h-form").valid()){
+                var ticketname2 = $('#ticket_type_id option:selected').text();
+                var areaname = $('#venues_id option:selected').text();
                 
                 var index = layer.load(0,{shade:[0.3,'#676767']});
                 data = $("form").serialize();
                 main_type = $('#ticket_type_id option:selected').attr('main');
-                data = data+'&price='+price+'&ticketName='+ticketName+'&main_type='+main_type;
+                data = data+'&price='+price+'&ticketName='+ticketName+'&main_type='+main_type+'&ticketname2='+ticketname2+'&areaname='+areaname;
                 
                 $.post(
                     "{:UC('Wechat/Ticket/makeOrder')}", 

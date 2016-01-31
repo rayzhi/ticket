@@ -35,6 +35,7 @@ class TicketController extends CommonController {
             }
         }
         $this->assign('activity_text',getSysConfig('activity-text'));
+        $this->assign('isHasCoupon',\Wechat\Logic\CouponLogic::isHasCoupon(getOpenid()));
         $this->assign('venuesinfo',$areaName);
        
         $this->display(); 
@@ -126,7 +127,6 @@ class TicketController extends CommonController {
                 $this->assign('couponInfo',$couponInfo);
             }
             
-            
             if($couponInfo && $orderInfo['third_party_pay'] > $couponInfo[0]['price']){
                 $orderInfo['third_party_pay'] = $orderInfo['third_party_pay'] - $couponInfo[0]['price'];            
             }elseif($couponInfo && $orderInfo['third_party_pay'] <= $couponInfo[0]['price']){
@@ -134,6 +134,9 @@ class TicketController extends CommonController {
             }
         }
         
+        $this->assign('orderticketname',S('orderticketname_'.getOpenid()));
+        $this->assign('orderareaname',S('orderareaname_'.getOpenid()));
+
         $this->assign('orderInfo',$orderInfo);
         
         $this->display();

@@ -11,6 +11,11 @@ class TicketOrderModel extends Model{
     var $orderStatus = array('未使用','已使用','已过期');
  
     public function makeOrder($postData){
+
+        S('orderticketname_'.getOpenid(),$postData['ticketname2'],3600);
+        S('orderareaname_'.getOpenid(),$postData['areaname'],3600);
+        unset($postData['ticketname2']);
+        unset($postData['areaname']);
         
         $array['sn']              = time().rand(100000,999999);
         $array['open_id']         = session('openid');

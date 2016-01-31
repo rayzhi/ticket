@@ -30,6 +30,14 @@
         <a class="btn-block" href="<?php echo UC('Wechat/Ticket/tickeList');?>">立即购票 畅想魔乐城</a>
     </div>
 
+    <div class="mask share-mask hide">
+        <p class="container share-mask-text">
+            <img src="__PUBLIC__/images/wen.png">
+            点击右上角<br>
+            发送给好友 或 分享到朋友圈
+        </p>
+    </div>
+
     <div class="mask default-mask hide">
         <a href="javascript:" class="mask-close"><img src="__PUBLIC__/images/cha.png" width="50px"></a>
         <p class="container text-nomal-box">
@@ -40,6 +48,14 @@
     <a class="block text-guide helpbox" href="javascript:"><img src="__PUBLIC__/images/wen.png" width="15">活动说明</a>
 
     <script type="text/javascript">
+
+        $(".sharehelp-box").click(function(){
+            $(".share-mask").removeClass("hide");
+        });
+
+        $(".share-mask").click(function(){
+            $(".share-mask").addClass("hide");
+        });
         
         $(".helpbox").click(function(){
             showHelp();

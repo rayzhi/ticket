@@ -43,7 +43,7 @@ a{color: #000;text-decoration: none;}
 .tuijiantext{display: table-row;}
 .tuijian-info img{width: 80px; border-radius: 80px; display: table-cell;}
 .tuijian-info span{font-size: 14px; vertical-align: middle;display: table-cell;padding-left: 10px;}
-.sharehelp-box{text-align: center;color: #ff6600;}
+.sharehelp-box{display: block;width: 90%;padding: 10px;background: #fff;border:1px #ff6600 solid;margin: 0 auto;border-radius: 5px; color: #ff6600;text-align: center;}
 .sharehelp-box img{margin-left: 10px;position: absolute;margin-top: -30px;}
 
 .field-value{margin-left: 30px; color: #ff6600;}
@@ -89,7 +89,7 @@ animation: myfirst 5s;
 
 .maintext{text-align: center;font-weight: normal;}
 .mainprice{font-size: 30px;color: #ff6600; text-align: right;margin: 10px;}
-.selectarea{width: 100%;padding: 10px 10px 20px 10px;border:none;border-bottom: 1px solid #ccc;-webkit-appearance:listbox; -moz-appearance:listbox;}
+.selectarea{color: blue;width: 100%;padding: 10px 10px 20px 10px;border:none;border-bottom: 1px solid #ccc;-webkit-appearance:listbox; -moz-appearance:listbox;}
 .selectnum{margin-top: 10px;padding: 0 10px;}
 .numer{display: inline-block;}
 .numer .minus,.numer .plus{border: 1px solid #ccc;width: 35px;height: 33px;text-align: center; line-height: 33px;display: inline-block;}
@@ -158,8 +158,13 @@ animation: myfirst 5s;
 .ticketlist-desc{color: blue;font-size: 12px;position: absolute;left: 10px;margin-top: 15px;}
 
 .lingqu-lighttext{margin: 0;text-align: center;font-size: 12px;margin-top: -15px;}
-.order-lookup{font-size: 12px;text-align: right;border-top: 1px solid #eee;padding-top: 5px;margin-bottom: -10px;margin-top: 10px;color: #666;}
+.order-lookup{font-size: 12px;text-align: right;border-top: 1px solid #eee;padding-top: 5px;margin-bottom: -10px;margin-top: 10px;color: blue;}
 .coupontopbtn{display: block;width: 100%;padding: 10px;background: #fff;margin: 0 auto;border-radius: 5px; color: #666;text-align: center;margin-top: 10px;}
 .guanzhutext{text-align: center;color: #fff;margin-top: 150px;}
 .guanzhutext img{width: 200px;}
 .ticketwarnerbox{display: inline-block;font-size: 12px;float: right;color: #ff6600;}
+.tickettip{font-size: 12px;color: #666;text-align: right;}
+
+.share-mask{padding-top: 50px;}
+.share-mask-text{text-align: center;color: #fff;font-size: 18px;}
+.share-mask-text img{display: block;width: 100px;height: 100px;margin: 0 auto;margin-bottom: 30px;}

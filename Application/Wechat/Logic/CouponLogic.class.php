@@ -43,7 +43,7 @@ class CouponLogic{
         $now = time();
         $userclist = D('user_coupon')
             ->join("coupon on user_coupon.coupon_id=coupon.id")
-            ->where("user_coupon.open_id='$openid' and coupon.end_time>$now and status=0")
+            ->where("user_coupon.open_id='$openid' and coupon.end_time>$now and user_coupon.status=0")
             ->field("coupon.title,coupon.price,coupon.begin_time,coupon.end_time,user_coupon.status,user_coupon.id")
             ->select();
         return $userclist;
@@ -124,6 +124,18 @@ class CouponLogic{
             return $pb-$pa;
         });
         return $list;
+    }
+
+    //是否有优惠券
+    public static function isHasCoupon($openid){
+        $coupon = D('user_coupon')
+            ->where("open_id='$openid' and status=0")
+            ->find();
+        $activitycoupon = D('user_activitycoupon')->where("open_id='$openid' and status=0")->find();
+        if($coupon || $activitycoupon){
+            return true;
+        }
+        return false;
     }
 
     //获得优惠券的价格,$couponType == 1 是活动优惠券，==0 是普通优惠券
