@@ -43,7 +43,7 @@ class CouponLogic{
         $now = time();
         $userclist = D('user_coupon')
             ->join("coupon on user_coupon.coupon_id=coupon.id")
-            ->where("user_coupon.open_id='$openid' and coupon.end_time>$now")
+            ->where("user_coupon.open_id='$openid' and coupon.end_time>$now and status=0")
             ->select();
         return $userclist;
     }
@@ -104,7 +104,7 @@ class CouponLogic{
         $list = self::getUserCoupon($openid);
         $activity_couponlist = D('user_activitycoupon')->where(array('open_id'=>$openid,'status'=>0))->select();
         foreach($activity_couponlist as $actinfo){
-            $acdd = D('activity_coupon')->where(array('id'=>$actinfo['activitycoupon_id'],'status'=>0))->find();
+            $acdd = D('activity_coupon')->where(array('id'=>$actinfo['activitycoupon_id']))->find();
             $acinfo['title'] = $acdd['name'];
             $acinfo['price'] = $acdd['price'];
             $acinfo['begin_time'] = $acdd['stime'];
