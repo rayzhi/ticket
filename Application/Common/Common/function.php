@@ -1,8 +1,9 @@
 <?php
 
 function createQr($strcon){
-	$qr = new \Common\Lib\phpqrcode\Qrcode();
-	return $qr->createQRcode($strcon);
+	//$qr = new \Common\Lib\phpqrcode\Qrcode();
+	//return $qr->createQRcode($strcon);
+	return "http://qr.liantu.com/api.php?text=".$strcon;
 }
 
 
