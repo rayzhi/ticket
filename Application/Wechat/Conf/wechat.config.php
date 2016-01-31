@@ -1,17 +1,10 @@
 <?php
 return array(
 	
-	/* 微信公众号配置 */
-	'WECHAT_TOKEN' 			=> 'reraweraedfsdgdfgf1233211354344',
-	'WECHAT_APPID' 			=> 'wxb3cb5fc99dbe663d',
-	'WECHAT_APPSECRET' 	    => 'e587e53438f778407ae22091b6cf2e56', 
-	'WECHAT_ENCODINGAESKEY' => 'mwZcAgJFmqdjExG7Dny9oOaaFOsUTwdEaHQVOJ6SOJ6',
-	'WECHAT_WELCOME' 		=> '欢迎关注魔乐世界！我们为您定制了很棒的活动，详情请查看菜单。',
-    
-    /*** 支付配置  **/
-    
-    'WECHAT_MCH_ID'         => '1295302101',   //微信商户id
-    'WECHAT_PAY_KEY'        => 'guangdongchuanqihudongmolechengf',  //微信支付key
+	
+
+
+    'WECHAT_WELCOME'        => '欢迎关注魔乐世界！我们为您定制了很棒的活动，详情请查看菜单。',
 
     'WECHAT_MENU'           => array(
         'button' => array(
