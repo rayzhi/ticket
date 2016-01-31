@@ -91,7 +91,7 @@ class CouponLogic{
         self::giveCoupon($receter,$coupon);
 
         $invatename = D('User')->where(array('open_id'=>$inviter))->getField('nickname');
-        \Wechat\Logic\PushLogic::pushTextMsg($receter,"恭喜您领到您的好友@".$invatename."分享的魔乐城优惠劵，优惠劵能抵消魔乐城场馆票价，记得使用哦！");
+        \Wechat\Logic\PushLogic::pushTextMsg($receter,getSysConfig('coupon-text'));
         
         //更新优惠券
         S('sharecoupon_'.$openid,$couponlist);
