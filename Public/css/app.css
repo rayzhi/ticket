@@ -159,3 +159,4 @@ animation: myfirst 5s;
 
 .lingqu-lighttext{margin: 0;text-align: center;font-size: 12px;margin-top: -15px;}
 .order-lookup{font-size: 12px;text-align: right;border-top: 1px solid #eee;padding-top: 5px;margin-bottom: -10px;margin-top: 10px;color: #666;}
+.coupontopbtn{display: block;width: 80%;padding: 10px;background: #fff;border:1px solid #ff6600;margin: 0 auto;border-radius: 5px; color: #666;text-align: center;margin-top: 10px;}
