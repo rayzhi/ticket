@@ -12,7 +12,7 @@ class CommonController extends Controller {
     public function _initialize() {
 
         if(SERVER_ENVIRONMENT == 'LOCAL_HOST'){
-            session('openid','oDNOgw8iIWZDyXoIDqU81xtp93iQ');//测试openid
+            session('openid','oZcK7wtW4NB-hr5I1_XKKfoC6zV8');//测试openid
         }
         
         if( ACTION_NAME != 'notifyurl'){//支付通知--过滤掉
