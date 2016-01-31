@@ -120,8 +120,12 @@ class TicketController extends CommonController {
         if(!$order_id) $this->error('参数错误！');
         $orderInfo = D('TicketOrder')->getOrderInfo($order_id);
         if($orderInfo['coupon_pay'] == 0){
-            $couponInfo = \Wechat\Logic\CouponLogic::getAllCoupon($openid);
-            $this->assign('couponInfo',$couponInfo);
+            $ticket_type = D('TicketOrderDetail')->where(array('order_id' => $order_id))->getField('ticket_type');
+            if($ticket_type != 3){
+                $couponInfo = \Wechat\Logic\CouponLogic::getAllCoupon($openid);
+                $this->assign('couponInfo',$couponInfo);
+            }
+            
             
             if($couponInfo && $orderInfo['third_party_pay'] > $couponInfo[0]['price']){
                 $orderInfo['third_party_pay'] = $orderInfo['third_party_pay'] - $couponInfo[0]['price'];            

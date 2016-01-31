@@ -162,3 +162,4 @@ animation: myfirst 5s;
 .coupontopbtn{display: block;width: 100%;padding: 10px;background: #fff;margin: 0 auto;border-radius: 5px; color: #666;text-align: center;margin-top: 10px;}
 .guanzhutext{text-align: center;color: #fff;margin-top: 150px;}
 .guanzhutext img{width: 200px;}
+.ticketwarnerbox{display: inline-block;font-size: 12px;float: right;color: #ff6600;}

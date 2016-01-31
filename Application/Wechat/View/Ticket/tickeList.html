@@ -43,7 +43,9 @@
                         <input type="text" name="amount" class="numval" readonly value="1">
                         <span class="plus">+</span>
                     </div>
+                	<span class="ticketwarnerbox hide">儿童票不可使用优惠券</span>
                 </div>
+
             </div>
             
             <input type="hidden" id="eachPrice" name="eachPrice" value="0" />
@@ -147,6 +149,13 @@
                 $('#price').html(0);
                 //return alert('请先选择场馆');
                 return;
+            }
+
+            //判断儿童票
+            if(venues_id == 4 && ticket_type_id == 3){
+            	$('.ticketwarnerbox').removeClass('hide');
+            }else{
+            	$('.ticketwarnerbox').addClass('hide');
             }
             
             var index = layer.load(0,{shade:[0.3,'#676767']});
