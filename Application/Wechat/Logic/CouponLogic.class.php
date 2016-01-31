@@ -102,9 +102,9 @@ class CouponLogic{
     //获取所有优惠券，包括普通优惠券，活动优惠券
     public static function getAllCoupon($openid){
         $list = self::getUserCoupon($openid);
-        $activity_couponlist = D('user_activitycoupon')->where(array('open_id'=>$openid))->select();
+        $activity_couponlist = D('user_activitycoupon')->where(array('open_id'=>$openid,'status'=>0))->select();
         foreach($activity_couponlist as $actinfo){
-            $acdd = D('activity_coupon')->where(array('id'=>$actinfo['activitycoupon_id']))->find();
+            $acdd = D('activity_coupon')->where(array('id'=>$actinfo['activitycoupon_id'],'status'=>0))->find();
             $acinfo['title'] = $acdd['name'];
             $acinfo['price'] = $acdd['price'];
             $acinfo['begin_time'] = $acdd['stime'];
