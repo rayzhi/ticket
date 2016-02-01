@@ -119,7 +119,7 @@
 						if(obj.status == 1){
 							window.location.href = "{:UC('Wechat/Ticket/sureOrder')}?order_id="+obj.url;
 						}else{
-							alert(data.info);
+							alert(obj.info);
 							layer.close(index);
 						}
 					},
