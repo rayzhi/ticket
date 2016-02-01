@@ -22,7 +22,7 @@
 				<option value="">暂无优惠券</option>
 			<else />
 				<volist name="couponInfo" id="vo">
-					<option value="{$vo.id}-{$vo.coutype}">{$vo.title}-{$vo.price}元</option>
+					<option value="{$vo.id}-{$vo.coutype}" data-price="{$vo.price}">{$vo.title}-{$vo.price}元</option>
 				</volist>
 			</empty>
 		</select>
@@ -86,9 +86,8 @@
         })
 
         function changeText(){
-            var temp = $('#coupon_id option:selected').text().split('-');
-            var prices = temp[1].split('元');
-            $('.dikoue').html("-"+prices[0]);
+            var price = $('#coupon_id option:selected').data('price');
+            $('.dikoue').html("-"+price);
         }
 		
 		$('#coupon_id').change(function(){
