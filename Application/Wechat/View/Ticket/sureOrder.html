@@ -64,7 +64,13 @@
 
 <block name="script">
 	<script>
-		
+		$(".sharehelp-box").click(function(){
+            $(".share-mask").removeClass("hide");
+        });
+
+        $(".share-mask").click(function(){
+            $(".share-mask").addClass("hide");
+        });
 		//提交表单
 		$('.btn-block').click(function(){
 			coupon_id = $('#coupon_id option:selected').val();
