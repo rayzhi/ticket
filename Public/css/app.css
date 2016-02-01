@@ -168,3 +168,4 @@ animation: myfirst 5s;
 .share-mask-text .centimg{display: block;width: 100px;height: 100px;margin: 0 auto;margin-bottom: 30px;}
 .share-mask-text .sharedire{position: fixed;top: 50px;right: 50px;}
 .dikoue{color: #ff6600;float: right;}
+.wifiimg{position: fixed;top: 50%;left: 50%;width: 220px;height: 305px;margin-top: -150px;margin-left: -110px;}
