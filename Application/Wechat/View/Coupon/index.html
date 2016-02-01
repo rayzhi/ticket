@@ -31,11 +31,16 @@
     
     <div class="couponlist">
 
-        <if condition="$subscribe eq 0">
-            <a href="javascript:" class="coupontopbtn helpboxbtn">恭喜您领取到魔乐城的优惠劵，请点击关注我们公众号购票吧！ </a>
-            <else/>
+        <if condition="($subscribe eq 0) and (count($list) gt 0)">
+            <a href="javascript:" class="coupontopbtn helpboxbtn">魔乐城的优惠劵，请点击关注我们公众号购票吧！ </a>
+        </if>
+        <if condition="($subscribe eq 0) and (count($list) eq 0)">
+            <a href="javascript:" class="coupontopbtn helpboxbtn">暂无优惠卷送您，请点击关注我们公众号参与活动获取吧</a>
+        </if>
+        <if condition="$subscribe eq 1">
             <a href="{:UC('Wechat/Ticket/tickeList')}" class="coupontopbtn">请点击去购票吧！ </a>
         </if>
+        
 
         <volist name="list" id="info">
         <if condition="$subscribe eq 0">
@@ -50,8 +55,22 @@
         </volist>
     </div>
 
+    <div class="margin-top30"></div>
+    <div class="sharehelp-box">
+        <span>越分享越优惠，越分享越快乐</span>
+    </div>
+
     <div class="helpbox text-guide margin-top30">没有更多可用券了</div>
     <!--<p class="ticketlist-moreinfo"><a href="{:UC('Wechat/Ticket/tickeList')}">去购票？</a></p>-->
+
+    <div class="mask share-mask hide">
+        <p class="container share-mask-text">
+            <img src="__PUBLIC__/images/share_img.png" class="centimg">
+            <img src="__PUBLIC__/images/share_icon2.png" class="sharedire">
+            点击右上角<br>
+            发送给好友 或 分享到朋友圈
+        </p>
+    </div>
 
     <div class="mask default-mask hide">
         <a href="javascript:" class="mask-close"><img src="__PUBLIC__/images/cha.png" width="50px"></a>
@@ -63,6 +82,16 @@
             
         </p>
     </div>
+
+    <script type="text/javascript">
+        $(".sharehelp-box").click(function(){
+            $(".share-mask").removeClass("hide");
+        });
+
+        $(".share-mask").click(function(){
+            $(".share-mask").addClass("hide");
+        });
+    </script>
 
 </body>
 </block>
