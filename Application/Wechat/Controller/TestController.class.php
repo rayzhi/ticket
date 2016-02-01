@@ -40,6 +40,10 @@ class TestController extends Controller {
         print_r($d);
     }
 
+    public function testCouponAct(){
+        \Wechat\Logic\CouponLogic::giveCoupon(getOpenid(),1);
+    }
+
     public function testPayCouponAct(){
         \Wechat\Logic\CouponLogic::givePayInvertCoupon(getOpenid());
     }

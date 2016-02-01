@@ -22,6 +22,9 @@ class CouponLogic{
         $info['ctime'] = time();
         $info['note'] = "";
         $id = D('user_coupon')->add($info);
+
+        //设置提示
+        self::ticketTip($openid);
         return $id;
     }
 
@@ -166,6 +169,18 @@ class CouponLogic{
             $cSave['order_id'] = $orderId;
             return $cResult = D('user_activitycoupon')->where(array('id'=>$couponId))->save($cSave);
         }
+    }
+
+    //设置提示
+    public static function ticketTip($openid){
+        S('ticketTip_'.$openid,true,3600);
+    }
+
+    //判断提示
+    public static function isTip($openid){
+        $resp = S('ticketTip_'.$openid);
+        S('ticketTip_'.$openid,null);
+        return $resp;
     }
    
 

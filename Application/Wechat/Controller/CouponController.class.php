@@ -15,6 +15,7 @@ class CouponController extends CommonController {
         $weobj = WechatWrap::getInstance();
         $userinfo = $weobj->getUserInfo(getOpenid());
         $this->assign('subscribe',$userinfo['subscribe']);
+        $this->assign('isTip',\Wechat\Logic\CouponLogic::isTip(getOpenid()));
         
         $this->assign('list',$list);
         $this->display();

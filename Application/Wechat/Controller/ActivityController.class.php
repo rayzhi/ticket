@@ -32,7 +32,12 @@ class ActivityController extends CommonController {
             $info['ctime'] = $nowtime;
             $info['status'] = 0;
             D('user_activitycoupon')->add($info);
+            //小提示
+            \Wechat\Logic\CouponLogic::ticketTip(getOpenid());
         }
+
+        //设置提示
+
         \Wechat\Logic\PushLogic::pushTextMsg(getOpenid(),getSysConfig('coupon-text'));
         redirect('/Wechat/Coupon/index', 0, '页面跳转中...');
     }

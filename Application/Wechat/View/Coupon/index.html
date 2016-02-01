@@ -32,13 +32,13 @@
     <div class="couponlist">
 
         <if condition="($subscribe eq 0) and (count($list) gt 0)">
-            <a href="javascript:" class="coupontopbtn helpboxbtn">请点击关注我们公众号购票吧！ </a>
+            <a href="javascript:" class="coupontopbtn helpboxbtn"><if condition="$isTip eq 1">恭喜您领取了优惠券，</if>请点击关注我们公众号购票吧！ </a>
         </if>
         <if condition="($subscribe eq 0) and (count($list) eq 0)">
             <a href="javascript:" class="coupontopbtn helpboxbtn">暂无优惠卷送您，请点击关注我们公众号参与活动获取吧！</a>
         </if>
         <if condition="$subscribe eq 1">
-            <a href="{:UC('Wechat/Ticket/tickeList')}" class="coupontopbtn">请点击去购票吧！ </a>
+            <a href="{:UC('Wechat/Ticket/tickeList')}" class="coupontopbtn"><if condition="$isTip eq 1">恭喜您领取了优惠券，</if>请点击去购票吧！ </a>
         </if>
         
 
