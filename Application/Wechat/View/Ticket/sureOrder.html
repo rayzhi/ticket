@@ -16,14 +16,13 @@
     </div>
 
     <a class="panel margin-top" href="#">
-        <span class="text">抵用券/优惠券</span>
-        <br /><br />
+        <p class="text">抵用券/优惠券<span class="dikoue">-10</span></p>
         <select name="coupon_id" id="coupon_id" class="selectarea">
 			<empty name="couponInfo">
 				<option value="">暂无优惠券</option>
 			<else />
 				<volist name="couponInfo" id="vo">
-					<option value="{$vo.id}-{$vo.coutype}">{$vo.title}&nbsp;{$vo.price}元</option>
+					<option value="{$vo.id}-{$vo.coutype}">{$vo.title}-{$vo.price}元</option>
 				</volist>
 			</empty>
 		</select>
@@ -44,6 +43,22 @@
 
     <div class="margin-top">&nbsp;</div>
     <button type="submit" class="btn-block margin-top">立即购买</button>
+
+    <div class="margin-top30"></div>
+    <div class="sharehelp-box activity-sharebox">
+        <span>越分享越优惠，越分享越快乐</span>
+    </div>
+
+    <div class="mask share-mask hide">
+        <p class="container share-mask-text">
+            <img src="__PUBLIC__/images/wen.png" class="centimg">
+            <img src="__PUBLIC__/images/jiantao.png" class="sharedire">
+            点击右上角<br>
+            发送给好友 或 分享到朋友圈
+        </p>
+    </div>
+
+
   </body>
 </block>
 
@@ -59,12 +74,23 @@
 			var index = layer.load(0,{shade:[0.3,'#676767']});
 			window.location.href = "{:UC('Wechat/Ticket/doPay')}?oid="+{$orderInfo.id}+'&cid='+coupon_id;		
 		})
+
+        $(function(){
+            changeText();
+        })
+
+        function changeText(){
+            var temp = $('#coupon_id option:selected').text().split('-');
+            var prices = temp[1].split('元');
+            $('.dikoue').html("-"+prices[0]);
+        }
 		
 		$('#coupon_id').change(function(){
 
 			var index = layer.load(0,{shade:[0.3,'#676767']});
             var ddd = {$orderInfo['id']};
 			coupon_id = $(this).val();
+            changeText();
 			$.post(
 				"{:UC('Wechat/Ticket/changeCoupon')}", 
 				{'coupon_id':coupon_id,'oid':ddd}, 
