@@ -156,7 +156,7 @@ animation: myfirst 5s;
 .ticketlist-desc{color: blue;font-size: 12px;position: absolute;left: 10px;margin-top: 15px;}
 
 .lingqu-lighttext{margin: 0;text-align: center;font-size: 12px;margin-top: -15px;}
-.order-lookup{font-size: 12px;text-align: right;border-top: 1px solid #eee;padding-top: 5px;margin-bottom: -10px;margin-top: 10px;color: blue;}
+.order-lookup{font-size: 16px;text-align: right;border-top: 1px solid #eee;padding-top: 5px;margin-bottom: -10px;margin-top: 10px;color: blue;}
 .coupontopbtn{display: block;width: 100%;padding: 10px;background: #fff;margin: 0 auto;border-radius: 5px; color: #666;text-align: center;margin-top: 10px;}
 .guanzhutext{text-align: center;color: #fff;margin-top: 150px;}
 .guanzhutext img{width: 200px;}

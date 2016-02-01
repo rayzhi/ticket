@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>魔乐城</title>
     <link href="__PUBLIC__/css/normalize.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/app.css?a=16">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/app.css?a=17">
     <script src="__PUBLIC__/static/admin/js/jquery-1.9.1.js"></script>
     <script src="__PUBLIC__/static/admin/js/jquery.validate.js"></script>
     <script src="__PUBLIC__/static/admin/js/messages_cn.js"></script>
@@ -43,7 +43,7 @@
             success: function () {
                 $.post("<?php echo UC('Wechat/Recommend/releaseShareCoupon');?>");
                 alert("已成功分享");
-                window.location.href="<?php echo UC('Wechat/Activity/index');?>"; 
+                window.location.href="<?php echo UC('Wechat/Activity/index',array('id'=>5));?>"; 
             },
             cancel: function () {
                 alert("您已取消分享");
