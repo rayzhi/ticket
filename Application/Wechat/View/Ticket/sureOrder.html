@@ -11,19 +11,26 @@
  <body>
  
     <div class="panel margin-top">
-        <h3>魔乐城场馆体验票</h3>
-        <span class="text">魔乐城场馆 天河区</span>
+        <h3>魔乐城</h3>
+        <span class="text">{$orderareaname} - {$orderticketname}</span>
     </div>
 
     <a class="panel margin-top" href="#">
-        <span class="text">抵用券/优惠码</span>
-        <span class="moretext pull-right">{$couponInfo.price}元</span>
-       <!--  <span class="moretext pull-right">1张可用 &gt;</span>--> 
+        <p class="text">抵用券/优惠券<span class="dikoue">0</span></p>
+        <select name="coupon_id" id="coupon_id" class="selectarea">
+			<empty name="couponInfo">
+				<option value="">暂无优惠券</option>
+			<else />
+				<volist name="couponInfo" id="vo">
+					<option value="{$vo.id}-{$vo.coutype}" data-price="{$vo.price}">{$vo.title}-{$vo.price}元</option>
+				</volist>
+			</empty>
+		</select>
     </a>
 
     <div class="panel margin-top" href="#">
         <span class="text">实付金额</span>
-        <span class="moretext pull-right">{$orderInfo.third_party_pay}元</span>
+        <span class="moretext pull-right"><span id="third">{$orderInfo.third_party_pay}</span>元</span>
     </div>
 
     <h3 class="box-title">选择支付方式</h3>
@@ -32,21 +39,75 @@
         <span class="moretext pull-right"><img src="__PUBLIC__/images/yuan.gif" class="payicon"></span>
     </div>
 
-    <p class="helpbox text-help margin-top">体验票出票后不可退换，请仔细核对订单信息</p>
+    <p class="helpbox text-help margin-top">出票后不可退换，请仔细核对订单信息</p>
 
     <div class="margin-top">&nbsp;</div>
     <button type="submit" class="btn-block margin-top">立即购买</button>
+
+    <div class="margin-top30"></div>
+    <div class="sharehelp-box activity-sharebox">
+        <span>越分享越优惠，越分享越快乐</span>
+    </div>
+
+    <div class="mask share-mask hide">
+        <p class="container share-mask-text">
+            <img src="__PUBLIC__/images/share_img.png" class="centimg">
+            <img src="__PUBLIC__/images/share_icon2.png" class="sharedire">
+            点击右上角<br>
+            发送给好友 或 分享到朋友圈
+        </p>
+    </div>
+
+
   </body>
 </block>
 
-
 <block name="script">
 	<script>
-		
+		$(".sharehelp-box").click(function(){
+            $(".share-mask").removeClass("hide");
+        });
+
+        $(".share-mask").click(function(){
+            $(".share-mask").addClass("hide");
+        });
 		//提交表单
 		$('.btn-block').click(function(){
+			coupon_id = $('#coupon_id option:selected').val();
+			if(coupon_id == ''){
+				coupon_id = 0;
+			}
 			var index = layer.load(0,{shade:[0.3,'#676767']});
-			window.location.href = "{:UC('Wechat/Ticket/doPay')}?oid="+{$orderInfo.id}+'&cid='+{$couponInfo.id};		
+			window.location.href = "{:UC('Wechat/Ticket/doPay')}?oid="+{$orderInfo.id}+'&cid='+coupon_id;		
+		})
+
+        $(function(){
+            changeText();
+        })
+
+        function changeText(){
+            var price = $('#coupon_id option:selected').data('price');
+            $('.dikoue').html("-"+price);
+        }
+		
+		$('#coupon_id').change(function(){
+
+			var index = layer.load(0,{shade:[0.3,'#676767']});
+            var ddd = {$orderInfo['id']};
+			coupon_id = $(this).val();
+            changeText();
+			$.post(
+				"{:UC('Wechat/Ticket/changeCoupon')}", 
+				{'coupon_id':coupon_id,'oid':ddd}, 
+			    function(obj){
+					if(obj.status == 1){
+						$('#third').html(obj.info);
+					}
+					layer.close(index);
+				},
+				'json'
+			);
+			
 		})
 		
 	</script>

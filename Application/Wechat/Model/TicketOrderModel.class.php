@@ -11,6 +11,11 @@ class TicketOrderModel extends Model{
     var $orderStatus = array('未使用','已使用','已过期');
  
     public function makeOrder($postData){
+
+        S('orderticketname_'.getOpenid(),$postData['ticketname2'],3600);
+        S('orderareaname_'.getOpenid(),$postData['areaname'],3600);
+        unset($postData['ticketname2']);
+        unset($postData['areaname']);
         
         $array['sn']              = time().rand(100000,999999);
         $array['open_id']         = session('openid');
@@ -96,7 +101,7 @@ class TicketOrderModel extends Model{
     	$result =  $this->table(self::TICKET_ORDER.' a')
 				    	->join('left join '.$tbTicketOrderDetail.' b ON a.id=b.order_id')
 				    	->join('left join '.$tbTicketSn.' c ON b.did=c.did')
-				    	->field('a.id,a.total_cost,a.tirhd_party_pay,c.*')
+				    	->field('a.id,a.total_cost,a.third_party_pay,c.*')
 				    	->where(array('a.sn'=>$order_sn))
 				    	->order('c.t_price DESC')
 				    	->select();

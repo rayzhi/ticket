@@ -7,14 +7,14 @@
 namespace Wechat\Controller;
 
 class TicketController extends CommonController {
-	
-	var $payType = 4; //微信支付
+    
+    protected $payType = PAYTYPE;  //支付方式----微信支付
 
     /**
      * 魔幻城首页
      */
     public function indexAct(){
-    	
+        
         $userinfo = \Wechat\Logic\UserLogic::getUserinfo(getOpenid());
         $this->assign('userinfo',$userinfo);
         $this->assign('activity_text',getSysConfig('activity-text'));
@@ -27,73 +27,52 @@ class TicketController extends CommonController {
     public function tickeListAct(){
         
         $areainfo = R('Api/areainfo');
-       
-        //测试时候地区暂时取----佛山
-        $venues_id = $areainfo['data'][2]['id'];
-        $areaName = $areainfo['data'][2]['name'];
-        $this->assign('areaName',$areaName);
-   
-        //该地区的场馆
-        $venuesinfo = R('Api/venuesinfo',array($venues_id));
-        $this->assign('venuesinfo',$venuesinfo['data']);
-       
-        //单票的信息4--微信支付   场馆id 2--成人票
-//         $ticketInfo = R('Api/queryprice',array($this->payType,$venues_id));
-//         foreach($ticketInfo['data'] as $k=>$v){
-//            $ticketType[$v['ticketTypeId']]['id'] = $v['ticketTypeId'];
-//            $ticketType[$v['ticketTypeId']]['name'] = $v['ticketType'];
-//            $ticketType[$v['ticketTypeId']]['ticketMainType'] = 0;
-//         }
-        
-//         //套票
-//         $taoPiao = R('Api/price',array($venues_id,$this->payType));
-//         foreach($taoPiao['data'] as $k=>$v){
-//            $ticketType1[$v['id']]['id'] = $v['id'];
-//            $ticketType1[$v['id']]['name'] = $v['name'];
-//            $ticketType1[$v['id']]['ticketMainType'] = 1;
-//         }
-        
+        foreach($areainfo['data'] as $k=>$v){
+            $venuesinfo = R('Api/venuesinfo',array($v['id']));
+            foreach($venuesinfo['data'] as $k1=>$v1){
+                $areaName[$v1['id']]['id'] = $v1['id']; 
+                $areaName[$v1['id']]['name'] = $v['name'].$v1['name'];
+            }
+        }
         $this->assign('activity_text',getSysConfig('activity-text'));
-        //$this->assign('ticketType',$ticketType);
-        //$this->assign('ticketType1',$ticketType1);
-        //$this->assign('ticketInfo',$ticketInfo['data'][0]);
-
+        $this->assign('isHasCoupon',\Wechat\Logic\CouponLogic::isHasCoupon(getOpenid()));
+        $this->assign('venuesinfo',$areaName);
+       
         $this->display(); 
         
     }
     
     public function getVenuesAct(){
-    	
-    	if(IS_POST){
-    		
-    		$venues_id = I('venues_id');
-    		if($venues_id){
-    		
-		    	//单票的信息4--微信支付   场馆id 2--成人票
-		    	$ticketInfo = R('Api/queryprice',array($this->payType,$venues_id));
-		    	foreach($ticketInfo['data'] as $k=>$v){
-		    		$ticketType[$v['ticketTypeId']]['id'] = $v['ticketTypeId'];
-		    		$ticketType[$v['ticketTypeId']]['name'] = $v['ticketType'];
-		    		$ticketType[$v['ticketTypeId']]['ticketMainType'] = 0;
-		    	}
-		    	
-		    	//套票
-		    	$taoPiao = R('Api/price',array($venues_id,$this->payType));
-		    	foreach($taoPiao['data'] as $k=>$v){
-		    		$ticketType1[$v['id']]['id'] = $v['id'];
-		    		$ticketType1[$v['id']]['name'] = $v['name'];
-		    		$ticketType1[$v['id']]['ticketMainType'] = 1;
-		    	}
-    		}
-	    	
-	    	$this->assign('ticketType',$ticketType);
-	    	$this->assign('ticketType1',$ticketType1);
-	    	
-	    	$this->success($this->fetch('Ticket:venuesLib'));
-    	}
-    	
-    }
+         
+        if(IS_POST){
     
+            $venues_id = I('venues_id');
+            if($venues_id){
+    
+                //单票的信息4--微信支付   场馆id 2--成人票
+                $ticketInfo = R('Api/queryprice',array($this->payType,$venues_id));
+                foreach($ticketInfo['data'] as $k=>$v){
+                    $ticketType[$v['ticketTypeId']]['id'] = $v['ticketTypeId'];
+                    $ticketType[$v['ticketTypeId']]['name'] = $v['ticketType'];
+                    $ticketType[$v['ticketTypeId']]['ticketMainType'] = 0;
+                }
+                 
+                //套票
+                $taoPiao = R('Api/price',array($venues_id,$this->payType));
+                foreach($taoPiao['data'] as $k=>$v){
+                    $ticketType1[$v['id']]['id'] = $v['id'];
+                    $ticketType1[$v['id']]['name'] = $v['name'];
+                    $ticketType1[$v['id']]['ticketMainType'] = 1;
+                }
+            }
+    
+            $this->assign('ticketType',$ticketType);
+            $this->assign('ticketType1',$ticketType1);
+    
+            $this->success($this->fetch('Ticket:venuesLib'));
+        }
+         
+    }
     
     public function getTicketPriceAct(){
         
@@ -112,7 +91,7 @@ class TicketController extends CommonController {
             $price = $price ? $price : 0;
             $back['total'] = sprintf('%.2f',$price * $amount);
             $back['price'] = sprintf('%.2f',$price);
-            $this->success('成功',$back);   
+            $this->success('成功',$back);
         }
     }
     
@@ -141,18 +120,49 @@ class TicketController extends CommonController {
         $order_id = I('order_id');
         if(!$order_id) $this->error('参数错误！');
         $orderInfo = D('TicketOrder')->getOrderInfo($order_id);
-        $couponInfo = D('UserCoupon')->getMaxCoupon($openid);
- 
-        if($couponInfo && $orderInfo['third_party_pay'] > $couponInfo['price']){
-            $orderInfo['third_party_pay'] = $orderInfo['third_party_pay'] - $couponInfo['price'];            
-        }else{
-            $couponInfo['id'] = $couponInfo['price'] = 0;
+        if($orderInfo['coupon_pay'] == 0){
+            $ticket_type = D('TicketOrderDetail')->where(array('order_id' => $order_id))->getField('ticket_type');
+            if($ticket_type != 3){
+                $couponInfo = \Wechat\Logic\CouponLogic::getAllCoupon($openid);
+                $this->assign('couponInfo',$couponInfo);
+            }
+            
+            if($couponInfo && $orderInfo['third_party_pay'] > $couponInfo[0]['price']){
+                $orderInfo['third_party_pay'] = $orderInfo['third_party_pay'] - $couponInfo[0]['price'];            
+            }elseif($couponInfo && $orderInfo['third_party_pay'] <= $couponInfo[0]['price']){
+                $orderInfo['third_party_pay'] = 0;
+            }
         }
         
+        $this->assign('orderticketname',S('orderticketname_'.getOpenid()));
+        $this->assign('orderareaname',S('orderareaname_'.getOpenid()));
+
         $this->assign('orderInfo',$orderInfo);
-        $this->assign('couponInfo',$couponInfo);
         
         $this->display();
+    }
+    
+    public function changeCouponAct(){
+        
+        $coupon_id = I('coupon_id');
+        if($coupon_id != 0){
+            $tmp = explode("-", $coupon_id);
+            $couponId = $tmp[0];
+            $couponType = $tmp[1];
+        }
+        if(!$couponType){
+            $couponType = 0;
+        }
+        
+        $oid = I('oid');
+        
+        $price = \Wechat\Logic\CouponLogic::getCouponPrice($couponId,$couponType);
+        $order = D('TicketOrder')->where(array('id'=>$oid))->find();
+        
+        $p = $order['third_party_pay'] - $price;
+        $p = $p > 0 ? $p : 0;
+        $this->success($p);
+        
     }
     
     /**
@@ -162,19 +172,29 @@ class TicketController extends CommonController {
     
         $order_id = I('oid');
         $coupon_id = I('cid');
+        if($coupon_id != 0){
+            $tmp = explode("-", $coupon_id);
+            $coupon_id = $tmp[0];
+            $couponType = $tmp[1];
+        }
         if(!$order_id) $this->error('参数错误！');
         if($coupon_id){
-            $useResult = D('UserCoupon')->useCoupon($order_id,$coupon_id);//使用优惠券
-            if($useResult['code'] == 2) $this->error($useResult['msg']);
+            $useResult = D('UserCoupon')->useCoupon($order_id,$coupon_id,$couponType);//使用优惠券
         }
         $orderInfo = D('TicketOrder')->where(array('id'=>$order_id))->find();
+        if($orderInfo['third_party_pay'] == 0){
+            $this->enoughPayAct($orderInfo);
+            exit;
+        }
+        
         if(!$order_id) $this->error('订单不存在！');
         $wechatPay = new \Common\Lib\Pay\pay_wap_wechat\wap_wechat();
         $payment['appid']      = C('WECHAT_APPID'); 
         $payment['mch_id']     = C('WECHAT_MCH_ID');
         $payment['key']        = C('WECHAT_PAY_KEY');
         $payment['M_OrderNO']  = $orderInfo['sn'];
-        $payment['M_Amount']   = '0.01';//测试金额
+        //$payment['M_Amount']   = $orderInfo['third_party_pay'];
+        $payment['M_Amount']   = 0.01;
         $payment['notify_url'] = __BASE__.UC('Wechat/Ticket/notifyurl');
 
         recordLog($payment,'wechatPay');        
@@ -182,6 +202,19 @@ class TicketController extends CommonController {
         header('Content-Type:text/html;charset=utf-8');
         $wechatPay->doPay($sendData);
         exit;
+        
+    }
+    
+    public function enoughPayAct($orderInfo){
+        
+        $save['status'] = 1;
+        $save['third_pay_id'] = $this->payType;//不用支付
+        $result = D('TicketOrder')->where(array('sn'=>$orderInfo['sn']))->save($save);
+        recordLog('优惠券足够支付','wechatPay');
+        recordLog($orderInfo,'wechatPay');
+        //调用取票sn接口
+        $this->addTicketSn($orderInfo['sn']);
+        redirect(__BASE__.UC('Wechat/User/orderlist'));
         
     }
     
@@ -198,14 +231,13 @@ class TicketController extends CommonController {
             if($checkOrder['status'] == 0){
                 $save['status'] = 1;
                 $save['third_pay_id'] = $this->payType;
-                $save['pay_time'] = time();
                 $result = D('TicketOrder')->where(array('sn'=>$order_sn))->save($save);              
                 if($result){
                     //调用取票sn接口
                     $this->addTicketSn($order_sn);
-                    recordLog('订单修改状态成功','wechatPay');             
+                    recordLog('订单修改状态成功','wechatPay');
                     //赠送支付人的推荐人优惠券
-                    \Wechat\Logic\CouponLogic::givePayInvertCoupon($checkOrder['open_id']);      
+                    \Wechat\Logic\CouponLogic::givePayInvertCoupon($checkOrder['open_id']);            
                     $wechatPay->notifyStop();
                 }
             }else{
@@ -249,26 +281,26 @@ class TicketController extends CommonController {
      * @param unknown $snResult
      */
     private function returnPrice($snResult){
-    	
-    	if($snResult){
-    		$count = count($snResult);
-    		$coupon = $snResult[0]['total_cost'] - $snResult[0]['third_party_pay'];
-    		$i = 0;
-    		while($coupon > 0 && $i <= $count){
-    			$coupon = $snResult[$i]['t_price'] - $coupon;
-    			if($coupon >= 0){
-    				$coupon = 0;
-    				$snResult[$i]['t_price'] = $coupon;
-    			}else{
-    				$coupon = abs($coupon);
-    				$i++;
-    			}
-    		}
-    		foreach($snResult as $k=>$v){
-    			R('Api/wxcallback',array($v['ticket_sn'],$v['t_price']));//返回票的价格
-    		}
-    	}
-    	
+        
+        if($snResult){
+            $count = count($snResult);
+            $coupon = $snResult[0]['total_cost'] - $snResult[0]['third_party_pay'];
+            $i = 0;
+            while($coupon > 0 && $i <= $count){
+                $coupon = $snResult[$i]['t_price'] - $coupon;
+                if($coupon >= 0){
+                    $coupon = 0;
+                    $snResult[$i]['t_price'] = $coupon;
+                }else{
+                    $coupon = abs($coupon);
+                    $i++;
+                }
+            }
+            foreach($snResult as $k=>$v){
+                R('Api/wxcallback',array($v['ticket_sn'],$v['t_price']));//返回票的价格
+            }
+        }
+        
     }
 
 

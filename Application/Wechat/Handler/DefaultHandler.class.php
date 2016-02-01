@@ -9,7 +9,8 @@ class DefaultHandler extends CommonHandler{
 
     public function handleEvent($msg){
         //订阅事件
-        if($msg->getRevEvent() == "subscribe"){
+        $eventinfo = $msg->getRevEvent();
+        if($eventinfo['event'] == "subscribe"){
             $msg->text(C('WECHAT_WELCOME'))->reply(); //回复用户
             //保存新用户信息
             $userinfo = $msg->getUserInfo($msg->getRevFrom());

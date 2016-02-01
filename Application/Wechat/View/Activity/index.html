@@ -17,11 +17,29 @@
         <div class="activity-btn">
             <a href="{:UC('Wechat/Activity/receive?id='.$_GET['id'])}" class="btn-block white">领取大礼包</a>
         </div>
+        <div class="sharehelp-box activity-sharebox fixedp" style="width:100%;">
+            <span>越分享越优惠，越分享越快乐</span>
+        </div>
     </div>
 
-    <div class="sharehelp-box activity-sharebox fixedp">
-        <span>点击右上角 分享更多好友</span><img src="__PUBLIC__/images/jiantao.png" width="50px">
+    <div class="mask share-mask hide">
+        <p class="container share-mask-text">
+            <img src="__PUBLIC__/images/share_img.png" class="centimg">
+            <img src="__PUBLIC__/images/share_icon2.png" class="sharedire">
+            点击右上角<br>
+            发送给好友 或 分享到朋友圈
+        </p>
     </div>
+
+    <script type="text/javascript">
+        $(".sharehelp-box").click(function(){
+            $(".share-mask").removeClass("hide");
+        });
+
+        $(".share-mask").click(function(){
+            $(".share-mask").addClass("hide");
+        });
+    </script>
 
 </body>
 </block>

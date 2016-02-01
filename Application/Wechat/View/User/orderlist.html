@@ -23,8 +23,8 @@
             <span class="ordertime">{$info['add_time']|date="Y-m-d H:i:s",###}</span>
             <span class="orderno">订单号：{$info['sn']}</span>
           </p>
-          <h3 class="goodsname">魔乐城场馆体验票 {$info['amount']} 张</h3>
-          <p class="areaname">魔乐城场馆 {$info['venuesName']}</p>
+          <h3 class="goodsname">魔乐城(成都洛带店)</h3>
+          <p class="areaname">{$info['venuesName']}体验票 {$info['amount']} 份</p>
           <p class="orderinfo-bottom">
             <span class="pricesp">总价：<strong>{$info['third_party_pay']}元</strong></span>
             <if condition="$info['status'] eq 0">
@@ -33,18 +33,39 @@
               <span class="orderstate disable">已支付</span>
             </if>
           </p>
+          <div class="order-lookup">亲，进场验证码在里面哦》</div>
         </a>
       </volist>
     </div>
 
     <div class="helpbox text-guide margin-top30">没有更多订单了</div>
 
+    <div class=" margin-top"></div>
+    <div class="sharehelp-box activity-sharebox">
+        <span>越分享越优惠，越分享越快乐</span>
+    </div>
+
+    <div class="mask share-mask hide">
+        <p class="container share-mask-text">
+            <img src="__PUBLIC__/images/share_img.png" class="centimg">
+            <img src="__PUBLIC__/images/share_icon2.png" class="sharedire">
+            点击右上角<br>
+            发送给好友 或 分享到朋友圈
+        </p>
+    </div>
+
   </body>
 </block>
 
 <block name="script">
     <script>
-       
+       $(".sharehelp-box").click(function(){
+            $(".share-mask").removeClass("hide");
+        });
+
+        $(".share-mask").click(function(){
+            $(".share-mask").addClass("hide");
+        });
     </script>
 </block>
 

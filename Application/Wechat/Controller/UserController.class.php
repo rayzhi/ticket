@@ -71,5 +71,8 @@ class UserController extends CommonController {
         $this->display();
    }
 
+   public function wifiAct(){
+        $this->display();
+   }
 
 }

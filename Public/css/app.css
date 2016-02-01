@@ -25,8 +25,8 @@ a{color: #000;text-decoration: none;}
 .container{padding: 15px;}
 
 .mask{position: fixed;width: 100%;height: 100%;background:rgba(0,0,0,0.8);background:#000\9;top:0;left:0;filter:alpha(opacity=20)\9;}
-.mask .text-nomal-box{overflow: scroll;position: absolute;bottom: 100px; top: 100px;}
-.mask .mask-close{position: absolute;right: 10px;top: 10px;display: block;}
+.mask .text-nomal-box{overflow: scroll;position: absolute;bottom: 80px; top: 80px;font-size: 14px;font-weight: normal;color: #fff;}
+.mask .mask-close{position: fixed;right: 10px;top: 10px;display: block;}
 
 .panel{display: block;background: #fff;padding: 20px 20px;}
 .panel h3{margin: 0;line-height: 35px;}
@@ -43,7 +43,7 @@ a{color: #000;text-decoration: none;}
 .tuijiantext{display: table-row;}
 .tuijian-info img{width: 80px; border-radius: 80px; display: table-cell;}
 .tuijian-info span{font-size: 14px; vertical-align: middle;display: table-cell;padding-left: 10px;}
-.sharehelp-box{text-align: center;color: #ff6600;}
+.sharehelp-box{display: block;width: 90%;padding: 10px;background: #fff;border:1px #ff6600 solid;margin: 0 auto;border-radius: 5px; color: #ff6600;text-align: center;}
 .sharehelp-box img{margin-left: 10px;position: absolute;margin-top: -30px;}
 
 .field-value{margin-left: 30px; color: #ff6600;}
@@ -89,7 +89,7 @@ animation: myfirst 5s;
 
 .maintext{text-align: center;font-weight: normal;}
 .mainprice{font-size: 30px;color: #ff6600; text-align: right;margin: 10px;}
-.selectarea{width: 100%;padding: 10px 10px 20px 10px;border:none;border-bottom: 1px solid #ccc;-webkit-appearance:listbox; -moz-appearance:listbox;}
+.selectarea{color: blue;width: 100%;padding: 10px 10px 20px 10px;border:none;border-bottom: 1px solid #ccc;-webkit-appearance:listbox; -moz-appearance:listbox;}
 .selectnum{margin-top: 10px;padding: 0 10px;}
 .numer{display: inline-block;}
 .numer .minus,.numer .plus{border: 1px solid #ccc;width: 35px;height: 33px;text-align: center; line-height: 33px;display: inline-block;}
@@ -139,11 +139,9 @@ animation: myfirst 5s;
 
 .activity-imgbox{width: 100%;}
 .activity-imgbox img{width: 100%;}
-.activity-btns{padding: 0 20px;position: fixed;bottom: 60px; left: 0;width: 100%;}
+.activity-btns{padding: 0 20px;position: fixed;bottom: 50px; left: 0;width: 100%;}
 .activity-btn{display: inline-block;width: 49%;}
-.activity-sharebox{margin-top: 20px;}
-.activity-sharebox img{width: 20px;position: relative;}
-.fixedp{position: fixed;bottom: 30px; width: 100%;left: 0;}
+.fixedp{ width: 90%;margin-top: 20px;}
 
 .spacelist{}
 .space-item{display: block;background: #fff;margin-top: 10px;padding: 10px 20px;border: 1px solid #ccc;border-radius: 5px;}
@@ -155,5 +153,19 @@ animation: myfirst 5s;
 .ticketlist-item .item-icon{width: 10px;position: absolute;margin-top: 18px;}
 .ticketlist-moreinfo{text-align: center;padding: 0 15px;font-size: 12px; color: blue;}
 .ticketlist-moreinfo a{color: blue;}
-
 .ticketlist-desc{color: blue;font-size: 12px;position: absolute;left: 10px;margin-top: 15px;}
+
+.lingqu-lighttext{margin: 0;text-align: center;font-size: 12px;margin-top: -15px;}
+.order-lookup{font-size: 16px;text-align: right;border-top: 1px solid #eee;padding-top: 5px;margin-bottom: -10px;margin-top: 10px;color: blue;}
+.coupontopbtn{display: block;width: 100%;padding: 10px;background: #fff;margin: 0 auto;border-radius: 5px; color: #666;text-align: center;margin-top: 10px;}
+.guanzhutext{text-align: center;color: #fff;margin-top: 150px;}
+.guanzhutext img{width: 200px;}
+.ticketwarnerbox{display: inline-block;font-size: 12px;float: right;color: #ff6600;}
+.tickettip{font-size: 12px;color: #666;text-align: right;}
+
+.share-mask{padding-top: 100px;}
+.share-mask-text{text-align: center;color: #fff;font-size: 18px;}
+.share-mask-text .centimg{display: block;width: 100px;height: 100px;margin: 0 auto;margin-bottom: 30px;}
+.share-mask-text .sharedire{position: fixed;top: 50px;right: 50px;}
+.dikoue{color: #ff6600;float: right;}
+.wifiimg{position: fixed;top: 50%;left: 50%;width: 220px;height: 305px;margin-top: -150px;margin-left: -110px;}

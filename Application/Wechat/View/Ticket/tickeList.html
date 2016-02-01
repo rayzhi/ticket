@@ -1,72 +1,76 @@
 <extend name="template/template" />
 
 <block name="css">
-	<style type="text/css">
-	  
-	</style>
+    <style type="text/css">
+      
+    </style>
 </block>
 
 <block name="content">
 
  <body>
- 	<div class="ticketlist-banner">
- 		<img src="__PUBLIC__/images/ticketbanner.jpg">
- 	</div>
+    <div class="ticketlist-banner">
+        <img src="__PUBLIC__/images/ticketbanner.jpg">
+    </div>
  
-	<form id="h-form" method="post" enctype="multipart/form-data" action="javascript:;" >
-		<div class="panel ticketlist-list">
-			<div class="ticketlist-item">
-				<img src="__PUBLIC__/images/xiaojuan.gif" class="item-icon">
-				<select name="venues_id" id="venues_id" class="selectarea required">
-					<empty name="venuesinfo">
-						<option value="">暂无场地</option>
-					<else />
-						<option value="">请选择场地</option>
-						<volist name="venuesinfo" id="vo">
-							<option value="{$vo.id}">{$vo.name}</option>
-						</volist>
-					</empty>
-				</select>
-			</div>
-			
-			<div class="ticketlist-item">
-				<img src="__PUBLIC__/images/xiaojuan.gif" class="item-icon">
-				<select name="ticket_type_id" id="ticket_type_id" class="selectarea required">
-					<option value="">请选择票类型</option>
-					<volist name="ticketType" id="vo">
-						<option value="{$vo.id}" main="{$vo.ticketMainType}">{$vo.name}</option>
-					</volist>
-					<volist name="ticketType1" id="vt">
-						<option value="{$vt.id}" main="{$vt.ticketMainType}">{$vt.name}</option>
-					</volist>
-				</select>
-			</div>
-			
-			<div class="ticketlist-item">
-				<div class="selectnum">
-				    <span class="text">数量</span>
-				    <div class="numer margin-left30">
-				        <span class="minus">-</span>
-				        <input type="text" name="amount" class="numval" readonly value="1">
-				        <span class="plus">+</span>
-				    </div>
-				</div>
-			</div>
-			
-			<input type="hidden" id="eachPrice" name="eachPrice" value="0" />
-			
-		</div>
-		<p class="mainprice">￥<span id="price">0</span></p>	
-		<div class="margin-top30">&nbsp;</div>
-	    <div class="container">
-	    	<button type="submit" class="btn-block margin-top">立即购买</button>
-	    </div>
-	    
-	</form>
+    <form id="h-form" method="post" enctype="multipart/form-data" action="javascript:;" >
+        <div class="panel ticketlist-list">
+            <div class="ticketlist-item">
+                <img src="__PUBLIC__/images/xiaojuan.gif" class="item-icon">
+                <select name="venues_id" id="venues_id" class="selectarea required">
+                    <empty name="venuesinfo">
+                        <option value="">暂无场地</option>
+                    <else />
+                        <volist name="venuesinfo" id="vo">
+                            <option value="{$vo.id}" <if condition="$vo['id'] eq 4">selected="selected"</if>>{$vo.name}</option>
+                        </volist>
+                    </empty>
+                </select>
+            </div>
+            
+            <div class="ticketlist-item">
+                <img src="__PUBLIC__/images/xiaojuan.gif" class="item-icon">
+                <select name="ticket_type_id" id="ticket_type_id" class="selectarea required">
+                    <option value="" selected="selected">请选择票类型</option>
+                </select>
+            </div>
+            
+            <div class="ticketlist-item">
+                <div class="selectnum">
+                    <span class="text">数量</span>
+                    <div class="numer margin-left30">
+                        <span class="minus">-</span>
+                        <input type="text" name="amount" class="numval" readonly value="1">
+                        <span class="plus">+</span>
+                    </div>
+                	<span class="ticketwarnerbox hide">儿童票不可使用优惠券</span>
+                </div>
 
-	<p class="ticketlist-moreinfo"><a href="javascript:" id="helpbox">查看详情</a></p>
-	<div class="sharehelp-box activity-sharebox">
-        <span>点击右上角 分享更多好友</span><img src="__PUBLIC__/images/jiantao.png" width="50px">
+            </div>
+            
+            <input type="hidden" id="eachPrice" name="eachPrice" value="0" />
+            
+        </div>
+        <p class="mainprice"><a href="javascript:" id="helpbox" class="ticketlist-desc">购票说明</a>￥<span id="price">0</span></p>  
+        <div class="container">
+            <div class="tickettip"><if condition="$isHasCoupon eq 1">您有20元优惠劵可抵扣<else/>分享好友可获得最高20元优惠劵</if></div>
+            <button type="submit" class="btn-block margin-top">立即购买</button>
+        </div>
+        
+    </form>
+
+    <p class="ticketlist-moreinfo"></p>
+    <div class="sharehelp-box activity-sharebox">
+        <span>越分享越优惠，越分享越快乐</span>
+    </div>
+
+    <div class="mask share-mask hide">
+        <p class="container share-mask-text">
+            <img src="__PUBLIC__/images/share_img.png" class="centimg">
+            <img src="__PUBLIC__/images/share_icon2.png" class="sharedire">
+            点击右上角<br>
+            发送给好友 或 分享到朋友圈
+        </p>
     </div>
 
     <div class="mask default-mask hide">
@@ -80,9 +84,16 @@
 
 
 <block name="script">
-	<script>
+    <script>
+        $(".sharehelp-box").click(function(){
+            $(".share-mask").removeClass("hide");
+        });
 
-		$("#helpbox").click(function(){
+        $(".share-mask").click(function(){
+            $(".share-mask").addClass("hide");
+        });
+
+        $("#helpbox").click(function(){
             showHelp();
         });
 
@@ -97,6 +108,7 @@
         function hideHelp(){
             $(".default-mask").addClass("hide");
         }
+<<<<<<< HEAD
 		
 		//提交表单
 		$('.btn-block').click(function(){
@@ -189,5 +201,119 @@
 		})
 		
 	</script>
+=======
+        
+        //提交表单
+        $('.btn-block').click(function(){
+            
+            price = Number($('#price').html());
+            if(price <= 0) return alert('票价必须大于0哦');
+            ticketName = $('.ticketName').html();
+            
+            if($("#h-form").valid()){
+                var ticketname2 = $('#ticket_type_id option:selected').text();
+                var areaname = $('#venues_id option:selected').text();
+                
+                var index = layer.load(0,{shade:[0.3,'#676767']});
+                data = $("form").serialize();
+                main_type = $('#ticket_type_id option:selected').attr('main');
+                data = data+'&price='+price+'&ticketName='+ticketName+'&main_type='+main_type+'&ticketname2='+ticketname2+'&areaname='+areaname;
+                
+                $.post(
+                    "{:UC('Wechat/Ticket/makeOrder')}", 
+                    data, 
+                    function(obj){
+                        if(obj.status == 1){
+                            window.location.href = "{:UC('Wechat/Ticket/sureOrder')}?order_id="+obj.url;
+                        }else{
+                            alert(data.info);
+                            layer.close(index);
+                        }
+                    },
+                    'json'
+                );
+            }
+        })
+        
+        function areaChange(){
+            var index = layer.load(0,{shade:[0.3,'#676767']});
+            venues_id = $('#venues_id option:selected').val();
+            if(venues_id == ''){
+                $('#price').html(0);                
+            }
+            $.post(
+                "{:UC('Wechat/Ticket/getVenues')}", 
+                {'venues_id':venues_id}, 
+                function(obj){
+                    if(obj.status == 1){
+                        $('#ticket_type_id').html(obj.info);                            
+                    }
+                    layer.close(index);
+                },
+                'json'
+            );
+        }
+
+        function ticketchange(){
+            venues_id = $('#venues_id option:selected').val();
+            ticket_type_id = $('#ticket_type_id option:selected').val();
+            main_type = $('#ticket_type_id option:selected').attr('main');
+            if(venues_id == '') {
+                $('#price').html(0);
+                //return alert('请先选择场馆');
+                return;
+            }
+
+            //判断儿童票
+            if(venues_id == 4 && ticket_type_id == 3){
+            	$('.ticketwarnerbox').removeClass('hide');
+            }else{
+            	$('.ticketwarnerbox').addClass('hide');
+            }
+            
+            var index = layer.load(0,{shade:[0.3,'#676767']});
+            amount = $('.numval').val();
+            $.post(
+                "{:UC('Wechat/Ticket/getTicketPrice')}", 
+                {'venues_id':venues_id,'ticket_type_id':ticket_type_id,'main_type':main_type,'amount':amount}, 
+                function(obj){
+                    if(obj.status == 1){
+                        $('#price').html(obj.url.total);
+                        $('#eachPrice').val(obj.url.price);
+                    }
+                    layer.close(index);
+                },
+                'json'
+            );
+        }
+
+        $('#venues_id').change(areaChange);
+
+        
+        $('#ticket_type_id').change(ticketchange);
+
+        $(function(){
+            areaChange();
+            ticketchange();
+        });
+        
+        $('.plus').click(function(){
+            numval = Number($('.numval').val())+1;
+            $('.numval').val(numval);
+            total = Number($('#price').html());
+            eachPrice = Number($('#eachPrice').val());
+            $('#price').html((eachPrice * numval).toFixed(2));
+        })
+        
+        $('.minus').click(function(){
+            numval = Number($('.numval').val());
+            if(numval > 1) $('.numval').val(numval-1);
+            numval = Number($('.numval').val());
+            eachPrice = Number($('#eachPrice').val());
+            $('#price').html((eachPrice * numval).toFixed(2));
+        })
+        
+    </script>
+>>>>>>> 90f5065f4ef65275d12fcd485b50e5f49b4fcdf3
 </block>
 

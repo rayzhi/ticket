@@ -38,12 +38,13 @@ class CouponLogic{
         self::giveCoupon($inviter,InviteCouponID2);
     }
 
-    //获取用户优惠券列表
+    //获取用户普通优惠券列表
     public static function getUserCoupon($openid){
         $now = time();
         $userclist = D('user_coupon')
             ->join("coupon on user_coupon.coupon_id=coupon.id")
-            ->where("user_coupon.open_id='$openid' and coupon.end_time>$now")
+            ->where("user_coupon.open_id='$openid' and coupon.end_time>$now and user_coupon.status=0")
+            ->field("coupon.title,coupon.price,coupon.begin_time,coupon.end_time,user_coupon.status,user_coupon.id")
             ->select();
         return $userclist;
     }
@@ -55,7 +56,7 @@ class CouponLogic{
         return $id;
     }
 
-    //获取已经拥有的优惠券个数
+    //获取已经拥有的普通优惠券个数
     public static function countCoupon($openid,$couponid=0){
         if($couponid==0){
             return D('user_coupon')->where(array('open_id'=>$openid))->count(1);
@@ -90,13 +91,81 @@ class CouponLogic{
         self::giveCoupon($receter,$coupon);
 
         $invatename = D('User')->where(array('open_id'=>$inviter))->getField('nickname');
-        \Wechat\Logic\PushLogic::pushTextMsg($receter,"恭喜您领到您的好友@".$invatename."分享的魔乐城优惠劵，优惠劵能抵消魔乐城场馆票价，记得使用哦！");
+        \Wechat\Logic\PushLogic::pushTextMsg($receter,getSysConfig('coupon-text'));
         
         //更新优惠券
         S('sharecoupon_'.$openid,$couponlist);
         //更新领取人
         $readyusers[] = $receter;
         S('sharecoupon_user'.$openid,$readyusers);
+    }
+
+    //获取所有优惠券，包括普通优惠券，活动优惠券
+    public static function getAllCoupon($openid){
+        $list = self::getUserCoupon($openid);
+        $activity_couponlist = D('user_activitycoupon')->where(array('open_id'=>$openid,'status'=>0))->select();
+        foreach($activity_couponlist as $actinfo){
+            $acdd = D('activity_coupon')->where(array('id'=>$actinfo['activitycoupon_id']))->find();
+            $acinfo['title'] = $acdd['name'];
+            $acinfo['price'] = $acdd['price'];
+            $acinfo['begin_time'] = $acdd['stime'];
+            $acinfo['end_time'] = $acdd['etime'];
+            $acinfo['status'] = $acdd['status'];
+            $acinfo['id'] = $actinfo['id'];
+            $acinfo['coutype'] = 1;
+            $actilist[] = $acinfo;
+        }
+        if($actilist){
+            $list = array_merge($list,$actilist);
+        }
+        usort($list, function($a,$b){
+            $pa = $a['price'];
+            $pb = $b['price'];
+            return $pb-$pa;
+        });
+        return $list;
+    }
+
+    //是否有优惠券
+    public static function isHasCoupon($openid){
+        $coupon = D('user_coupon')
+            ->where("open_id='$openid' and status=0")
+            ->find();
+        $activitycoupon = D('user_activitycoupon')->where("open_id='$openid' and status=0")->find();
+        if($coupon || $activitycoupon){
+            return true;
+        }
+        return false;
+    }
+
+    //获得优惠券的价格,$couponType == 1 是活动优惠券，==0 是普通优惠券
+    public static function getCouponPrice($couponId,$couponType){
+        if($couponType == 0){
+            $couponId = D('user_coupon')->where(array('id'=>$couponId))->getField('coupon_id');
+            return D('coupon')->where(array('id'=>$couponId))->getField('price');
+        }
+        else if($couponType == 1){
+            $couponId = D('user_activitycoupon')->where(array('id'=>$couponId))->getField('activitycoupon_id');
+            return D('activity_coupon')->where(array('id'=>$couponId))->getField('price');
+        }
+    }
+
+
+    //修改优惠券的状态
+    public static function changeStatus($couponId,$couponType,$orderId){
+        if($couponType == 0){
+            $cSave['status'] = 1;
+            $cSave['usetime'] = time();
+            $cSave['coupon_pay'] = self::getCouponPrice($couponId,$couponType);
+            $cSave['order_id'] = $orderId;
+            return $cResult = D('user_coupon')->where(array('id'=>$couponId))->save($cSave);
+        }
+        else if($couponType == 1){
+            $cSave['status'] = 1;
+            $cSave['usetime'] = time();
+            $cSave['order_id'] = $orderId;
+            return $cResult = D('user_activitycoupon')->where(array('id'=>$couponId))->save($cSave);
+        }
     }
    
 

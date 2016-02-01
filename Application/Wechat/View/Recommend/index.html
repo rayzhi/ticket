@@ -14,25 +14,34 @@
         <div class="tuijiantext">
             <img src="{$userinfo['headimgurl']}">
             <span>
-                {$userinfo['nickname']}<br>
-                {$invitetext}
+                着了魔的小主：<br>
+                已经为您备好着了魔的邀请链接啦，即可分享给魔乐的新朋友，每成功邀请1位，即可获得魔乐优惠券，多邀多得哦。
             </span>
         </div>
 
     </div>
 
-        <div class="sharehelp-box margin-top">
-            <span>点击右上角分享，赢20元奖励</span><img src="__PUBLIC__/images/jiantao.png" width="50px">
-        </div>
+    <div class="sharehelp-box margin-top">
+        <span>越分享越优惠，越分享越快乐</span>
+    </div>
 
     <div class="tuijian-info">
         <div class="margin-top30"></div>
         <a class="btn-block" href="<?php echo UC('Wechat/Ticket/tickeList');?>">立即购票 畅想魔乐城</a>
     </div>
 
+    <div class="mask share-mask hide">
+        <p class="container share-mask-text">
+            <img src="__PUBLIC__/images/share_img.png" class="centimg">
+            <img src="__PUBLIC__/images/share_icon2.png" class="sharedire">
+            点击右上角<br>
+            发送给好友 或 分享到朋友圈
+        </p>
+    </div>
+
     <div class="mask default-mask hide">
         <a href="javascript:" class="mask-close"><img src="__PUBLIC__/images/cha.png" width="50px"></a>
-        <p class="container text-nomal">
+        <p class="container text-nomal-box">
             {$activity_text}
         </p>
     </div>
@@ -40,6 +49,14 @@
     <a class="block text-guide helpbox" href="javascript:"><img src="__PUBLIC__/images/wen.png" width="15">活动说明</a>
 
     <script type="text/javascript">
+
+        $(".sharehelp-box").click(function(){
+            $(".share-mask").removeClass("hide");
+        });
+
+        $(".share-mask").click(function(){
+            $(".share-mask").addClass("hide");
+        });
         
         $(".helpbox").click(function(){
             showHelp();

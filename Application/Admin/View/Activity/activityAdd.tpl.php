@@ -28,7 +28,7 @@
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1">添加活动海报图片</label>
 
                 <div class="col-sm-9">
-                    {$img_upload} （图片规格:500px * 400px）
+                    {$img_upload} （图片规格:750px * 1200px）
                 </div>
             </div>
 

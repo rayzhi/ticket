@@ -9,8 +9,9 @@ use \Common\Lib\Pclass as t;
 
 class ApiController extends CommonController {
     
-    protected $apiurl = 'http://120.76.43.54:8082';//接口的基本域名
-
+    //protected $apiurl = 'http://120.76.43.54:8082';//接口的基本域名
+    protected $apiurl = APIURL;//接口的基本域名
+    
     /**
      * 查询票价
      * @param $payType     1 现金支付  2 美团  3 ...
@@ -25,6 +26,7 @@ class ApiController extends CommonController {
         $param  = '&payType='.$payType.'&venuesId='.$venuesId;
         if($ticketType) $param .= '&ticketType='.$ticketType;
         $url    = $url.$param;
+        recordLog($url,'wechatPay');
         $curl   = new t\Curl();
         $return = $curl->get($url);
         $return = json_decode($return,true);
@@ -57,7 +59,7 @@ class ApiController extends CommonController {
         foreach($param as $k=>$v){
             $url .= '&'.$k.'='.urlencode($v);
         }
-
+        recordLog($url,'wechatPay');
         $curl   = new t\Curl();
         $return = $curl->get($url);
         $return = json_decode($return,true);
@@ -76,6 +78,7 @@ class ApiController extends CommonController {
         $param  = '&payType='.$payType.'&venuesId='.$venuesId;
         if($id) $param .= '&id='.$id;
         $url    = $url.$param;
+        recordLog($url,'wechatPay');
         $curl   = new t\Curl();
         $return = $curl->get($url);
         $return = json_decode($return,true);
@@ -92,6 +95,7 @@ class ApiController extends CommonController {
         
         $token  = $this->getToken(md5('areainfo'));
         $url    = $this->apiurl.'/sys/areainfo/select?token='.$token;
+        recordLog($url,'wechatPay');
         $curl   = new t\Curl();
         $return = $curl->get($url);
         $return = json_decode($return,true);
@@ -111,6 +115,7 @@ class ApiController extends CommonController {
         $token  = $this->getToken(md5('venuesinfo'));
         $url    = $this->apiurl.'/sys/venuesinfo/select?token='.$token.'&c_areaId='.$c_areaId;
         $curl   = new t\Curl();
+        recordLog($url,'wechatPay');
         $return = $curl->get($url);
         $return = json_decode($return,true);
 
