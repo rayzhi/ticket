@@ -40,12 +40,32 @@
 
     <div class="helpbox text-guide margin-top30">没有更多订单了</div>
 
+    <div class=" margin-top"></div>
+    <div class="sharehelp-box activity-sharebox">
+        <span>点击右上角分享 获取魔乐优惠券</span><img src="__PUBLIC__/images/jiantao.png" width="50px">
+    </div>
+
+    <div class="mask share-mask hide">
+        <p class="container share-mask-text">
+            <img src="__PUBLIC__/images/wen.png" class="centimg">
+            <img src="__PUBLIC__/images/jiantao.png" class="sharedire">
+            点击右上角<br>
+            发送给好友 或 分享到朋友圈
+        </p>
+    </div>
+
   </body>
 </block>
 
 <block name="script">
     <script>
-       
+       $(".sharehelp-box").click(function(){
+            $(".share-mask").removeClass("hide");
+        });
+
+        $(".share-mask").click(function(){
+            $(".share-mask").addClass("hide");
+        });
     </script>
 </block>
 

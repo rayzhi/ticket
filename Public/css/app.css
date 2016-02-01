@@ -139,11 +139,9 @@ animation: myfirst 5s;
 
 .activity-imgbox{width: 100%;}
 .activity-imgbox img{width: 100%;}
-.activity-btns{padding: 0 20px;position: fixed;bottom: 60px; left: 0;width: 100%;}
+.activity-btns{padding: 0 20px;position: fixed;bottom: 50px; left: 0;width: 100%;}
 .activity-btn{display: inline-block;width: 49%;}
-.activity-sharebox{margin-top: 20px;}
-.activity-sharebox img{width: 20px;position: relative;}
-.fixedp{position: fixed;bottom: 30px; width: 100%;left: 0;}
+.fixedp{ width: 90%;margin-top: 20px;}
 
 .spacelist{}
 .space-item{display: block;background: #fff;margin-top: 10px;padding: 10px 20px;border: 1px solid #ccc;border-radius: 5px;}
@@ -165,6 +163,7 @@ animation: myfirst 5s;
 .ticketwarnerbox{display: inline-block;font-size: 12px;float: right;color: #ff6600;}
 .tickettip{font-size: 12px;color: #666;text-align: right;}
 
-.share-mask{padding-top: 50px;}
+.share-mask{padding-top: 100px;}
 .share-mask-text{text-align: center;color: #fff;font-size: 18px;}
-.share-mask-text img{display: block;width: 100px;height: 100px;margin: 0 auto;margin-bottom: 30px;}
+.share-mask-text .centimg{display: block;width: 100px;height: 100px;margin: 0 auto;margin-bottom: 30px;}
+.share-mask-text .sharedire{position: fixed;top: 50px;right: 50px;}
