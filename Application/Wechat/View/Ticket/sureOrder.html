@@ -87,7 +87,10 @@
 
         function changeText(){
             var price = $('#coupon_id option:selected').data('price');
-            $('.dikoue').html("-"+price+"元");
+            if(price){
+                $('.dikoue').html("-"+price+"元");
+            }
+            
         }
 		
 		$('#coupon_id').change(function(){
