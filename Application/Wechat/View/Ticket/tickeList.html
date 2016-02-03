@@ -44,6 +44,7 @@
                         <span class="plus">+</span>
                     </div>
                 	<span class="ticketwarnerbox hide">儿童票不可使用优惠券</span>
+                	<span class="ticketwarnerbox1 hide">新春体验票不可使用优惠券</span>
                 </div>
 
             </div>
@@ -176,6 +177,12 @@
             	$('.ticketwarnerbox').removeClass('hide');
             }else{
             	$('.ticketwarnerbox').addClass('hide');
+            }
+            
+            if(venues_id == 4 && ticket_type_id == 11){
+            	$('.ticketwarnerbox1').removeClass('hide');
+            }else{
+            	$('.ticketwarnerbox1').addClass('hide');
             }
             
             var index = layer.load(0,{shade:[0.3,'#676767']});

@@ -122,7 +122,7 @@ class TicketController extends CommonController {
         $orderInfo = D('TicketOrder')->getOrderInfo($order_id);
         if($orderInfo['coupon_pay'] == 0){
             $ticket_type = D('TicketOrderDetail')->where(array('order_id' => $order_id))->getField('ticket_type');
-            if($ticket_type != 3){
+            if($ticket_type != 3 && $ticket_type != 11){
                 $couponInfo = \Wechat\Logic\CouponLogic::getAllCoupon($openid);
                 $this->assign('couponInfo',$couponInfo);
             }
