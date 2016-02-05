@@ -75,4 +75,8 @@ class UserController extends CommonController {
         $this->display();
    }
 
+   public function wifiChengduAct(){
+        $this->display();
+   }
+
 }
