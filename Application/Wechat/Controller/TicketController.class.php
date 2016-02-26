@@ -28,9 +28,13 @@ class TicketController extends CommonController {
         
         $areainfo = R('Api/areainfo');
         foreach($areainfo['data'] as $k=>$v){
+            //如果是成都地区，过滤佛山的场馆
+            if(DISTRICT_SERVER == 'CHENGDU' && $v['id'] == 3){
+                continue;
+            }
             $venuesinfo = R('Api/venuesinfo',array($v['id']));
             foreach($venuesinfo['data'] as $k1=>$v1){
-                $areaName[$v1['id']]['id'] = $v1['id']; 
+                $areaName[$v1['id']]['id'] = $v1['id'];
                 $areaName[$v1['id']]['name'] = $v['name'].$v1['name'];
             }
         }
