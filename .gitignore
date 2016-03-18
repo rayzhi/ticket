@@ -5,3 +5,4 @@ Runtime
 myconfig.php
 myconfig.example.php
 *.log
+.idea/
