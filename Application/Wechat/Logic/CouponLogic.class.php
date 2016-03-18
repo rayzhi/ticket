@@ -83,7 +83,7 @@ class CouponLogic{
         if($receter == $inviter){
             return;
         }
-        $readyusers = S('sharecoupon_user'.$openid);
+        $readyusers = S('sharecoupon_user'.$receter);
         if(in_array($receter, $readyusers)){
             //如果已经领取就直接返回
             return;
@@ -97,10 +97,10 @@ class CouponLogic{
         \Wechat\Logic\PushLogic::pushTextMsg($receter,getSysConfig('coupon-text'));
         
         //更新优惠券
-        S('sharecoupon_'.$openid,$couponlist);
+        S('sharecoupon_'.$receter,$couponlist);
         //更新领取人
         $readyusers[] = $receter;
-        S('sharecoupon_user'.$openid,$readyusers);
+        S('sharecoupon_user'.$receter,$readyusers);
     }
 
     //获取所有优惠券，包括普通优惠券，活动优惠券
