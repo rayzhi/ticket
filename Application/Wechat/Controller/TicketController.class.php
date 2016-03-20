@@ -277,7 +277,6 @@ class TicketController extends CommonController {
         }
         recordLog('调取weixinbuy接口结束','wechatPay');
         return true;
-        
     }
     
     /**

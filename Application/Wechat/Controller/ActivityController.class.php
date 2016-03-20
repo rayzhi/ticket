@@ -39,7 +39,7 @@ class ActivityController extends CommonController {
         //设置提示
 
         \Wechat\Logic\PushLogic::pushTextMsg(getOpenid(),getSysConfig('coupon-text'));
-        redirect('/Wechat/Coupon/index', 0, '页面跳转中...');
+        redirect(UC('/Wechat/Coupon/index'), 0, '页面跳转中...');
     }
 
 }
