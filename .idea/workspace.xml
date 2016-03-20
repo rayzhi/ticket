@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="74cdce33-7cd4-4cbb-87f2-6d0a63d030a4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Wechat/Controller/TestController.class.php" afterPath="$PROJECT_DIR$/Application/Wechat/Controller/TestController.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Wechat/Logic/CouponLogic.class.php" afterPath="$PROJECT_DIR$/Application/Wechat/Logic/CouponLogic.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Wechat/View/template/template.html" afterPath="$PROJECT_DIR$/Application/Wechat/View/template/template.html" />
-    </list>
+    <list default="true" id="74cdce33-7cd4-4cbb-87f2-6d0a63d030a4" name="Default" comment="" />
     <ignored path="ticket.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -70,7 +65,7 @@
       <file leaf-file-name="CouponController.class.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Application/Wechat/Controller/CouponController.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7070707">
+            <state vertical-scroll-proportion="0.6363636">
               <caret line="39" column="39" selection-start-line="39" selection-start-column="39" selection-end-line="39" selection-end-column="39" />
               <folding />
             </state>
@@ -657,7 +652,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/Wechat/Controller/CouponController.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7070707">
+        <state vertical-scroll-proportion="0.6363636">
           <caret line="39" column="39" selection-start-line="39" selection-start-column="39" selection-end-line="39" selection-end-column="39" />
           <folding />
         </state>
