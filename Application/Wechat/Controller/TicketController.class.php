@@ -25,7 +25,7 @@ class TicketController extends CommonController {
      * 列表
      */
     public function tickeListAct(){
-        
+        \Think\Log::write('测试日志信息，这是警告级别，并且实时写入','DEBUG');
         $areainfo = R('Api/areainfo');
         foreach($areainfo['data'] as $k=>$v){
             //如果是成都地区，过滤佛山的场馆
