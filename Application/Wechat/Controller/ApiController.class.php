@@ -138,6 +138,7 @@ class ApiController extends CommonController {
       
         $url      = $this->apiurl.'/sys/ticketsaleinfo/wxcallback?token='.$token;
         $curlData = json_encode($data);
+        \Think\Log::write('returnPrice:'.print_r($snResult,true),'DEBUG');
         $curl     = new t\Curl();
         $return   = $curl->post($url,$curlData,1);
        
