@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="74cdce33-7cd4-4cbb-87f2-6d0a63d030a4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Common/Common/function.php" afterPath="$PROJECT_DIR$/Application/Common/Common/function.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Wechat/Controller/TicketController.class.php" afterPath="$PROJECT_DIR$/Application/Wechat/Controller/TicketController.class.php" />
-    </list>
+    <list default="true" id="74cdce33-7cd4-4cbb-87f2-6d0a63d030a4" name="Default" comment="" />
     <ignored path="ticket.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -25,10 +22,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TicketController.class.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TicketController.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Application/Wechat/Controller/TicketController.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44781145">
+            <state vertical-scroll-proportion="-13.3">
               <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
               <folding />
             </state>
@@ -45,11 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="function.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="function.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Application/Common/Common/function.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.0983605">
-              <caret line="9" column="13" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.26860467">
+              <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
               <folding>
                 <marker date="1458643293761" expanded="true" signature="14162:14295" placeholder="..." />
                 <marker date="1458643293761" expanded="true" signature="14391:14404" placeholder="..." />
@@ -835,10 +832,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Wechat/Controller/NotifyController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.7">
+          <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Wechat/Controller/TicketController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.3">
+          <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Application/Common/Common/function.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.0983605">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.26860467">
+          <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
           <folding>
             <marker date="1458643293761" expanded="true" signature="14162:14295" placeholder="..." />
             <marker date="1458643293761" expanded="true" signature="14391:14404" placeholder="..." />
@@ -853,22 +866,6 @@
             <marker date="1458643293761" expanded="true" signature="21578:21842" placeholder="..." />
             <marker date="1458643293761" expanded="true" signature="21593:21829" placeholder="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Wechat/Controller/NotifyController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.7">
-          <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Wechat/Controller/TicketController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44781145">
-          <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
