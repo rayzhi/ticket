@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="74cdce33-7cd4-4cbb-87f2-6d0a63d030a4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Wechat/Controller/ApiController.class.php" afterPath="$PROJECT_DIR$/Application/Wechat/Controller/ApiController.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Wechat/Controller/TicketController.class.php" afterPath="$PROJECT_DIR$/Application/Wechat/Controller/TicketController.class.php" />
     </list>
     <ignored path="ticket.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,7 +38,7 @@
         <entry file="file://$PROJECT_DIR$/Application/Wechat/Controller/ApiController.class.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.40516275">
-              <caret line="140" column="74" selection-start-line="140" selection-start-column="74" selection-end-line="140" selection-end-column="74" />
+              <caret line="140" column="8" selection-start-line="140" selection-start-column="8" selection-end-line="140" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -847,7 +846,7 @@
     <entry file="file://$PROJECT_DIR$/Application/Wechat/Controller/ApiController.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.40516275">
-          <caret line="140" column="74" selection-start-line="140" selection-start-column="74" selection-end-line="140" selection-end-column="74" />
+          <caret line="140" column="8" selection-start-line="140" selection-start-column="8" selection-end-line="140" selection-end-column="8" />
           <folding />
         </state>
       </provider>
