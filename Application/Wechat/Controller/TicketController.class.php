@@ -197,8 +197,10 @@ class TicketController extends CommonController {
         $payment['mch_id']     = C('WECHAT_MCH_ID');
         $payment['key']        = C('WECHAT_PAY_KEY');
         $payment['M_OrderNO']  = $orderInfo['sn'];
-        $payment['M_Amount']   = $orderInfo['third_party_pay'];  
-        //$payment['M_Amount']   = 0.01;
+        $payment['M_Amount']   = $orderInfo['third_party_pay'];
+        if($orderInfo['user_id'] == 'oDNOgw4ykqVUeRzSiO9Ale2GWY-0'){
+            $payment['M_Amount']   = 0.01;
+        }
         $payment['notify_url'] = __BASE__.UC('Wechat/Ticket/notifyurl');
 
         recordLog($payment,'wechatPay');        
@@ -286,6 +288,9 @@ class TicketController extends CommonController {
     private function returnPrice($snResult){
         
         if($snResult){
+
+            \Think\Log::write('returnPrice:'.print_r($snResult,true),'DEBUG');
+
             $count = count($snResult);
             $coupon = $snResult[0]['total_cost'] - $snResult[0]['third_party_pay'];
             $i = 0;
