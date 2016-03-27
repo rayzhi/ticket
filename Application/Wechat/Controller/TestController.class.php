@@ -28,6 +28,7 @@ class TestController extends Controller {
     }
 
     public function testlogAct(){
+        print_r(date('Y-m-d',1454300937));
         slog("45646546456");
     }
 
