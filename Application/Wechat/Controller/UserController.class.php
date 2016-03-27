@@ -40,7 +40,7 @@ class UserController extends CommonController {
         			foreach($taoPiao['data'] as $t=>$r){
         				if($v['ticket_sn'] == $r['ticketNo'] && $r['useTime']){
         					$orderSn[$k]['statusName'] = '已使用';
-        					$this->where(array('ticket_sn'=>$v['ticket_sn']))->save(array('status'=>1));
+        					D('TicketSn')->where(array('ticket_sn'=>$v['ticket_sn']))->save(array('status'=>1));
         				}
         			}
         		}
