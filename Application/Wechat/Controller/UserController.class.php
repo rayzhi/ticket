@@ -9,7 +9,7 @@ namespace Wechat\Controller;
 class UserController extends CommonController {
 
     public function indexAct(){
-        
+
         $userinfo = \Wechat\Logic\UserLogic::getUserinfo(getOpenid());
         $this->assign('userinfo',$userinfo);
         
