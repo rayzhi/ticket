@@ -7,8 +7,6 @@
 namespace Wechat\Controller;
 
 class TicketController extends CommonController {
-    
-    protected $payType = PAYTYPE;  //支付方式----微信支付
 
     /**
      * 魔幻城首页
@@ -53,7 +51,7 @@ class TicketController extends CommonController {
             if($venues_id){
     
                 //单票的信息4--微信支付   场馆id 2--成人票
-                $ticketInfo = R('Api/queryprice',array($this->payType,$venues_id));
+                $ticketInfo = R('Api/queryprice',array(PAYTYPE,$venues_id));
                 foreach($ticketInfo['data'] as $k=>$v){
                     $ticketType[$v['ticketTypeId']]['id'] = $v['ticketTypeId'];
                     $ticketType[$v['ticketTypeId']]['name'] = $v['ticketType'];
@@ -61,7 +59,7 @@ class TicketController extends CommonController {
                 }
                  
                 //套票
-                $taoPiao = R('Api/price',array($venues_id,$this->payType));
+                $taoPiao = R('Api/price',array($venues_id,PAYTYPE));
                 foreach($taoPiao['data'] as $k=>$v){
                     $ticketType1[$v['id']]['id'] = $v['id'];
                     $ticketType1[$v['id']]['name'] = $v['name'];
@@ -81,13 +79,13 @@ class TicketController extends CommonController {
         
         if(IS_POST){       
             if($_POST['main_type'] == 1){
-                $ticketInfo = R('Api/price',array($_POST['venues_id'],$this->payType,$_POST['ticket_type_id']));
+                $ticketInfo = R('Api/price',array($_POST['venues_id'],PAYTYPE,$_POST['ticket_type_id']));
                 $price = 0;
                 foreach($ticketInfo['data'][0]['tickets'] as $k=>$v){
                     $price += $v['price'] * $v['count'];
                 }               
             }else{
-                $ticketInfo = R('Api/queryprice',array($this->payType,$_POST['venues_id'],$_POST['ticket_type_id']));
+                $ticketInfo = R('Api/queryprice',array(PAYTYPE,$_POST['venues_id'],$_POST['ticket_type_id']));
                 $price = $ticketInfo['data'][0]['price'];
             }
             $amount = I('amount') ? I('amount') : 1;
@@ -213,7 +211,7 @@ class TicketController extends CommonController {
     public function enoughPayAct($orderInfo){
         
         $save['status'] = 1;
-        $save['third_pay_id'] = $this->payType;//不用支付
+        $save['third_pay_id'] = PAYTYPE;//不用支付
         $result = D('TicketOrder')->where(array('sn'=>$orderInfo['sn']))->save($save);
         recordLog('优惠券足够支付','wechatPay');
         recordLog($orderInfo,'wechatPay');
@@ -235,7 +233,7 @@ class TicketController extends CommonController {
             $checkOrder = D('TicketOrder')->where(array('sn'=>$order_sn))->find();
             if($checkOrder['status'] == 0){
                 $save['status'] = 1;
-                $save['third_pay_id'] = $this->payType;
+                $save['third_pay_id'] = PAYTYPE;
                 $result = D('TicketOrder')->where(array('sn'=>$order_sn))->save($save);              
                 if($result){
                     //调用取票sn接口
