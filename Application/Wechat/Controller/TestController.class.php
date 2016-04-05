@@ -136,4 +136,27 @@ class TestController extends Controller {
         echo json_encode($rs);
     }
 
+
+    public function testBuyAct(){
+        $order_sn = "1459842432420554";
+        recordLog('调取weixinbuy接口开始','wechatPay');
+        $orderInfo = D('TicketOrder')->orderAllInfo($order_sn);
+        recordLog($orderInfo,'wechatPay');
+        $result = R('Api/weixinbuy',array($orderInfo));
+        if($result['data']){
+            recordLog($result['data'],'wechatPay');
+            foreach($result['data'] as $k=>$v){
+                if($v['ticketNo']){
+                    D('TicketSn')->addTicketSn($orderInfo['did'],$v['ticketNo'],createQr($v['ticketNo']),$v['expiryDate'],$v['price'],$v['ticketTypeId'],$v['ticketTypeName']);
+                }
+            }
+            $snResult = D('TicketOrder')->ticketPriceUseCoupon($order_sn);
+            $this->returnPrice($snResult);//返回价格
+        }else{
+            recordLog('返回票sn失败','wechatPay');
+        }
+        recordLog('调取weixinbuy接口结束','wechatPay');
+        return true;
+    }
+
 }

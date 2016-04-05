@@ -136,7 +136,6 @@ class ApiController extends CommonController {
         $token    = $this->getToken(md5($ticketNo.$price));
         $data[]   = $param;
         $url      = $this->apiurl.'/sys/ticketsaleinfo/wxcallback?token='.$token;
-        print_r($data);
         $curlData = json_encode($data);
         
         $curl     = new t\Curl();
