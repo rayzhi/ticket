@@ -84,4 +84,61 @@ class TestController extends Controller {
         print_r($aa);
     }
 
+    /**
+     * 测试返回价格
+     */
+    public function testReturnPriceAct(){
+        $order_sn = "1454295073439732";
+        $snResult = D('TicketOrder')->ticketPriceUseCoupon($order_sn);
+        if($snResult){
+
+            $coupon = $snResult[0]['total_cost'] - $snResult[0]['third_party_pay'];
+
+            foreach($snResult as &$ticket){
+                $ticket['t_price'] = $ticket['t_price'] - $coupon;
+                if($ticket['t_price']>0){
+                    break;
+                }
+                $ticket['t_price'] = 0;
+                $coupon = abs($ticket['t_price']);
+            }
+            /*
+            foreach($snResult as $k=>$v){
+                R('Api/wxcallback',array($v['ticket_sn'],$v['t_price']));//返回票的价格
+            }
+            */
+
+        }
+    }
+
+    /**
+     * 所有已支付的票号和实际支付价格
+     */
+    public function payPriceAct(){
+        $readyPayList = D('TicketOrder')->where(array('status'=>1))->field('sn')->select();
+        $rs = array();
+        foreach($readyPayList as $info){
+            $snResult = D('TicketOrder')->ticketPriceUseCoupon($info['sn']);
+            if($snResult){
+                $coupon = $snResult[0]['total_cost'] - $snResult[0]['third_party_pay'];
+                foreach($snResult as &$ticket){
+                    $ticket['t_price'] = $ticket['t_price'] - $coupon;
+                    if($ticket['t_price']>0){
+                        break;
+                    }
+                    $ticket['t_price'] = 0;
+                    $coupon = abs($ticket['t_price']);
+                }
+                foreach($snResult as $ticket){
+                    if(!$ticket['ticket_sn']) continue;
+                    $rsinfo = array();
+                    $rsinfo['sn'] = $ticket['ticket_sn'];
+                    $rsinfo['price'] = $ticket['t_price'];
+                    $rs[] = $rsinfo;
+                }
+            }
+        }
+        echo json_encode($rs);
+    }
+
 }

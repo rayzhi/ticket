@@ -281,23 +281,19 @@ class TicketController extends CommonController {
     
     /**
      * 回传价格
-     * @param unknown $snResult
+     * @param array $snResult
      */
     private function returnPrice($snResult){
         
         if($snResult){
-            $count = count($snResult);
             $coupon = $snResult[0]['total_cost'] - $snResult[0]['third_party_pay'];
-            $i = 0;
-            while($coupon > 0 && $i <= $count){
-                $coupon = $snResult[$i]['t_price'] - $coupon;
-                if($coupon >= 0){
-                    $coupon = 0;
-                    $snResult[$i]['t_price'] = $coupon;
-                }else{
-                    $coupon = abs($coupon);
-                    $i++;
+            foreach($snResult as &$ticket){
+                $ticket['t_price'] = $ticket['t_price'] - $coupon;
+                if($ticket['t_price']>0){
+                    break;
                 }
+                $ticket['t_price'] = 0;
+                $coupon = abs($ticket['t_price']);
             }
             foreach($snResult as $k=>$v){
                 R('Api/wxcallback',array($v['ticket_sn'],$v['t_price']));//返回票的价格
