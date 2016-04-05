@@ -30,3 +30,7 @@ function getOpenid(){
     //return 555;
     return session('openid');
 }
+
+function slog($s){
+
+}

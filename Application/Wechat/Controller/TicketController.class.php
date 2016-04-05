@@ -25,7 +25,6 @@ class TicketController extends CommonController {
      * 列表
      */
     public function tickeListAct(){
-        slog("test");
         $areainfo = R('Api/areainfo');
         foreach($areainfo['data'] as $k=>$v){
             //如果是成都地区，过滤佛山的场馆
