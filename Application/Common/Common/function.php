@@ -7,11 +7,6 @@ function createQr($strcon){
 }
 
 
-function slog($content){
-	file_put_contents("./test.log",$content,FILE_APPEND);
-}
-
-
 /**
  * URL添加参数
  * @param string $url
