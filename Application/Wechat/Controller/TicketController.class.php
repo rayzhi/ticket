@@ -293,8 +293,8 @@ class TicketController extends CommonController {
                 if($ticket['t_price']>0){
                     break;
                 }
-                $ticket['t_price'] = 0;
                 $coupon = abs($ticket['t_price']);
+                $ticket['t_price'] = 0;
             }
             foreach($snResult as $k=>$v){
                 R('Api/wxcallback',array($v['ticket_sn'],$v['t_price']));//返回票的价格
