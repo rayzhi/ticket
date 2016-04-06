@@ -129,19 +129,28 @@ class ApiController extends CommonController {
      */
     public function wxcallbackAct($ticketNo,$price){
     
-         $param = array(
-             'ticketNo' => $ticketNo,
-             'price'    => $price
-        );
-        $token    = $this->getToken(md5($ticketNo.$price));
-        $data[]   = $param;
-      
-        $url      = $this->apiurl.'/sys/ticketsaleinfo/wxcallback?token='.$token;
-        $curlData = json_encode($data);
-        
-        $curl     = new t\Curl();
-        $return   = $curl->post($url,$curlData,1);
-       
+    	$type = 'post';
+    	$param = array(
+    			'ticketNo' => $ticketNo,
+    			'price'    => $price
+    	);
+    	$data[]   = $param;
+    	$curlData = 'param='.urlencode(json_encode($data));
+    	if($type == 'get'){
+    		$token    = $this->getToken(md5($ticketNo.$price));
+    		$url      = $this->apiurl.'/sys/ticketsaleinfo/wxcallback?token='.$token.'&'.$curlData;
+    		$curl     = new t\Curl();
+    		$return   = $curl->get($url);
+    		$return   = json_decode($return,true);
+    	}else{
+    	
+	        $token    = $this->getToken(md5($ticketNo.$price));
+	        $url      = $this->apiurl.'/sys/ticketsaleinfo/wxcallback?token='.$token.'&'.$curlData;
+	        $curl     = new t\Curl();
+	        $return   = $curl->post($url,$curlData,1);
+    	}
+    	recordLog($url,'api');
+    	recordLog($return,'api');
         return $return;
     
     }

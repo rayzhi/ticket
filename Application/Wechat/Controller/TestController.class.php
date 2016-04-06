@@ -88,8 +88,10 @@ class TestController extends Controller {
      * 测试返回价格
      */
     public function testReturnPriceAct(){
-        $order_sn = "1454295073439732";
+    	
+        $order_sn = "1459907424700866";
         $snResult = D('TicketOrder')->ticketPriceUseCoupon($order_sn);
+        recordLog($snResult,'api');
         if($snResult){
 
             $coupon = $snResult[0]['total_cost'] - $snResult[0]['third_party_pay'];
@@ -102,11 +104,12 @@ class TestController extends Controller {
                 $ticket['t_price'] = 0;
                 $coupon = abs($ticket['t_price']);
             }
-            /*
+            
             foreach($snResult as $k=>$v){
-                R('Api/wxcallback',array($v['ticket_sn'],$v['t_price']));//返回票的价格
+                $result =R('Api/wxcallback',array($v['ticket_sn'],$v['t_price']));//返回票的价格
+                recordLog($result,'api');
             }
-            */
+            
 
         }
     }
